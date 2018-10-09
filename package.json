@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Jack2413/OnlineShopping/issues"
   },
-  "homepage": "https://github.com/Jack2413/OnlineShopping#readme"
+  "homepage": "https://github.com/Jack2413/OnlineShopping#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
