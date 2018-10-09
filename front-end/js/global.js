@@ -24,6 +24,7 @@ $(document).ready(function(e) {
 			strength += 20
 		}
 		switch(strength){
+			case 0: $('#InputText').text(''); break
 			case 20: $('#InputText').text('Very weak'); break
 			case 40: $('#InputText').text('Weak'); break
 			case 60: $('#InputText').text('Good'); break
@@ -39,9 +40,14 @@ $(document).ready(function(e) {
 	});
 
 	$('#InputEmail').on(function(){
-		if(!email.match(/[@]+/)){
-			$('#EmailText').text('Unvaild Email');
+		var email = $('#InputEmail').val();
+		if(email==''){
+			$('#EmailText').text('');
+			return;
 		}
+		var text = !email.match(/[@]+/)?'Unvaild Email':'Vaild'
+		$('#EmailText').text(text);
+		
 	});
 
 
@@ -66,13 +72,13 @@ $(document).ready(function(e) {
 			return;
 		}
 
-		$.ajax({
-				method: 'POST',
-				url:'https://nwen304project2.herokuapp.com/post',
-				data: JSON.stringify(
+		// $.ajax({
+		// 		method: 'POST',
+		// 		url:'https://nwen304project2.herokuapp.com/post',
+		// 		data: JSON.stringify(
 
-				)
-			)
-		}
+		// 		)
+		// 	)
+		// });
 	});
 });
