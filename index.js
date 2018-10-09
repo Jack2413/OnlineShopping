@@ -26,7 +26,7 @@ next();
 });
 
 
-app.get('/', (req, res) => res.render('pages/index'))
-	.listen(port, () => console.log('Listening on Heroku Server'))
+// app.get('/', (req, res) => res.render('pages/index'))
+// 	.listen(port, () => console.log('Listening on Heroku Server'))
 
 
