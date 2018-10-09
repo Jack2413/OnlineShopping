@@ -1,0 +1,19 @@
+{
+  "name": "online-shopping-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jack2413/OnlineShopping.git"
+  },
+  "author": "JackGan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jack2413/OnlineShopping/issues"
+  },
+  "homepage": "https://github.com/Jack2413/OnlineShopping#readme"
+}
