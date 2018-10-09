@@ -20,7 +20,7 @@ $(document).ready(function(e) {
 		if (password.match(/[!@#$%^&*()]+/)) {
 			strength += 20
 		}
-		if(password.length > 6){
+		if(password.length > 5){
 			strength += 20
 		}
 		switch(strength){
@@ -30,9 +30,21 @@ $(document).ready(function(e) {
 			case 80: $('#InputText').text('Strong'); break
 			case 100: $('#InputText').text('Very Strong'); break
 		}
+		if(password.length<6){
+			$('#InputText').text('password must have at least 6 digits');
+			return;
+		}
 
 		$('#strength').val(strength);
 	});
+
+	$('#InputEmail').on(function(){
+		if(!email.match(/[@]+/)){
+			$('#EmailText').text('Unvaild Email');
+		}
+	});
+
+
 
 	$('#ConfirmPassword').keyup(function(){
 		if($('#InputPassword').val()==''||$('#ConfirmPassword').val()==''){
@@ -42,5 +54,25 @@ $(document).ready(function(e) {
 			var reply = $('#InputPassword').val()===$('#ConfirmPassword').val()?
 			'Password match':'Password Unmatch'
 			$('#ConfirmText').text(reply);
+	});
+
+	$('#submitButton').click(function() {
+		var username = $('#InputUsername').val();
+		var email = $('#InputEmail').val();
+		var password = $('#InputPassword').val();
+
+		
+		if(!email.match(/[@]+/)||password.length<6){
+			return;
+		}
+
+		$.ajax({
+				method: 'POST',
+				url:'https://nwen304project2.herokuapp.com/post',
+				data: JSON.stringify(
+
+				)
+			)
+		}
 	});
 });
