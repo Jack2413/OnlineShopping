@@ -9,7 +9,7 @@ const pool = new Pool({
 	ssl: true 
 });
 
-app.use (express.static(path.join(__dirname + '../front-end')));
+app.use (express.static(path.join(__dirname + '/front-end')));
 //invoke functions on a service hosted in a different location
 // Add headers
 app.use (bodyParser.json());
