@@ -5,6 +5,10 @@ $(document).ready(function(e) {
 		var strength = 0;
 		var password = $('#InputPassword').val();
 
+		if(password.length==0){
+			$('#InputText').text('');
+			return;
+		}
 		if (password.match(/[a-z]+/)){
 			strength += 20
 		}
@@ -24,7 +28,6 @@ $(document).ready(function(e) {
 			strength += 20
 		}
 		switch(strength){
-			case 0: $('#InputText').text(''); break
 			case 20: $('#InputText').text('Very weak'); break
 			case 40: $('#InputText').text('Weak'); break
 			case 60: $('#InputText').text('Good'); break
@@ -39,7 +42,7 @@ $(document).ready(function(e) {
 		$('#strength').val(strength);
 	});
 
-	$('#InputEmail').on(function(){
+	$('#InputEmail').change(function(){
 		var email = $('#InputEmail').val();
 		if(email==''){
 			$('#EmailText').text('');

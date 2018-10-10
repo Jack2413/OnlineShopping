@@ -9,7 +9,7 @@
 box-shadow: 0px 0px 26px 11px rgba(0,0,0,0.75);
 }
 
-#InputText, #ConfirmText #EmailText{
+#InputText, #ConfirmText, #EmailText{
 	text-align:right;
 	font-weight:bold;
 	color:red;
