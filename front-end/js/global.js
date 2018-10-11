@@ -110,7 +110,9 @@ $(document).ready(function(e) {
 	});
 
 	$('RegisterButton').click(function() {
+		alert(1);
 		window.open('register.html','_self');
+		window.location.href='register.html';
 	}
 });
 
