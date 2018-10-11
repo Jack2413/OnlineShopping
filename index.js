@@ -65,7 +65,7 @@ app.get('/login', async (req, res) => {
 			return res.send('Login success');
 		}
 		client.release();
-		
+
 	} catch (err) { 
 		console.error(err); 
 		res.send("Error " + err);
@@ -87,7 +87,7 @@ app.post('/register', async (req, res) => {
 		const encrypt_password = crypto.pbkdf2Sync(password, salt, confige.iterations, confige.encryptBytes, 'sha512');
 		console.log('salt: ' + salt 'encrypt_password: '+ encrypt_password);
 
-		var result = await client.query('INSERT INTO USER (USERNAME,EMAIL,ENCRYPT_PASSWORD,SALT) VALUES ($1,$2,$3,$4)',[username,email,encrypt_password,salt]);
+		var result = await client.query('INSERT INTO USERS (USERNAME,EMAIL,ENCRYPT_PASSWORD,SALT) VALUES ($1,$2,$3,$4)',[username,email,encrypt_password,salt]);
 
 		if (!result) {
 			//console.log('not insert success');
