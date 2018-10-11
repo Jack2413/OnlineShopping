@@ -1,6 +1,7 @@
 var url = 'https://nwen304project2.herokuapp.com';
+
 $(document).ready(function(e) {
-	
+
 	$('#InputPassword').keyup(function () {
 		//var strengthBar = $('#strength');
 		var strength = 0;
@@ -88,7 +89,7 @@ $(document).ready(function(e) {
 		}).then(feedback, ERROR_LOG);
 	});
 
-	$('loginButton').click(function() {
+	$('#loginButton').click(function() {
 		var $email = $('#InputEmail').val();
 		var $password = $('#InputPassword').val();
 
@@ -109,11 +110,13 @@ $(document).ready(function(e) {
 		}).then(feedback, ERROR_LOG);
 	});
 
-	$('RegisterButton').click(function() {
-		alert(1);
-		window.open('register.html','_self');
-		window.location.href='register.html';
-	}
+	$('#RegisterButton').click(function(){
+		//alert("123");
+		window.open('./register.html');
+		//window.location.replace('./register.html');
+		//window.location.href='./register.html';
+	
+	});
 });
 
 function feedback(tasks){
