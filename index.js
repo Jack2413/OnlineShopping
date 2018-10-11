@@ -2,12 +2,27 @@ var express = require('express');
 var app = express();
 var port = process.env.PORT || 8080;
 var bodyParser = require ('body-parser');
+var crypto = require('crypto');
 const path = require('path');
 const { Pool } = require('pg'); 
 const pool = new Pool({
 	connectionString: process.env.DATABASE_URL,
 	ssl: true 
 });
+
+var config = {
+  // size of the generated hash
+  hashBytes: 64,
+  // larger salt means hashed passwords are more resistant to rainbow table, but
+  // you get diminishing returns pretty fast
+  saltBytes: 32,
+  // more iterations means an attacker has to take longer to brute force an
+  // individual password, so larger is better. however, larger also means longer
+  // to hash the password. tune so that hashing the password takes about a
+  // second
+  iterations: 872791,
+  encryptBytes: 128
+};
 
 app.use (express.static(path.join(__dirname + '/front-end')))
   .set('views', path.join(__dirname, 'views'))
@@ -34,12 +49,23 @@ app.get('/login', async (req, res) => {
 		console.log("get in get function");
 		const client = await pool.connect();
 		var result = await client.query('SELECT * FROM todo');
+
+		var email = req.body.email;
+		var password = req.body.password;
+
+		const salt = await client.query('SELECT SALT FROM USER where email = '+email);
+		const database_password = await client.query('SELECT ENCRYPT_PASSWORD FROM USER where email = '+email);
+		const encrypt_password = crypto.pbkdf2Sync(password, salt, confige.iterations, confige.encryptBytes, 'sha512');
+
+		var result = database_password===encrypt_password;
+
 		if (!result) {
 			return res.send('Invalid username or password'); 
 		}else{ 
-			return res.send(result.rows);
+			return res.send('Login success');
 		}
 		client.release();
+		
 	} catch (err) { 
 		console.error(err); 
 		res.send("Error " + err);
@@ -51,24 +77,23 @@ app.get('/login', async (req, res) => {
 app.post('/register', async (req, res) => { 
 	try {
 		const client = await pool.connect();
-		console.log(req.body);
-		var task = req.body.task;
-		var name = req.body.task_name;
-		var state = req.body.state;
-		console.log(task+' '+name+' '+state);
-		var result = await client.query('INSERT INTO todo (TASK,NAME,STATE) VALUES ($1,$2,$3)',[task,name,state]);
-		var result2 = await client.query('SELECT * FROM todo where id = (SELECT MAX(id) FROM todo)');
+		//console.log(req.body);
+		var username = req.body.username;
+		var email = req.body.email;
+		var password = req.body.password;
+		console.log('salt: ' + salt 'encrypt_password: '+ encrypt_password);
+
+		const salt = crypto.randomBytes(config.saltBytes);
+		const encrypt_password = crypto.pbkdf2Sync(password, salt, confige.iterations, confige.encryptBytes, 'sha512');
+		console.log('salt: ' + salt 'encrypt_password: '+ encrypt_password);
+
+		var result = await client.query('INSERT INTO USER (USERNAME,EMAIL,ENCRYPT_PASSWORD,SALT) VALUES ($1,$2,$3,$4)',[username,email,encrypt_password,salt]);
+
 		if (!result) {
-			console.log('not insert success');
-			return res.send('not insert success'); 
-		}else if(!result2){
-			console.log('insert success'); 
-			console.log('select fail'); 
-			return res.send('insert success, select fail'); 
+			//console.log('not insert success');
+			return res.send('Email already been used.'); 
 		}else{
-			console.log('insert success'); 
-			console.log('select success'); 
-			return res.send(result2.rows);
+			return res.send('Register success');
 		}
 		client.release();
 	} catch (err) { 

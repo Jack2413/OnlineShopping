@@ -20,6 +20,8 @@
     "body-parser": "^1.18.3",
     "csprng": "^0.1.2",
     "express": "^4.16.3",
+    "pbkdf2": "^3.0.17",
+    "pbkdf2-password": "^1.2.1",
     "pg": "^7.5.0"
   }
 }
