@@ -55,8 +55,6 @@ $(document).ready(function(e) {
 		
 	});
 
-
-
 	$('#ConfirmPassword').keyup(function(){
 		if($('#InputPassword').val()==''||$('#ConfirmPassword').val()==''){
 			$('#ConfirmText').text('');
@@ -110,6 +108,10 @@ $(document).ready(function(e) {
 
 		}).then(feedback, ERROR_LOG);
 	});
+
+	$('RegisterButton').click(function() {
+		window.open('register.html','_self');
+	}
 });
 
 function feedback(tasks){

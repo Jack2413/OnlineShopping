@@ -35,7 +35,7 @@ app.get('/login', async (req, res) => {
 		const client = await pool.connect();
 		var result = await client.query('SELECT * FROM todo');
 		if (!result) {
-			return res.send('invalid username or password'); 
+			return res.send('Invalid username or password'); 
 		}else{ 
 			return res.send(result.rows);
 		}
