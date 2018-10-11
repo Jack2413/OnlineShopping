@@ -113,10 +113,8 @@ $(document).ready(function(e) {
 	$('#RegisterButton').click(function(){
 		//var text = "123";
 		//var text= $.md5('123');
-		var csprng = require("sodium").Random;
-		var bytes = csprng.randombytes_buf(32);
 		//var rand = '22';//crypto.randomBytes('csprng');
-		alert(bytes);
+		//alert(bytes);
 		window.open('./register.html');
 
 		//window.location.replace('./register.html');
