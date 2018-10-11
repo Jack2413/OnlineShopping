@@ -1,3 +1,4 @@
+var url = 'https://nwen304project2.herokuapp.com';
 $(document).ready(function(e) {
 	
 	$('#InputPassword').keyup(function () {
@@ -5,10 +6,7 @@ $(document).ready(function(e) {
 		var strength = 0;
 		var password = $('#InputPassword').val();
 
-		if(password.length==0){
-			$('#InputText').text('');
-			return;
-		}
+		
 		if (password.match(/[a-z]+/)){
 			strength += 20
 		}
@@ -34,9 +32,13 @@ $(document).ready(function(e) {
 			case 80: $('#InputText').text('Strong'); break
 			case 100: $('#InputText').text('Very Strong'); break
 		}
+
 		if(password.length<6){
 			$('#InputText').text('password must have at least 6 digits');
-			return;
+			
+		}
+		if(password.length==0){
+			$('#InputText').text('');
 		}
 
 		$('#strength').val(strength);
@@ -66,22 +68,52 @@ $(document).ready(function(e) {
 	});
 
 	$('#submitButton').click(function() {
-		var username = $('#InputUsername').val();
-		var email = $('#InputEmail').val();
-		var password = $('#InputPassword').val();
+		var $username = $('#InputUsername').val();
+		var $email = $('#InputEmail').val();
+		var $password = $('#InputPassword').val();
 
-		
 		if(!email.match(/[@]+/)||password.length<6){
 			return;
 		}
 
-		// $.ajax({
-		// 		method: 'POST',
-		// 		url:'https://nwen304project2.herokuapp.com/post',
-		// 		data: JSON.stringify(
+		$.ajax({
+				method: 'POST',
+				url:url+'/register',
+				data: JSON.stringify({
+					username: $username,
+					email: $email,
+					password: $password
+				}),
+				contentType: "application/json",
+				dataType: "json",
 
-		// 		)
-		// 	)
-		// });
+		}).then(feedback, ERROR_LOG);
+	});
+
+	$('loginButton').click(function() {
+		var $email = $('#InputEmail').val();
+		var $password = $('#InputPassword').val();
+
+		if(!email.match(/[@]+/)||password.length<6){
+			return;
+		}
+
+		$.ajax({
+				method: 'GET',
+				url:url+'/login',
+				data: JSON.stringify({
+					email: $email,
+					password: $password
+				}),
+				contentType: "application/json",
+				dataType: "json",
+
+		}).then(feedback, ERROR_LOG);
 	});
 });
+
+function feedback(tasks){
+
+		
+}
+

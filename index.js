@@ -27,6 +27,55 @@ res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allo
 next(); 
 });
 
+//Get function
+//to get all the tasks from Heroku database, and return the result to front-end
+app.get('/login', async (req, res) => { 
+	try {
+		console.log("get in get function");
+		const client = await pool.connect();
+		var result = await client.query('SELECT * FROM todo');
+		if (!result) {
+			return res.send('invalid username or password'); 
+		}else{ 
+			return res.send(result.rows);
+		}
+		client.release();
+	} catch (err) { 
+		console.error(err); 
+		res.send("Error " + err);
+	} 
+});
+
+//Post function
+//to create a new task to Heroku database, and return the task just created
+app.post('/register', async (req, res) => { 
+	try {
+		const client = await pool.connect();
+		console.log(req.body);
+		var task = req.body.task;
+		var name = req.body.task_name;
+		var state = req.body.state;
+		console.log(task+' '+name+' '+state);
+		var result = await client.query('INSERT INTO todo (TASK,NAME,STATE) VALUES ($1,$2,$3)',[task,name,state]);
+		var result2 = await client.query('SELECT * FROM todo where id = (SELECT MAX(id) FROM todo)');
+		if (!result) {
+			console.log('not insert success');
+			return res.send('not insert success'); 
+		}else if(!result2){
+			console.log('insert success'); 
+			console.log('select fail'); 
+			return res.send('insert success, select fail'); 
+		}else{
+			console.log('insert success'); 
+			console.log('select success'); 
+			return res.send(result2.rows);
+		}
+		client.release();
+	} catch (err) { 
+		console.error(err); 
+		res.send("Error " + err);
+	} 
+});
 
 app.get('/', (req, res) => res.render('pages/index'))
 	.listen(port, () => console.log('Listening on Heroku Server'))
