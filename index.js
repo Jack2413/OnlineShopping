@@ -85,7 +85,7 @@ app.post('/register', async (req, res) => {
 
 		const salt = crypto.randomBytes(config.saltBytes);
 		const encrypt_password = crypto.pbkdf2Sync(password, salt, confige.iterations, confige.encryptBytes, 'sha512');
-		console.log('salt: ' + salt 'encrypt_password: '+ encrypt_password);
+		console.log('salt: ' + salt + 'encrypt_password: '+ encrypt_password);
 
 		var result = await client.query('INSERT INTO USERS (USERNAME,EMAIL,ENCRYPT_PASSWORD,SALT) VALUES ($1,$2,$3,$4)',[username,email,encrypt_password,salt]);
 
