@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Jack2413/OnlineShopping#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "csprng": "^0.1.2",
     "express": "^4.16.3",
     "pg": "^7.5.0"
   }

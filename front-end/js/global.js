@@ -111,8 +111,14 @@ $(document).ready(function(e) {
 	});
 
 	$('#RegisterButton').click(function(){
-		//alert("123");
+		//var text = "123";
+		//var text= $.md5('123');
+		var csprng = require("sodium").Random;
+		var bytes = csprng.randombytes_buf(32);
+		//var rand = '22';//crypto.randomBytes('csprng');
+		alert(bytes);
 		window.open('./register.html');
+
 		//window.location.replace('./register.html');
 		//window.location.href='./register.html';
 	
