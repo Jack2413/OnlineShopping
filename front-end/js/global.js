@@ -91,8 +91,8 @@ $(document).ready(function(e) {
 	});
 
 	$('#loginButton').click(function() {
-		var $email = $('#InputEmail').val();
-		var $password = $('#InputPassword').val();
+		var $email = $('#login_InputEmail').val();
+		var $password = $('#login_InputPassword').val();
 
 		if(!$email.match(/[@]+/)||$password.length<6){
 			return;
