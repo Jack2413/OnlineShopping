@@ -66,8 +66,7 @@ $(document).ready(function(e) {
 			$('#ConfirmText').text(reply);
 	});
 
-	$('#submitButton').click(function(e) {
-		e.preventDefult();
+	$('#submitButton').click(function() {
 		var $username = $('#InputUsername').val();
 		var $email = $('#InputEmail').val();
 		var $password = $('#InputPassword').val();
