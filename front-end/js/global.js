@@ -93,7 +93,7 @@ $(document).ready(function(e) {
 	$('#loginButton').click(function() {
 		var $email = $('#login_InputEmail').val();
 		var $password = $('#login_InputPassword').val();
-		alert($email+' '+$password);
+		//alert($email+' '+$password);
 		if(!$email.match(/[@]+/)||$password.length<6){
 			return;
 		}
