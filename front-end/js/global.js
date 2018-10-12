@@ -1,5 +1,5 @@
 var url = 'https://nwen304project2.herokuapp.com';
-
+var ERROR_LOG = console.error.bind(console);
 $(document).ready(function(e) {
 
 	$('#InputPassword').keyup(function () {
