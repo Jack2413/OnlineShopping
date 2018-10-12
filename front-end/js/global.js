@@ -70,6 +70,7 @@ $(document).ready(function(e) {
 		var $username = $('#InputUsername').val();
 		var $email = $('#InputEmail').val();
 		var $password = $('#InputPassword').val();
+		console.log($username+' '+$email+' '+$password);
 
 		if(!email.match(/[@]+/)||password.length<6){
 			return;
