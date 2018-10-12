@@ -109,6 +109,7 @@ $(document).ready(function(e) {
 				dataType: "json",
 
 		}).then(feedback, ERROR_LOG);
+		alert($email+' '+$password);
 	});
 
 	$('#RegisterButton').click(function(){
