@@ -77,7 +77,7 @@ app.get('/login', async (req, res) => {
 app.post('/register', async (req, res) => { 
 	try {
 		const client = await pool.connect();
-		//console.log(req.body);
+		console.log(req.body);
 		var username = req.body.username;
 		var email = req.body.email;
 		var password = req.body.password;
