@@ -70,7 +70,7 @@ $(document).ready(function(e) {
 		var $username = $('#InputUsername').val();
 		var $email = $('#InputEmail').val();
 		var $password = $('#InputPassword').val();
-		alert($username+' '+$email+' '+$password);
+
 
 		if(!email.match(/[@]+/)||password.length<6){
 			return;
@@ -78,7 +78,7 @@ $(document).ready(function(e) {
 
 		$.ajax({
 				method: 'POST',
-				url:url+'/register',
+				url: url+'/register',
 				data: JSON.stringify({
 					username: $username,
 					email: $email,
@@ -88,6 +88,7 @@ $(document).ready(function(e) {
 				dataType: "json",
 
 		}).then(feedback, ERROR_LOG);
+		alert($username+' '+$email+' '+$password);
 	});
 
 	$('#loginButton').click(function() {
