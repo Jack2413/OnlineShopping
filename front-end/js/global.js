@@ -66,11 +66,11 @@ $(document).ready(function(e) {
 			$('#ConfirmText').text(reply);
 	});
 
-	$('#submitButton').click(function() {
+	$('#submitButton').click(function(e) {
+		e.preventDefult();
 		var $username = $('#InputUsername').val();
 		var $email = $('#InputEmail').val();
 		var $password = $('#InputPassword').val();
-
 
 		if(!$email.match(/[@]+/)||$password.length<6){
 			return;
