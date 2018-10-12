@@ -76,6 +76,7 @@ app.get('/login', async (req, res) => {
 //to create a new task to Heroku database, and return the task just created
 app.post('/register', async (req, res) => { 
 	try {
+		console.log("get in register function");
 		const client = await pool.connect();
 		console.log(req.body);
 		var username = req.body.username;
