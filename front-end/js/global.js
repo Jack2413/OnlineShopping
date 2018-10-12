@@ -72,7 +72,7 @@ $(document).ready(function(e) {
 		var $password = $('#InputPassword').val();
 
 
-		if(!email.match(/[@]+/)||password.length<6){
+		if(!email.match(/[@]+/)||$password.length<6){
 			return;
 		}
 
