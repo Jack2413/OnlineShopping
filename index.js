@@ -24,7 +24,7 @@ var config = {
   encryptBytes: 128
 };
 
-app.use (express.static(path.join(__dirname + '/front-end')))
+app.use (express.static(path.join(__dirname + '/front-end/js')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
 //invoke functions on a service hosted in a different location
