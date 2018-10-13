@@ -57,7 +57,7 @@ app.get('/login', async (req, res) => {
 		var salt = await client.query('SELECT SALT FROM USERS where email = $1',[email]);
 		console.log('salt '+salt);
 
-		var database_password = await client.query('SELECT ENCRYPTED_PASSWORD FROM USERS where email = $1'+[email]);
+		var database_password = await client.query('SELECT ENCRYPTED_PASSWORD FROM USERS where email = $1',[email]);
 		console.log('database_password :'+database_password);
 
 		var encrypt_password = crypto.pbkdf2Sync(password, salt, confige.iterations, confige.encryptBytes, 'sha512');
