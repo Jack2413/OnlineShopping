@@ -3,6 +3,7 @@ var app = express();
 var port = process.env.PORT || 8080;
 var bodyParser = require ('body-parser');
 var crypto = require('crypto');
+crypto.DEFAULT_ENCODING = 'hex';
 const path = require('path');
 const { Pool } = require('pg'); 
 const pool = new Pool({

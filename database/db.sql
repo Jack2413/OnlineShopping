@@ -3,5 +3,5 @@ CREATE TABLE users (
   email varchar(32) NOT NULL,
   encrypted_password varchar(128) NOT NULL,
   salt varchar(64) NOT NULL,
-  PRIMARY KEY (email),
-); ENGINE=InnoDB DEFAULT CHARSET=utf8
+  PRIMARY KEY (email)
+) DEFAULT CHARSET=utf8;
