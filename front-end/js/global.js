@@ -99,7 +99,7 @@ $(document).ready(function(e) {
 		}
 
 		$.ajax({
-				method: 'GET',
+				method: 'POST',
 				url: url+'/login',
 				data: JSON.stringify({
 					email: $email,

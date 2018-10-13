@@ -25,9 +25,9 @@ var confige = {
   encryptBytes: 128
 };
 
-app.use (express.static(path.join(__dirname + '/front-end')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs');
+app.use (express.static(path.join(__dirname + '/front-end')));
+  // .set('views', path.join(__dirname, 'views'))
+  // .set('view engine', 'ejs');
 //invoke functions on a service hosted in a different location
 // Add headers
 app.use (bodyParser.json());
@@ -45,7 +45,7 @@ next();
 
 //Get function
 //to get all the tasks from Heroku database, and return the result to front-end
-app.get('/login', async (req, res) => { 
+app.post('/login', async (req, res) => { 
 	try {
 		console.log("get in login function");
 		const client = await pool.connect();
