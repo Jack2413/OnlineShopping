@@ -48,20 +48,22 @@ app.get('/login', async (req, res) => {
 	try {
 		console.log("get in get function");
 		const client = await pool.connect();
-		var result = await client.query('SELECT * FROM USERS');
 
 		var email = req.body.email;
 		var password = req.body.password;
 		console.log("email "+email);
 
-		var salt = await client.query('SELECT SALT FROM USERS where email = $1',[email]);
-		console.log('salt '+salt);
+		var result = await client.query('SELECT * FROM USERS where email = $1',[email]);
+		console.log('result '+result.rows);
 
-		var database_password = await client.query('SELECT ENCRYPTED_PASSWORD FROM USERS where email = $1',[email]);
+		var database_password = result.rows.item(0).encrypted_password;
 		console.log('database_password :'+database_password);
 
+		var salt = result.rows.item(0).salt;
+		console.log('salt :'+salt);
+
 		var encrypt_password = crypto.pbkdf2Sync(password, salt, confige.iterations, confige.encryptBytes, 'sha512');
-		console.log('encrypt_password :'+encrypt_password);
+		console.log('encrypt_password :'+ encrypt_password;
 
 		var result = database_password===encrypt_password;
 
