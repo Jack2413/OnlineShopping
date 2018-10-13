@@ -92,7 +92,7 @@ app.post('/register', async (req, res) => {
 		var password = req.body.password;
 		console.log('username: ' + username + 'email: ' + email + 'password: '+ password);
 
-		const salt = crypto.randomBytes(config.saltBytes);
+		const salt = crypto.randomBytes(confige.saltBytes);
 		const encrypt_password = crypto.pbkdf2Sync(password, salt, confige.iterations, confige.encryptBytes, 'sha512');
 		console.log('salt: ' + salt + 'encrypt_password: '+ encrypt_password);
 
