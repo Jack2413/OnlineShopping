@@ -126,6 +126,7 @@ $(document).ready(function(e) {
 });
 
 function feedback(tasks){
+	console.log(tasks);
 	alert(tasks);
 }
 
