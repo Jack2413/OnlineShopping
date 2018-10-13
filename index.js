@@ -63,7 +63,7 @@ app.get('/login', async (req, res) => {
 		console.log('salt :'+salt);
 
 		var encrypt_password = crypto.pbkdf2Sync(password, salt, confige.iterations, confige.encryptBytes, 'sha512');
-		console.log('encrypt_password :'+ encrypt_password;
+		console.log('encrypt_password :'+ encrypt_password);
 
 		var result = database_password===encrypt_password;
 
