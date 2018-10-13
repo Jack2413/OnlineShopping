@@ -108,7 +108,7 @@ $(document).ready(function(e) {
 				contentType: "application/json",
 				dataType: "json",
 
-		}).then(feedback, ERROR_LOG);
+		}).then (feedback, ERROR_LOG);
 		alert($email+' '+$password);
 	});
 
