@@ -71,11 +71,11 @@ app.post('/login', async (req, res) => {
 		var result = database_password===encrypt_password;
 
 		if (!result) {
-			console.log("invalid username or password");
-			return res.send("invalid username or password"); 
+			console.log('invalid username or password');
+			return res.send('invalid username or password'); 
 		}else{ 
 			console.log('login success');
-			return res.send("login success");
+			return res.send('login success');
 		}
 		client.release();
 
@@ -104,11 +104,11 @@ app.post('/register', async (req, res) => {
 		var result = await client.query('INSERT INTO USERS (USERNAME,EMAIL,ENCRYPTED_PASSWORD,SALT) VALUES ($1,$2,$3,$4)',[username,email,encrypt_password,salt]);
 
 		if (!result) {
-			console.log("email already been used.");
-			return res.send("email already been used."); 
+			console.log('email already been used.');
+			return res.send('email already been used.'); 
 		}else{
-			console.log("register success");
-			return res.send("register success");
+			console.log('register success');
+			return res.send('register success');
 		}
 		client.release();
 	} catch (err) { 

@@ -86,7 +86,15 @@ $(document).ready(function(e) {
 				contentType: "application/json",
 				dataType: "json",
 
-		});//.then(feedback, ERROR_LOG);
+		}).then (
+		function(feedback){
+			console.log(feedback);
+			alert(feedback);
+		}, 
+		function(error){
+			console.log(error);
+			alert(error);
+		});
 		alert($username+' '+$email+' '+$password);
 	});
 
@@ -110,11 +118,11 @@ $(document).ready(function(e) {
 
 		}).then (
 		function(feedback){
-			console.log(feedback);
-			alert(feedback);
+			//console.log(feedback);
+			alert(feedback.text());
 		}, 
 		function(error){
-			console.log(error);
+			//console.log(error);
 			alert(error);
 		});
 
