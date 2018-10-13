@@ -57,6 +57,8 @@ app.get('/login', async (req, res) => {
 		var result = await client.query('SELECT * FROM USERS where email = $1',[email]);
 		console.log('result '+result.rows);
 
+		if (!result) {return res.send('Invalid username or password');} 
+
 		var database_password = result.rows[0].encrypted_password;
 		console.log('database_password :'+database_password);
 
