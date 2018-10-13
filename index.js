@@ -10,7 +10,7 @@ const pool = new Pool({
 	ssl: true 
 });
 
-var config = {
+var confige = {
   // size of the generated hash
   hashBytes: 64,
   // larger salt means hashed passwords are more resistant to rainbow table, but
