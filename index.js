@@ -56,10 +56,10 @@ app.get('/login', async (req, res) => {
 		var result = await client.query('SELECT * FROM USERS where email = $1',[email]);
 		console.log('result '+result.rows);
 
-		var database_password = result.rows.item(0).encrypted_password;
+		var database_password = result.rows[0].encrypted_password;
 		console.log('database_password :'+database_password);
 
-		var salt = result.rows.item(0).salt;
+		var salt = result.rows[0].salt;
 		console.log('salt :'+salt);
 
 		var encrypt_password = crypto.pbkdf2Sync(password, salt, confige.iterations, confige.encryptBytes, 'sha512');
