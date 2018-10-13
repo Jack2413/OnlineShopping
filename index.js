@@ -27,7 +27,7 @@ var confige = {
 
 app.use (express.static(path.join(__dirname + '/front-end')))
   .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
+  .set('view engine', 'ejs');
 //invoke functions on a service hosted in a different location
 // Add headers
 app.use (bodyParser.json());
@@ -47,9 +47,9 @@ next();
 //to get all the tasks from Heroku database, and return the result to front-end
 app.get('/login', async (req, res) => { 
 	try {
-		console.log("get in get function");
+		console.log("get in login function");
 		const client = await pool.connect();
-
+		console.log(req.body);
 		var email = req.body.email;
 		var password = req.body.password;
 		console.log("email "+email+"password: "+password);
