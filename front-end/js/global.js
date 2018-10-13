@@ -1,4 +1,4 @@
-var url = 'https://nwen304onlineshoping.herokuapp.com/';
+var url = 'https://nwen304onlineshoping.herokuapp.com';
 var ERROR_LOG = console.error.bind(console);
 $(document).ready(function(e) {
 
