@@ -52,12 +52,12 @@ app.get('/login', async (req, res) => {
 
 		var email = req.body.email;
 		var password = req.body.password;
-		console.log("email "+email);
+		console.log("email "+email+"password: "+password);
 
 		var result = await client.query('SELECT * FROM USERS where email = $1',[email]);
 		console.log('result '+result.rows);
 
-		if (!result) {return res.send('Invalid username or password');} 
+		if (result===undefined) {return res.send('Invalid username or password');} 
 
 		var database_password = result.rows[0].encrypted_password;
 		console.log('database_password :'+database_password);
