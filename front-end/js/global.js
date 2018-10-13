@@ -119,11 +119,11 @@ $(document).ready(function(e) {
 		}).then (
 		function(feedback){
 			//console.log(feedback);
-			alert(feedback.text());
+			alert(feedback);
 		}, 
 		function(error){
 			//console.log(error);
-			alert(error.text());
+			alert("error "+error);
 		});
 
 		alert($email+' '+$password);
