@@ -100,7 +100,7 @@ $(document).ready(function(e) {
 
 		$.ajax({
 				method: 'GET',
-				url:url+'/login',
+				url: url+'/login',
 				data: JSON.stringify({
 					email: $email,
 					password: $password
