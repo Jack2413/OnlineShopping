@@ -124,7 +124,7 @@ $(document).ready(function(e) {
 		function(error){
 
 			//console.log(error);
-			alert("error "+error.rows[0]);
+			alert("error "+error.rows);
 		});
 
 		alert($email+' '+$password);
