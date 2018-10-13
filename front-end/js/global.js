@@ -122,8 +122,9 @@ $(document).ready(function(e) {
 			alert(feedback);
 		}, 
 		function(error){
+
 			//console.log(error);
-			alert("error "+error);
+			alert("error "+error.rows[0]);
 		});
 
 		alert($email+' '+$password);
