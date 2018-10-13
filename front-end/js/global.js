@@ -123,7 +123,7 @@ $(document).ready(function(e) {
 		}, 
 		function(error){
 			//console.log(error);
-			alert(error);
+			alert(error.text());
 		});
 
 		alert($email+' '+$password);
