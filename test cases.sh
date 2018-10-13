@@ -2,7 +2,7 @@
 # test cases
 #test the GET method of the database
 echo 'Getting task(s) from database'
-curl -H "Content-Type: application/json" -X GET https://nwen304project2.herokuapp.com/get
+curl -H "Content-Type: application/json" -X GET -d '{"username":"testusername","email":"testemail@gmail,com","password":"123456"}' https://nwen304onlineshoping.herokuapp.com/login
 echo
 #test the POST method of the database
 echo 'Add task in the database'
