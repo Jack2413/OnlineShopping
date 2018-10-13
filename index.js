@@ -48,7 +48,7 @@ app.get('/login', async (req, res) => {
 	try {
 		console.log("get in get function");
 		const client = await pool.connect();
-		var result = await client.query('SELECT * FROM todo');
+		var result = await client.query('SELECT * FROM USERS');
 
 		var email = req.body.email;
 		var password = req.body.password;
