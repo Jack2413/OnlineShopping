@@ -108,8 +108,18 @@ $(document).ready(function(e) {
 				contentType: "application/json",
 				dataType: "json",
 
-		}).then (feedback, ERROR_LOG);
+		}).then (
+		function(feedback){
+			console.log(feedback);
+			alert(feedback);
+		}, 
+		function(error){
+			console.log(error);
+			alert(error);
+		});
+
 		alert($email+' '+$password);
+
 	});
 
 	$('#RegisterButton').click(function(){
@@ -123,11 +133,6 @@ $(document).ready(function(e) {
 		//window.location.href='./register.html';
 	
 	});
-
-	function feedback(tasks){
-		console.log(tasks);
-		alert(tasks);
-	}
 });
 
 
