@@ -88,12 +88,19 @@ $(document).ready(function(e) {
 
 		}).then (
 		function(feedback){
-			console.log(feedback);
-			alert(feedback);
+			console.log(typeof feedback);
+			alert(typeof feedback);
+			feedback.forEach(f=>{
+				alert(f);
+			});
 		}, 
 		function(error){
-			console.log(error);
-			alert(error);
+			console.log(typeof error);
+			alert(typeof error);
+			error.forEach(f=>{
+				alert(f);
+			});
+
 		});
 		alert($username+' '+$email+' '+$password);
 	});
@@ -118,13 +125,13 @@ $(document).ready(function(e) {
 
 		}).then (
 		function(feedback){
-			//console.log(feedback);
+			console.log(feedback);
 			alert(feedback);
 		}, 
 		function(error){
 
 			//console.log(error);
-			alert("error "+error.rows);
+			alert("error "+error);
 		});
 
 		alert($email+' '+$password);
