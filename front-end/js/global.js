@@ -55,7 +55,7 @@ $(document).ready(function(e) {
 		}
 
 		var text;
-		if(!email.match(/[@]+/)){
+		if(!isEmail(email)){
 			text = 'Unvaild Email';
 			$('#EmailText').removeClass("vaild");
 		}else{
@@ -87,8 +87,9 @@ $(document).ready(function(e) {
 		var $username = $('#InputUsername').val();
 		var $email = $('#InputEmail').val();
 		var $password = $('#InputPassword').val();
+		var $confirmPassword = $('#ConfirmPassword').val();
 
-		if(!$email.match(/[@]+/)||$password.length<6){
+		if(!isEmail(email)||$password.length<6||$password!=$confirmPassword){
 			return;
 		}
 
@@ -115,11 +116,46 @@ $(document).ready(function(e) {
 		//alert($username+' '+$email+' '+$password);
 	});
 
+	$('#resetButton').click(function() {
+
+		var $email = $('#InputEmail').val();
+		var $oldpassword = $('#InputEmail').val();
+		var $newpassword = $('#InputPassword').val();
+		var $confirmPassword = $('#ConfirmPassword').val();
+
+		if(!isEmail(email)||$password.length<6||$password!=$confirmPassword){
+			return;
+		}
+
+		$.ajax({
+				method: 'POST',
+				url: url+'/reset',
+				data: JSON.stringify({
+					email: $email,
+					oldpassword: $oldpassword,
+					newpassword: $newpassword
+				}),
+				contentType: "application/json",
+
+		}).then (
+		function(feedback){
+			alert(feedback);
+			window.location.href = url;
+			
+		}, 
+		function(error){
+			alert(error);
+
+		});
+		//alert($username+' '+$email+' '+$password);
+	});
+
 	$('#loginButton').click(function() {
 		var $email = $('#login_InputEmail').val();
 		var $password = $('#login_InputPassword').val();
 		//alert($email+' '+$password);
-		if(!$email.match(/[@]+/)||$password.length<6){
+		if(!isEmail(email)){
+
 			return;
 		}
 
@@ -148,8 +184,12 @@ $(document).ready(function(e) {
 	});
 	$('#loginPageButton').click(function(){
 		window.location.href = url;
-	});
+	}); 
 });
 
+function isEmail(email) {
+  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return regex.test(email);
+}
 
 

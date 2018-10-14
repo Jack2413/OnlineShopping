@@ -117,6 +117,49 @@ app.post('/register', async (req, res) => {
 	} 
 });
 
+app.post('/reset', async (req, res) => { 
+	try {
+
+		const client = await pool.connect();
+		console.log(req.body);
+		var email = req.body.email;
+		var oldpassword = req.body.oldpassword;
+		var newpassword = req.body.newpassword;
+		console.log('email: ' + username + 'oldpassword: ' + oldpassword + 'newpassword: '+ newpassword);
+		var result = await client.query('SELECT * FROM USERS where email = $1',[email]);
+		console.log('result '+result.rows);
+
+		if (result===undefined) {return res.send('Invalid username or password');} 
+
+		var database_password = result.rows[0].encrypted_password;
+		console.log('database_password :'+database_password);
+		var salt = result.rows[0].salt;
+		console.log('salt :'+salt);
+		var encrypt_password = crypto.pbkdf2Sync(oldpassword, salt, confige.iterations, confige.encryptBytes, 'sha512');
+		console.log('encrypt_password :'+ encrypt_password);
+		var result = database_password===encrypt_password;
+
+		if (!result) {
+			console.log('invalid username or password');
+			return res.send('invalid username or password'); 
+		}
+
+		salt = crypto.randomBytes(confige.saltBytes).toString('hex');
+		encrypt_password = crypto.pbkdf2Sync(newpassword, salt, confige.iterations, confige.encryptBytes, 'sha512');
+		console.log('salt: ' + salt + 'encrypt_password: '+ encrypt_password);
+
+		var result = await client.query('UPDATE USERS (ENCRYPTED_PASSWORD = $1,SALT = $2) WHERE EMAIL = $3',[encrypt_password,salt,email]);
+
+		console.log('register success');
+		return res.send('register success');
+
+		client.release();
+	} catch (err) { 
+		console.error(err); 
+		res.send("Error " + err);
+	} 
+});
+
 app.get('/', (req, res) => res.render('pages/index'))
 	.listen(port, () => console.log('Listening on Heroku Server'))
 
