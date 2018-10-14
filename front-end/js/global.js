@@ -88,11 +88,8 @@ $(document).ready(function(e) {
 
 		}).then (
 		function(feedback){
-			console.log(typeof feedback);
-			alert(typeof feedback);
-			feedback.forEach(f=>{
-				alert(f);
-			});
+			console.log(feedback.json());
+			
 		}, 
 		function(error){
 			console.log(typeof error);
@@ -130,8 +127,8 @@ $(document).ready(function(e) {
 		}, 
 		function(error){
 
-			//console.log(error);
-			alert("error "+error);
+			console.log(error.json());
+			alert("error "+error.json());
 		});
 
 		alert($email+' '+$password);
