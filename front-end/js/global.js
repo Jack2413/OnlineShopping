@@ -123,7 +123,7 @@ $(document).ready(function(e) {
 		var $newpassword = $('#InputPassword').val();
 		var $confirmPassword = $('#ConfirmPassword').val();
 
-		if(!isEmail($email)||$password.length<6||$password!=$confirmPassword){
+		if(!isEmail($email)||$newpassword.length<6||$newpassword!=$confirmPassword){
 			return;
 		}
 
