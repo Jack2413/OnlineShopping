@@ -125,7 +125,7 @@ app.post('/reset', async (req, res) => {
 		var email = req.body.email;
 		var oldpassword = req.body.oldpassword;
 		var newpassword = req.body.newpassword;
-		console.log('email: ' + username + 'oldpassword: ' + oldpassword + 'newpassword: '+ newpassword);
+		console.log('email: ' + email + 'oldpassword: ' + oldpassword + 'newpassword: '+ newpassword);
 		var result = await client.query('SELECT * FROM USERS where email = $1',[email]);
 		console.log('result '+result.rows);
 
