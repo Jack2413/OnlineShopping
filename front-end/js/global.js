@@ -115,7 +115,6 @@ $(document).ready(function(e) {
 					password: $password
 				}),
 				contentType: "application/json",
-				dataType: "json",
 
 		}).then (
 		function(feedback){
