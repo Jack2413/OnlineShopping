@@ -150,8 +150,8 @@ app.post('/reset', async (req, res) => {
 
 		var result = await client.query('UPDATE USERS SET ENCRYPTED_PASSWORD = $1, SALT = $2 WHERE EMAIL = $3',[encrypt_password,salt,email]);
 
-		console.log('register success');
-		return res.send('register success');
+		console.log('reset success');
+		return res.send('reset success');
 
 		client.release();
 	} catch (err) { 
