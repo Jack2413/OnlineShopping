@@ -89,7 +89,7 @@ $(document).ready(function(e) {
 		var $password = $('#InputPassword').val();
 		var $confirmPassword = $('#ConfirmPassword').val();
 
-		if(!isEmail(email)||$password.length<6||$password!=$confirmPassword){
+		if(!isEmail($email)||$password.length<6||$password!=$confirmPassword){
 			return;
 		}
 
@@ -123,7 +123,7 @@ $(document).ready(function(e) {
 		var $newpassword = $('#InputPassword').val();
 		var $confirmPassword = $('#ConfirmPassword').val();
 
-		if(!isEmail(email)||$password.length<6||$password!=$confirmPassword){
+		if(!isEmail($email)||$password.length<6||$password!=$confirmPassword){
 			return;
 		}
 
@@ -154,7 +154,7 @@ $(document).ready(function(e) {
 		var $email = $('#login_InputEmail').val();
 		var $password = $('#login_InputPassword').val();
 		//alert($email+' '+$password);
-		if(!isEmail(email)){
+		if(!isEmail($email)){
 
 			return;
 		}
