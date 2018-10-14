@@ -84,19 +84,16 @@ $(document).ready(function(e) {
 					password: $password
 				}),
 				contentType: "application/json",
-				dataType: "json",
 
 		}).then (
 		function(feedback){
-			console.log(feedback.json());
+			console.log(feedback);
+			alert(feedback);
 			
 		}, 
 		function(error){
-			console.log(typeof error);
-			alert(typeof error);
-			error.forEach(f=>{
-				alert(f);
-			});
+			console.log(error);
+			alert(error);
 
 		});
 		alert($username+' '+$email+' '+$password);
@@ -126,9 +123,8 @@ $(document).ready(function(e) {
 			alert(feedback);
 		}, 
 		function(error){
-
-			console.log(error.json());
-			alert("error "+error.json());
+			console.log(error);
+			alert(error);
 		});
 
 		alert($email+' '+$password);
