@@ -119,7 +119,7 @@ app.post('/register', async (req, res) => {
 
 app.post('/reset', async (req, res) => { 
 	try {
-
+		console.log("get in reset function");
 		const client = await pool.connect();
 		console.log(req.body);
 		var email = req.body.email;
