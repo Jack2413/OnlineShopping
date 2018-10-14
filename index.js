@@ -148,7 +148,7 @@ app.post('/reset', async (req, res) => {
 		encrypt_password = crypto.pbkdf2Sync(newpassword, salt, confige.iterations, confige.encryptBytes, 'sha512');
 		console.log('salt: ' + salt + 'encrypt_password: '+ encrypt_password);
 
-		var result = await client.query('UPDATE USERS (ENCRYPTED_PASSWORD = $1,SALT = $2) WHERE EMAIL = $3',[encrypt_password,salt,email]);
+		var result = await client.query('UPDATE USERS SET (ENCRYPTED_PASSWORD = $1,SALT = $2) WHERE EMAIL = $3',[encrypt_password,salt,email]);
 
 		console.log('register success');
 		return res.send('register success');
