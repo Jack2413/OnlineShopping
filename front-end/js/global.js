@@ -119,7 +119,7 @@ $(document).ready(function(e) {
 	$('#resetButton').click(function() {
 
 		var $email = $('#InputEmail').val();
-		var $oldpassword = $('#InputEmail').val();
+		var $oldpassword = $('#OldPassword').val();
 		var $newpassword = $('#InputPassword').val();
 		var $confirmPassword = $('#ConfirmPassword').val();
 
