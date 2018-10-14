@@ -35,8 +35,10 @@ $(document).ready(function(e) {
 		}
 
 		if(password.length<6){
+			$('#InputText').removeClass("vaild");
 			$('#InputText').text('password must have at least 6 digits');
-			
+		}else{
+			$('#InputText').addClass("vaild");
 		}
 		if(password.length==0){
 			$('#InputText').text('');
@@ -51,7 +53,15 @@ $(document).ready(function(e) {
 			$('#EmailText').text('');
 			return;
 		}
-		var text = !email.match(/[@]+/)?'Unvaild Email':'Vaild'
+
+		var text;
+		if(!email.match(/[@]+/)){
+			text = 'Unvaild Email';
+			$('#EmailText').removeClass("vaild");
+		}else{
+			text = 'Vaild';
+			$('#EmailText').addClass("vaild");
+		}
 		$('#EmailText').text(text);
 		
 	});
@@ -61,9 +71,16 @@ $(document).ready(function(e) {
 			$('#ConfirmText').text('');
 			return;
 		}
-			var reply = $('#InputPassword').val()===$('#ConfirmPassword').val()?
-			'Password match':'Password Unmatch'
-			$('#ConfirmText').text(reply);
+
+		var reply;
+		if($('#InputPassword').val()===$('#ConfirmPassword').val()){
+			reply = 'Password match';
+			$('#ConfirmText').addClass("vaild");
+		}else{
+			$('#ConfirmText').removeClass("vaild");
+			reply ='Password Unmatch';
+		}
+		$('#ConfirmText').text(reply);
 	});
 
 	$('#submitButton').click(function() {
@@ -88,14 +105,14 @@ $(document).ready(function(e) {
 		}).then (
 		function(feedback){
 			alert(feedback);
-			window.location.href = 'https://nwen304onlineshoping.herokuapp.com';
+			window.location.href = url;
 			
 		}, 
 		function(error){
 			alert(error);
 
 		});
-		alert($username+' '+$email+' '+$password);
+		//alert($username+' '+$email+' '+$password);
 	});
 
 	$('#loginButton').click(function() {
@@ -123,21 +140,14 @@ $(document).ready(function(e) {
 			alert(error);
 		});
 
-		alert($email+' '+$password);
-
+		//alert($email+' '+$password);
 	});
 
 	$('#RegisterButton').click(function(){
-		//var text = "123";
-		//var text= $.md5('123');
-		//var rand = '22';//crypto.randomBytes('csprng');
-		//alert(bytes);
-		//window.open('../register.html','_self');
 		window.location.href = 'https://nwen304onlineshoping.herokuapp.com/register.html';
-
-		//window.location.replace('./register.html');
-		//window.location.href='./register.html';
-	
+	});
+	$('#loginPageButton').click(function(){
+		window.location.href = url;
 	});
 });
 
