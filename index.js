@@ -67,7 +67,7 @@ app.post("/login", async (req, res) => {
     console.log("result " + result.rows);
 
     if (result === undefined) {
-      res.end('{"message" : "Invalid Username or Password", "status" : 400}');
+      return res.send('{"feedback" : "Invalid Username or Password", "status" : 400}');
     }
 
     var database_password = result.rows[0].encrypted_password;
@@ -89,10 +89,10 @@ app.post("/login", async (req, res) => {
 
     if (!result) {
       console.log("invalid username or password");
-      res.end('{"message" : "Invalid Username or Password", "status" : 400}');
+      return res.end('{"feedback" : "Invalid Username or Password", "status" : 400}');
     } else {
       console.log("login success");
-      res.end('{"message" : "Login Success", "status" : 200}');
+      return res.end('{"feedback" : "Login Success", "status" : 200}');
     }
     client.release();
   } catch (err) {
@@ -130,14 +130,11 @@ app.post("/register", async (req, res) => {
       [username, email, encrypt_password, salt]
     );
 
-    if (!result) {
-      console.log("email already been used.");
-      return res.send("email already been used.");
-    } else {
-      console.log("register success");
-      return res.send("register success");
-    }
+    console.log("email already been used.");
+    return res.send('{"feedback" : "register success", "status" : 200}');
+    
     client.release();
+
   } catch (err) {
     console.error(err);
     res.send("Error " + err);
@@ -166,7 +163,7 @@ app.post("/reset", async (req, res) => {
     console.log("result " + result.rows);
 
     if (result === undefined) {
-      return res.send("Invalid username or password");
+      return res.send('{"feedback" : "Invalid Username or Password", "status" : 400}');
     }
 
     var database_password = result.rows[0].encrypted_password;
@@ -185,7 +182,7 @@ app.post("/reset", async (req, res) => {
 
     if (!result) {
       console.log("invalid username or password");
-      return res.send("invalid username or password");
+      return res.send('{"feedback" : "Invalid Username or Password", "status" : 400}');
     }
 
     salt = crypto.randomBytes(confige.saltBytes).toString("hex");
@@ -204,7 +201,7 @@ app.post("/reset", async (req, res) => {
     );
 
     console.log("reset success");
-    return res.send("reset success");
+    return res.send('{"feedback" : "reset success", "status" : 200}');
 
     client.release();
   } catch (err) {

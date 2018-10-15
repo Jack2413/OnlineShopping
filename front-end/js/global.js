@@ -141,11 +141,10 @@ $(document).ready(function(e) {
 
 		}).then (
 		function(result){
-			alert(result.message);
+			alert(result.feedback);
 			if(result.status==200){
 				window.location.href = url+"/login.html";
 			}
-			
 		}, 
 		function(error){
 			alert(error);
@@ -175,8 +174,10 @@ $(document).ready(function(e) {
 
 		}).then (
 		function(feedback){
-			alert(feedback);
-			window.location.href = url;
+			alert(result.feedback);
+			if(result.status==200){
+				window.location.href = url;
+			}
 		}, 
 		function(error){
 			alert(error);
