@@ -15,7 +15,19 @@ $(document).ready(function(e) {
 
   $("#additem").click(() => {
     console.log("Add item!");
-    Add();
+    var name = $("#product-name").val();
+    var price = $("#product-price").val();
+    var des = $("#product-des").val();
+    var newproduct = { name: name, price: price, description: des };
+    console.log(newproduct);
+    addproduct(newproduct);
+  });
+
+  $("#search").click(() => {
+    var name = $("#searchitem").val();
+    var name = { name: name };
+    console.log(name);
+    searchproduct2();
   });
 
   function getthewholepage() {
@@ -29,14 +41,57 @@ $(document).ready(function(e) {
     });
   }
 
-  function Add(data) {
+  function getsearchpage() {
+    $.ajax({
+      method: "GET",
+      url: "/search/" + $("#searchitem").val(),
+      success: data => {
+        // alert(JSON.stringify(data.length));
+        redraw(data);
+      }
+    });
+  }
+
+  function addproduct(todo) {
+    $.ajax({
+      type: "POST",
+      url: "/add",
+      data: todo,
+      success: returnedata => {
+        //alert("before getpost success!!!");
+        getthewholepage();
+      }
+    });
+  }
+
+  function searchproduct2() {
+    if ($("#searchitem").val() == "") {
+      getthewholepage();
+    } else {
+      $.ajax({
+        type: "GET",
+        url: "/search/" + $("#searchitem").val(),
+
+        contentType: "application/json",
+
+        success: returnedata => {
+          //alert("before getpost success!!!");
+          getsearchpage();
+        }
+      });
+    }
+  }
+
+  function redraw(data) {
     //empty 2 lists
     $("#product-list").empty();
-    var name = $("#product-name").val();
-    var price = $("#product-price").val();
-    var des = $("#product-des").val();
     //alert(JSON.stringify(name))
-    stackproductlist(name, price, des);
+    for (var i = 0; i < data.length; i++) {
+      var name = data[i].name;
+      var price = data[i].price;
+      var des = data[i].description;
+      stackproductlist(name, price, des);
+    }
   }
 
   function stackproductlist(name, price, des) {
@@ -51,14 +106,16 @@ $(document).ready(function(e) {
       '<button type="button" class="btn btn-primary btn-sm">Add</button> </div> </div> </div>';
     var $newTask = $(taskHTML);
     $newTask.find(".card-title").text(name);
-    $newTask.find(".card-price").text("$" + price);
+    $newTask.find(".card-price").text(price);
     $newTask.find(".card-text").text(des);
 
     $newTask.hide();
-    $("#product-list").prepend($newTask);
+    $("#product-list").append($newTask);
     //$("#product-list") = [...$("#product-list"), $newTask];
 
-    $newTask.show("clip", 250).effect("highlight", 1000);
+    $newTask.show();
     $("#product-name").val("");
+    $("#product-price").val("");
+    $("#product-des").val("");
   }
 }); // end ready
