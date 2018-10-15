@@ -102,6 +102,7 @@ $(document).ready(function(e) {
 					password: $password
 				}),
 				contentType: "application/json",
+				datatype: "json"
 
 		}).then (
 		function(feedback){
@@ -136,11 +137,14 @@ $(document).ready(function(e) {
 					newpassword: $newpassword
 				}),
 				contentType: "application/json",
+				datatype: "json"
 
 		}).then (
-		function(feedback){
-			alert(feedback);
-			window.location.href = url+"/login.html";
+		function(result){
+			alert(result.message);
+			if(result.status==200){
+				window.location.href = url+"/login.html";
+			}
 			
 		}, 
 		function(error){
@@ -167,6 +171,7 @@ $(document).ready(function(e) {
 					password: $password
 				}),
 				contentType: "application/json",
+				datatype: "json"
 
 		}).then (
 		function(feedback){
