@@ -106,7 +106,7 @@ $(document).ready(function(e) {
 		}).then (
 		function(feedback){
 			alert(feedback);
-			window.location.href = url+"/login";
+			window.location.href = url+"/login.html";
 			
 		}, 
 		function(error){
@@ -140,7 +140,7 @@ $(document).ready(function(e) {
 		}).then (
 		function(feedback){
 			alert(feedback);
-			window.location.href = url+"/login";
+			window.location.href = url+"/login.html";
 			
 		}, 
 		function(error){
@@ -181,10 +181,10 @@ $(document).ready(function(e) {
 	});
 
 	$('#RegisterButton').click(function(){
-		window.location.href = 'https://nwen304onlineshoping.herokuapp.com/register';
+		window.location.href = 'https://nwen304onlineshoping.herokuapp.com/register.html';
 	});
 	$('#loginPageButton').click(function(){
-		window.location.href = url+"/login";
+		window.location.href = url+"/login.html";
 	}); 
 });
 
