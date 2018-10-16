@@ -67,7 +67,7 @@ app.post("/login", async (req, res) => {
     console.log("result " + result.rows);
 
     if (result === undefined) {
-      return res.json('{"feedback" : "Invalid Username or Password", "status" : 400}');
+      return res.json({feedback : "Invalid Username or Password", status : 400});
     }
 
     var database_password = result.rows[0].encrypted_password;
@@ -89,7 +89,7 @@ app.post("/login", async (req, res) => {
 
     if (!result) {
       console.log("invalid username or password");
-      return res.json('{"feedback" : "Invalid Username or Password", "status" : 400}');
+      return res.json({feedback : "Invalid Username or Password", status : 400});
     } else {
       console.log("login success");
       return res.json('{"feedback" : "Login Success", "status" : 200}');
