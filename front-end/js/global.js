@@ -176,7 +176,7 @@ $(document).ready(function(e) {
 
 		}).then (
 		function(result){
-			alert(result.feedback);
+			alert(result.message);
 			if(result.status==200){
 				window.location.href = url;
 			}
