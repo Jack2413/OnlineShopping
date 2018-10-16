@@ -89,10 +89,10 @@ app.post("/login", async (req, res) => {
 
     if (!result) {
       console.log("invalid username or password");
-      return res.end('{"feedback" : "Invalid Username or Password", "status" : 400}');
+      return res.send('{"feedback" : "Invalid Username or Password", "status" : 400}');
     } else {
       console.log("login success");
-      return res.end('{"feedback" : "Login Success", "status" : 200}');
+      return res.send('{"feedback" : "Login Success", "status" : 200}');
     }
     client.release();
   } catch (err) {
