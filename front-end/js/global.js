@@ -105,9 +105,11 @@ $(document).ready(function(e) {
 				datatype: "json"
 
 		}).then (
-		function(feedback){
-			alert(feedback);
-			window.location.href = url+"/login.html";
+		function(result){
+			alert(result.feedback);
+			if(result.status==200){
+				window.location.href = url+"/login.html";
+			}
 			
 		}, 
 		function(error){
@@ -173,7 +175,7 @@ $(document).ready(function(e) {
 				datatype: "json"
 
 		}).then (
-		function(feedback){
+		function(result){
 			alert(result.feedback);
 			if(result.status==200){
 				window.location.href = url;
