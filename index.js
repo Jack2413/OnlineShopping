@@ -97,7 +97,7 @@ app.post("/login", async (req, res) => {
     client.release();
   } catch (err) {
     console.error(err);
-    res.send("Error " + err);
+    return res.json({feedback : err, status : 400});
   }
 });
 
@@ -130,8 +130,12 @@ app.post("/register", async (req, res) => {
       [username, email, encrypt_password, salt]
     );
 
-    console.log("email already been used.");
-    return res.json({feedback : "register success", status : 200});
+    if(!result){
+    	console.log("email already been used.");
+    	return res.json({feedback : "email already been used", status : 400});
+	}else{
+    	return res.json({feedback : "register success", status : 200});
+	}
     
     client.release();
 
