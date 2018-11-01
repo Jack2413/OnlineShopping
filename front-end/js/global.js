@@ -145,7 +145,7 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				window.location.href = url+"/login.html";
+				window.location.href = url+"/login==.html";
 			}
 		}, 
 		function(error){
@@ -185,7 +185,7 @@ $(document).ready(function(e) {
 	          		HTML += '<li class="nav-item" id = logout>logout</li></ul>';
           		$('#navbarResponsive').remove();
 				$('#navbarResponsive').prepend(HTML);
-				window.location.href = url;
+				window.location.href = window.location.href = url+"/index.html";;
 			}
 			
 		}, 
