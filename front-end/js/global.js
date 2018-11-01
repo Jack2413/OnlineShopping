@@ -178,15 +178,16 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
+				var HTML =  '<ul class="navbar-nav ml-auto">';
+					HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
+	          		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
+	          		HTML += '<li class="nav-item"><a class="nav-link" href="#">username</a></li>';
+	          		HTML += '<li class="nav-item" id = logout>logout</li></ul>';
+          		$('#navbarResponsive').remove();
+				$('#navbarResponsive').prepend(HTML);
 				window.location.href = url;
-			var HTML =  '<ul class="navbar-nav ml-auto">';
-				HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
-          		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
-          		HTML += '<li class="nav-item"><a class="nav-link" href="#">username</a></li>';
-          		HTML += '<li class="nav-item" id = logout>logout</li></ul>';
 			}
-			$('#navbarResponsive').remove();
-			$('#navbarResponsive').prepend(HTML);
+			
 		}, 
 		function(error){
 			alert(error);
