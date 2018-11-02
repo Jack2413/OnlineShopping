@@ -216,6 +216,7 @@ function reload(){
 	var login_state = window.localStorage.getItem("login_state");
 	var username = window.localStorage.getItem("username");
 	var HTML;
+	alert(login_state);
 	if(login_state){
 		// HTML =  '<ul class="navbar-nav ml-auto">';
 		// HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
@@ -230,7 +231,7 @@ function reload(){
 	 	HTML += '<li class="nav-item"><a class="nav-link" href="login.html">Sign in</a></li>';
 	    HTML += '<li class="nav-item"><a class="nav-link" href="register.html">Sign up</a></ul>';
 	}
-	alert(login_state);
+	
 	$('#navbarResponsive').empty();
 	$('#navbarResponsive').prepend(HTML); 
 
