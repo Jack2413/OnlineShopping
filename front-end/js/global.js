@@ -214,8 +214,12 @@ function isEmail(email) {
 
 function reload(){
 	var user = window.localStorage.getItem("user");
-	var login_state = user.status;
-	var username = user.username;
+	var login_state;
+	var username;
+	if(user){
+		login_state = user.status;
+		username = user.username;
+	}
 	var HTML;
 
 	if(login_state==200){
