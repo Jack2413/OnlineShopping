@@ -183,7 +183,7 @@ $(document).ready(function(e) {
 					HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
 	          		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
 	          		HTML += '<li class="nav-item"><a class="nav-link" href="#">username</a></li>';
-	          		HTML += '<li class="nav-item" id = logout>logout</li></ul>';
+	          		HTML += '<li class="nav-item" id = logout><a class="nav-link" href="#">logout</li></ul>';
 
           		$('#navbarResponsive').empty();
 				$('#navbarResponsive').prepend(HTML);
@@ -197,15 +197,6 @@ $(document).ready(function(e) {
 
 		//alert($email+' '+$password);
 	});
-
-	var HTML =  '<ul class="navbar-nav ml-auto">';
-		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
-	    HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
-	    HTML += '<li class="nav-item"><a class="nav-link" href="#">username</a></li>';
-	    HTML += '<li class="nav-item" id = logout>logout</li></ul>';
-	    alert($('#navbarResponsive').val());
-    $('#navbarResponsive').empty();
-	$('#navbarResponsive').prepend(HTML);
 
 	$('#RegisterButton').click(function(){
 		window.location.href = 'https://nwen304onlineshoping.herokuapp.com/register.html';
