@@ -1,6 +1,5 @@
 var url = 'https://nwen304onlineshoping.herokuapp.com';
 var ERROR_LOG = console.error.bind(console);
-window.localStorage.setItem("login_state", "logout");
 $(document).ready(function(e) {
 	reload();
 	$('#InputPassword').keyup(function () {
@@ -232,8 +231,6 @@ function reload(){
 	 	HTML += '<li class="nav-item"><a class="nav-link" href="login.html">Sign in</a></li>';
 	    HTML += '<li class="nav-item"><a class="nav-link" href="register.html">Sign up</a></li></ul>';
 	}
-
-	alert(HTML);
 	
 	$('#navbarResponsive').empty();
 	$('#navbarResponsive').prepend(HTML); 
