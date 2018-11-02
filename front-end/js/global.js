@@ -215,7 +215,6 @@ function reload(){
 	var login_state = window.localStorage.getItem("login_state");
 	var username = window.localStorage.getItem("username");
 	var HTML;
-	alert(login_state);
 
 	if(login_state=="login"){
 		HTML =  '<ul class="navbar-nav ml-auto">';
