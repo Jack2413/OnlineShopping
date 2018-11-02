@@ -178,7 +178,8 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				window.localStorage.setItem("user", {username : result.username, status : result.status});
+				window.localStorage.setItem("login_state" : "login");
+				window.localStorage.setItem("username" : result.username);
 				window.location.href = "index.html";
 
 			}
@@ -192,8 +193,7 @@ $(document).ready(function(e) {
 	});
 
 	$('#logout').click(function(){
-		window.localStorage.setItem("login_state", "logout");
-		window.localStorage.setItem("permission", 2);
+		window.localStorage.clear();
 		window.location.href = "index.html";
 	});
 
@@ -213,19 +213,12 @@ function isEmail(email) {
 }
 
 function reload(){
-	var user = window.localStorage.getItem("user");
-	var login_state;
-	var username;
-	
-	if(user){
-		alert(user.status)
-		alert(user.username)
-		login_state = user.status;
-		username =  user.username;
-	}
+
+	var login_state = window.location.getItem("login_state");
+	var username = window.location.getItem("username");
 	var HTML;
 
-	if(login_state==200){
+	if(login_state=="login"){
 		HTML =  '<ul class="navbar-nav ml-auto">';
 		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
 		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
