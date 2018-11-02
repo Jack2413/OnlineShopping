@@ -1,6 +1,6 @@
 var url = 'https://nwen304onlineshoping.herokuapp.com';
 var ERROR_LOG = console.error.bind(console);
-window.localStorage.setItem("login_state", false);
+window.localStorage.setItem("login_state", "logout");
 $(document).ready(function(e) {
 	reload();
 	$('#InputPassword').keyup(function () {
@@ -180,7 +180,7 @@ $(document).ready(function(e) {
 			alert(result.feedback);
 			if(result.status==200){
 				window.localStorage.setItem("username", $email);
-				window.localStorage.setItem("login_state", true);
+				window.localStorage.setItem("login_state", "login");
 				window.location.href = "index.html?user="+$email;
 
 			}
@@ -195,7 +195,7 @@ $(document).ready(function(e) {
 
 	$('#logout').click(function(){
 		alert('logout');
-		window.localStorage.setItem("login_state", false);
+		window.localStorage.setItem("login_state", "logout");
 		window.location.href = "index.html";
 	});
 
@@ -218,12 +218,12 @@ function reload(){
 	var HTML;
 	alert(login_state);
 
-	if(login_state){
-		// HTML =  '<ul class="navbar-nav ml-auto">';
-		// HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
-		// HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
-	 // 	HTML += '<li class="nav-item"><a class="nav-link" href="#">'+username+'</a></li>';
-	 //    HTML += '<li class="nav-item" id = logout><a class="nav-link" >logout</li></ul>';
+	if(login_state=="login"){
+		HTML =  '<ul class="navbar-nav ml-auto">';
+		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
+		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
+	 	HTML += '<li class="nav-item"><a class="nav-link" href="#">'+username+'</a></li>';
+	    HTML += '<li class="nav-item" id = logout><a class="nav-link" >logout</li></ul>';
 		
 	}else{
 		HTML =  '<ul class="navbar-nav ml-auto">';
