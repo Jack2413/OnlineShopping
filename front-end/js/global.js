@@ -178,8 +178,8 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				window.localStorage.setItem("login_state" : "login");
-				window.localStorage.setItem("username" : result.username);
+				window.localStorage.setItem("login_state", "login");
+				window.localStorage.setItem("username", result.username);
 				window.location.href = "index.html";
 
 			}
