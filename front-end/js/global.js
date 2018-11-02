@@ -197,7 +197,6 @@ $(document).ready(function(e) {
 		alert('logout');
 		window.localStorage.setItem("login_state", false);
 		window.location.href = "index.html";
-		reload();
 	});
 
 	$('#RegisterButton').click(function(){
@@ -218,11 +217,11 @@ function reload(){
 	var username = window.localStorage.getItem("username");
 	var HTML;
 	if(login_state){
-		HTML =  '<ul class="navbar-nav ml-auto">';
-		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
-		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
-	 	HTML += '<li class="nav-item"><a class="nav-link" href="#">'+username+'</a></li>';
-	    HTML += '<li class="nav-item" id = logout><a class="nav-link" >logout</li></ul>';
+		// HTML =  '<ul class="navbar-nav ml-auto">';
+		// HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
+		// HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
+	 // 	HTML += '<li class="nav-item"><a class="nav-link" href="#">'+username+'</a></li>';
+	 //    HTML += '<li class="nav-item" id = logout><a class="nav-link" >logout</li></ul>';
 		
 	}else{
 		HTML =  '<ul class="navbar-nav ml-auto">';
