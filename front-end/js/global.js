@@ -1,7 +1,9 @@
 var url = 'https://nwen304onlineshoping.herokuapp.com';
 var ERROR_LOG = console.error.bind(console);
-$(document).ready(function(e) {
+var login_state = false;
 
+$(document).ready(function(e) {
+	reload();
 	$('#InputPassword').keyup(function () {
 		//var strengthBar = $('#strength');
 		var strength = 0;
@@ -178,16 +180,8 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				
-				var HTML =  '<ul class="navbar-nav ml-auto">';
-					HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
-	          		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
-	          		HTML += '<li class="nav-item"><a class="nav-link" href="#">username</a></li>';
-	          		HTML += '<li class="nav-item" id = logout><a class="nav-link" href="#">logout</li></ul>';
-
-          		$('#navbarResponsive').empty();
-				$('#navbarResponsive').prepend(HTML);
-				window.location.href = window.location.href = url+"/index.html";
+				login_state = true;
+				window.location.href = url+"/index.html";
 			}
 			
 		}, 
@@ -211,4 +205,26 @@ function isEmail(email) {
   return regex.test(email);
 }
 
+function reload{
+
+	var = HTML;
+	if(login_state){
+		HTML =  '<ul class="navbar-nav ml-auto">';
+		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
+		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
+	 	HTML += '<li class="nav-item"><a class="nav-link" href="#">username</a></li>';
+	    HTML += '<li class="nav-item" id = logout><a class="nav-link" href="#">logout</li></ul>';
+	
+	}else{
+		HTML =  '<ul class="navbar-nav ml-auto">';
+		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
+		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
+	 	HTML += '<li class="nav-item"><a class="nav-link" href="login.html">Sign in</a></li>';
+	    HTML += '<li class="nav-item"><a class="nav-link" href="register.html">Sign up</a></ul>';
+	}
+
+	$('#navbarResponsive').empty();
+	$('#navbarResponsive').prepend(HTML); 
+
+}
 
