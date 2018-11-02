@@ -214,7 +214,7 @@ function reload(){
 		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
 	 	HTML += '<li class="nav-item"><a class="nav-link" href="#">username</a></li>';
 	    HTML += '<li class="nav-item" id = logout><a class="nav-link" href="#">logout</li></ul>';
-	
+		
 	}else{
 		HTML =  '<ul class="navbar-nav ml-auto">';
 		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
@@ -222,7 +222,7 @@ function reload(){
 	 	HTML += '<li class="nav-item"><a class="nav-link" href="login.html">Sign in</a></li>';
 	    HTML += '<li class="nav-item"><a class="nav-link" href="register.html">Sign up</a></ul>';
 	}
-
+	alter(login_state);
 	$('#navbarResponsive').empty();
 	$('#navbarResponsive').prepend(HTML); 
 
