@@ -183,6 +183,7 @@ $(document).ready(function(e) {
 	          		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
 	          		HTML += '<li class="nav-item"><a class="nav-link" href="#">username</a></li>';
 	          		HTML += '<li class="nav-item" id = logout>logout</li></ul>';
+	          	alert($('#navbarResponsive').val());
           		$('#navbarResponsive').remove();
 				$('#navbarResponsive').prepend(HTML);
 				window.location.href = window.location.href = url+"/index.html";;
