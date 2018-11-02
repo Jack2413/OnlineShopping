@@ -2,10 +2,9 @@ var url = 'https://nwen304onlineshoping.herokuapp.com';
 var ERROR_LOG = console.error.bind(console);
 
 $(document).ready(function(e) {
-	// reload();
+	reload();
 	$('#InputPassword').keyup(function () {
 		//var strengthBar = $('#strength');
-		reload();
 		var strength = 0;
 		var password = $('#InputPassword').val();
 
