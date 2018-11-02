@@ -178,7 +178,7 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				window.location.href = window.location.href = url+"/index.html";
+				
 				var HTML =  '<ul class="navbar-nav ml-auto">';
 					HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
 	          		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
@@ -187,7 +187,7 @@ $(document).ready(function(e) {
 
           		$('#navbarResponsive').empty();
 				$('#navbarResponsive').prepend(HTML);
-				
+				window.location.href = window.location.href = url+"/index.html";
 			}
 			
 		}, 
