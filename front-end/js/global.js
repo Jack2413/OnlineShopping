@@ -178,8 +178,9 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				$.cookies.set("user", { username: result.username, permission: result.permission, login_state:"login" });
+				window.localStorage.setItem("user", result);
 				window.location.href = "index.html";
+
 			}
 			
 		}, 
@@ -191,9 +192,8 @@ $(document).ready(function(e) {
 	});
 
 	$('#logout').click(function(){
-		$.cookies.remove("user");
-		// window.localStorage.setItem("login_state", "logout");
-		// window.localStorage.setItem("permission", 2);
+		window.localStorage.setItem("login_state", "logout");
+		window.localStorage.setItem("permission", 2);
 		window.location.href = "index.html";
 	});
 
@@ -213,18 +213,12 @@ function isEmail(email) {
 }
 
 function reload(){
-		var login_state;
-		var username;
-	if($.cookies.get("user")){
-		login_state = $.cookies.get("user","login_state");
-		username = $.cookies.get("user","username");
-	}else{
-		login_state = "logout";
-
-	}
+	var user = window.localStorage.getItem("user");
+	var login_state = user.status;
+	var username = user.username;
 	var HTML;
 
-	if(login_state=="login"){
+	if(login_state==200){
 		HTML =  '<ul class="navbar-nav ml-auto">';
 		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
 		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
