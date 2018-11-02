@@ -180,6 +180,7 @@ $(document).ready(function(e) {
 			if(result.status==200){
 				window.localStorage.setItem("login_state", "login");
 				window.localStorage.setItem("username", result.username);
+				window.localStorage.setItem("permission", result.permission);
 				window.location.href = "index.html";
 
 			}
