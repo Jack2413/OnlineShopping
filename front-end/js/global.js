@@ -196,6 +196,7 @@ $(document).ready(function(e) {
 	$('#logout').click(function(){
 		alert('logout');
 		window.localStorage.setItem("login_state", false);
+		window.location.href = "index.html";
 		reload();
 	});
 
