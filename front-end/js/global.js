@@ -1,6 +1,6 @@
 var url = 'https://nwen304onlineshoping.herokuapp.com';
 var ERROR_LOG = console.error.bind(console);
-global login_state = false;
+var login_state = false;
 
 $(document).ready(function(e) {
 	reload();
