@@ -205,7 +205,7 @@ function isEmail(email) {
   return regex.test(email);
 }
 
-function reload{
+function reload(){
 
 	var = HTML;
 	if(login_state){
