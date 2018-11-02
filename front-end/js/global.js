@@ -180,8 +180,9 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				login_state = true;
 				window.location.href = url+"/index.html";
+				login_state = true;
+				alert(login_state);
 			}
 			
 		}, 
