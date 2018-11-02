@@ -178,9 +178,9 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				window.localStorage.setItem("username", $email);
+				window.localStorage.setItem("username", result.username);
 				window.localStorage.setItem("login_state", "login");
-				window.location.href = "index.html?user="+$email;
+				window.location.href = "index.html";
 
 			}
 			
@@ -193,7 +193,6 @@ $(document).ready(function(e) {
 	});
 
 	$('#logout').click(function(){
-		alert('logout');
 		window.localStorage.setItem("login_state", "logout");
 		window.location.href = "index.html";
 	});
@@ -221,7 +220,7 @@ function reload(){
 		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
 		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
 	 	HTML += '<li class="nav-item"><a class="nav-link" href="#">'+username+'</a></li>';
-	    HTML += '<li class="nav-item" id = logout><a class="nav-link" >logout</li></ul>';
+	    HTML += '<li class="nav-item" id = logout><a class="nav-link">logout</li></ul>';
 		
 	}else{
 		HTML =  '<ul class="navbar-nav ml-auto">';
