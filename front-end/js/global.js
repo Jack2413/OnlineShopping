@@ -213,8 +213,8 @@ function isEmail(email) {
 }
 
 function reload(){
-	var login_state = $.cookies.get("user").login_state;
-	var username = $.cookies.get("user").username;
+	var login_state = $.cookies.get("user","login_state");
+	var username = $.cookies.get("user","username");
 	var HTML;
 
 	if(login_state=="login"){
