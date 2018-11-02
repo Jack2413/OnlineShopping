@@ -229,7 +229,7 @@ function reload(){
 		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
 		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
 	 	HTML += '<li class="nav-item"><a class="nav-link" href="login.html">Sign in</a></li>';
-	    HTML += '<li class="nav-item"><a class="nav-link" href="register.html">Sign up</a></ul>';
+	    HTML += '<li class="nav-item"><a class="nav-link" href="register.html">Sign up</a></li></ul>';
 	}
 	
 	$('#navbarResponsive').empty();
