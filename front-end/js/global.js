@@ -3,7 +3,7 @@ var ERROR_LOG = console.error.bind(console);
 var login_state = false;
 
 $(document).ready(function(e) {
-	reload();
+	// reload();
 	$('#InputPassword').keyup(function () {
 		//var strengthBar = $('#strength');
 		var strength = 0;
@@ -147,7 +147,7 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				window.location.href = url+"/login==.html";
+				window.location.href = url+"/login.html";
 			}
 		}, 
 		function(error){
@@ -183,6 +183,7 @@ $(document).ready(function(e) {
 				window.location.href = "index.html";
 				login_state = true;
 				alert(login_state);
+				reload();
 			}
 			
 		}, 
