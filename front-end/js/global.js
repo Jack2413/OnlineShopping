@@ -178,7 +178,7 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				window.localStorage.setItem("user", result);
+				window.localStorage.setItem("user", {username : result.username, status : result.status});
 				window.location.href = "index.html";
 
 			}
