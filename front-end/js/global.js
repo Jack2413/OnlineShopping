@@ -216,9 +216,9 @@ function reload(){
 	var user = window.localStorage.getItem("user");
 	var login_state;
 	var username;
-	alert(typeof user)
+	alert(user)
 	if(user){
-		var data = JSON.parse(user);
+		// var data = JSON.parse(user);
 		login_state = data.status;
 		username = data.username;
 	}
