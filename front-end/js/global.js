@@ -1,11 +1,11 @@
 var url = 'https://nwen304onlineshoping.herokuapp.com';
 var ERROR_LOG = console.error.bind(console);
-var login_state = false;
 
 $(document).ready(function(e) {
 	// reload();
 	$('#InputPassword').keyup(function () {
 		//var strengthBar = $('#strength');
+		reload();
 		var strength = 0;
 		var password = $('#InputPassword').val();
 
@@ -180,10 +180,10 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				window.location.href = "index.html";
-				login_state = true;
-				alert(login_state);
-				reload();
+				window.localStorage.setItem("username", $email);
+				window.localStorage.setItem("login_state", true);
+				window.location.href = "index.html?user="+$email;
+
 			}
 			
 		}, 
@@ -208,13 +208,14 @@ function isEmail(email) {
 }
 
 function reload(){
-
+	var login_state = window.localStorage.getItem("login_state");
+	var username = window.localStorage.getItem("username");
 	var HTML;
 	if(login_state){
 		HTML =  '<ul class="navbar-nav ml-auto">';
 		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
 		HTML += '<li class="nav-item"><a class="nav-link" href="cart.html">Cart</a></li>';
-	 	HTML += '<li class="nav-item"><a class="nav-link" href="#">username</a></li>';
+	 	HTML += '<li class="nav-item"><a class="nav-link" href="#">'+username+'</a></li>';
 	    HTML += '<li class="nav-item" id = logout><a class="nav-link" href="#">logout</li></ul>';
 		
 	}else{
