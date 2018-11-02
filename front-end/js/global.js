@@ -207,7 +207,7 @@ function isEmail(email) {
 
 function reload(){
 
-	var = HTML;
+	var HTML;
 	if(login_state){
 		HTML =  '<ul class="navbar-nav ml-auto">';
 		HTML += '<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>';
