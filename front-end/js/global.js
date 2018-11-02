@@ -178,10 +178,8 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
-				window.localStorage.setItem("username", result.username);
-				window.localStorage.setItem("login_state", "login");
+				$.cookies.set("user", { username: result.username, permission: result.permission, login_state:"login" });
 				window.location.href = "index.html";
-
 			}
 			
 		}, 
@@ -193,7 +191,9 @@ $(document).ready(function(e) {
 	});
 
 	$('#logout').click(function(){
-		window.localStorage.setItem("login_state", "logout");
+		$.cookies.remove("user");
+		// window.localStorage.setItem("login_state", "logout");
+		// window.localStorage.setItem("permission", 2);
 		window.location.href = "index.html";
 	});
 
@@ -202,7 +202,9 @@ $(document).ready(function(e) {
 	});
 	$('#loginPageButton').click(function(){
 		window.location.href = url+"/login.html";
-	}); 
+	});
+
+
 });
 
 function isEmail(email) {
@@ -211,8 +213,8 @@ function isEmail(email) {
 }
 
 function reload(){
-	var login_state = window.localStorage.getItem("login_state");
-	var username = window.localStorage.getItem("username");
+	var login_state = $.cookies.get("user").login_state;
+	var username = $.cookies.get("user").username;
 	var HTML;
 
 	if(login_state=="login"){

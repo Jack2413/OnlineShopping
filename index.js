@@ -72,6 +72,9 @@ app.post("/login", async (req, res) => {
     var db_username = result.rows[0].username;
     console.log("db_username :" + db_username);
 
+    var db_permission = result.rows[0].permission;
+    console.log("db_permission :" + db_permission);
+
     var database_password = result.rows[0].encrypted_password;
     console.log("database_password :" + database_password);
 
@@ -94,7 +97,7 @@ app.post("/login", async (req, res) => {
       return res.json({feedback : "Invalid Username or Password", status : 400});
     } else {
       console.log("login success");
-      return res.json({feedback : "login Success", status : 200, username : db_username});
+      return res.json({feedback : "login Success", status : 200, username : db_username, permission : db_permission});
     }
     client.release();
   } catch (err) {
