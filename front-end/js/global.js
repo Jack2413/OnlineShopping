@@ -219,8 +219,8 @@ function reload(){
 	alert(user)
 	if(user){
 		// var data = JSON.parse(user);
-		login_state = data.status;
-		username = data.username;
+		login_state = user.status;
+		username =  user.username;
 	}
 	var HTML;
 
