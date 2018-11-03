@@ -226,8 +226,10 @@ app.get("/getOrder", async (req, res) => {
 		const client = await pool.connect();
 
 		var email = req.body.email;
+		console.log("email: "+email);
 		var db_permission = await client.query('SELECT permission FROM users WHERE EMAIL = $1',[email]);
     	var permission = db_permission.rows[0].permission;
+    	console.log("permission: "+permission);
 
     	if(permission==0){
     		result = await client.query('SELECT * FROM orders');
