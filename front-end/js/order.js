@@ -5,13 +5,14 @@ $(document).ready(function(e) {
 });
 
 function loadOrder () {
+	alert(window.localStorage.getItem("email"));
 	$.ajax ({
 		method: 'GET',
 		url: url+'/getOrder', 
 		data: JSON.stringify({
 			email: window.localStorage.getItem("email"),
 		}),
-		contentType: "application/json",
+		contentType: "application/json"
 		// datatype: "json"
 				
 	}).then (loadOrderData, ERROR_LOG);
