@@ -12,8 +12,8 @@ function loadOrder () {
 		data: JSON.stringify({
 			email: window.localStorage.getItem("email"),
 		}),
-		contentType: "application/json"
-		// datatype: "json"
+		contentType: "application/json",
+		datatype: "json"
 				
 	}).then (loadOrderData, ERROR_LOG);
 }
