@@ -224,7 +224,8 @@ app.get("/getOrder", async (req, res) => {
 	try {
 		console.log("get in get function");
 		const client = await pool.connect();
-
+		
+		console.log(req.body);
 		var email = req.body.email;
 		console.log("email: "+email);
 		var db_permission = await client.query('SELECT permission FROM users WHERE EMAIL = $1',[email]);
