@@ -8,6 +8,11 @@ function loadOrder () {
 	$.ajax ({
 		method: 'GET',
 		url: url+'/getOrder', 
+		data: JSON.stringify({
+			email: window.localStorage.getItem("email"),
+		}),
+		contentType: "application/json",
+		// datatype: "json"
 				
 	}).then (loadOrderData, ERROR_LOG);
 }
