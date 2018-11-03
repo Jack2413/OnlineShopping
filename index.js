@@ -220,11 +220,11 @@ app.post("/reset", async (req, res) => {
 
 });
 
-app.get("/getOrder", async (req, res) => {
+app.post("/getOrder", async (req, res) => {
 	try {
 		console.log("get in get function");
 		const client = await pool.connect();
-		
+
 		console.log(req.body);
 		var email = req.body.email;
 		console.log("email: "+email);

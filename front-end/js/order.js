@@ -7,7 +7,7 @@ $(document).ready(function(e) {
 function loadOrder () {
 	alert(window.localStorage.getItem("email"));
 	$.ajax ({
-		method: 'GET',
+		method: 'POST',
 		url: url+'/getOrder', 
 		data: JSON.stringify({
 			email: window.localStorage.getItem("email"),
