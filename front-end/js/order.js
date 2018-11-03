@@ -13,7 +13,7 @@ function loadOrder () {
 }
 
 function loadOrderData(orders){
-	var count = 0;
+	var count = 1;
 	orders.forEach(order=>{
 		//alert('ID: $1 Task: $2 Name: $3',task.id,task.task,task.name);
 		

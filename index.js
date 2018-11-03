@@ -224,7 +224,17 @@ app.get("/getOrder", async (req, res) => {
 	try {
 		console.log("get in get function");
 		const client = await pool.connect();
-		var result = await client.query('SELECT * FROM orders');
+
+		var email = req.body.email;
+		var db_permission = await client.query('SELECT permission FROM users WHERE EMAIL = $1',[email]);
+    	var permission = db_permission.rows[0].permission;
+
+    	if(permission==0){
+    		result = await client.query('SELECT * FROM orders');
+    	}else{
+    		result = await client.query('SELECT * FROM orders WHERE EMAIL = $1',[email]);
+    	}
+
 		if (!result) {
 			return res.send('No data found'); 
 		}else{ 
