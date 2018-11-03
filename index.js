@@ -217,6 +217,24 @@ app.post("/reset", async (req, res) => {
     console.error(err);
     res.send("Error " + err);
   }
+
+});
+
+app.get("/getOrder", async (req, res) => {
+	try {
+		console.log("get in get function");
+		const client = await pool.connect();
+		var result = await client.query('SELECT * FROM orders');
+		if (!result) {
+			return res.send('No data found'); 
+		}else{ 
+			return res.send(result.rows);
+		}
+		client.release();
+	} catch (err) { 
+		console.error(err); 
+		res.send("Error " + err);
+	} 
 });
 
 app.listen(port, () => console.log("Listening on Heroku Server"));
