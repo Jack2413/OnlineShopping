@@ -7,7 +7,7 @@ $(document).ready(function(e) {
 function loadOrder () {
 	$.ajax ({
 		method: 'GET',
-		url: 'url/getOrder', 
+		url: url+'/getOrder', 
 				
 	}).then (loadOrderData, ERROR_LOG);
 }
