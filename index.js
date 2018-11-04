@@ -222,7 +222,7 @@ app.post("/reset", async (req, res) => {
 
 app.post("/getOrder", async (req, res) => {
 	try {
-		console.log("get in get function");
+		console.log("get in Order function");
 		const client = await pool.connect();
 
 		console.log(req.body);
@@ -231,12 +231,35 @@ app.post("/getOrder", async (req, res) => {
 		var db_permission = await client.query('SELECT permission FROM users WHERE EMAIL = $1',[email]);
     	var permission = db_permission.rows[0].permission;
     	console.log("permission: "+permission);
+    	var result;
 
     	if(permission==0){
     		result = await client.query('SELECT * FROM orders');
     	}else{
     		result = await client.query('SELECT * FROM orders WHERE EMAIL = $1',[email]);
     	}
+
+		if (!result) {
+			return res.send('No data found'); 
+		}else{ 
+			return res.send(result.rows);
+		}
+		client.release();
+	} catch (err) { 
+		console.error(err); 
+		res.send("Error " + err);
+	} 
+});
+
+app.post("/getOrderDetails", async (req, res) => {
+	try {
+		console.log("get in OrderDetails function");
+		const client = await pool.connect();
+
+		console.log(req.body);
+		var orderID = req.body.orderID;
+		console.log("orderID: "+orderID);
+		var result = await client.query('select amount, id, name, price,description,imagecode from orderdetails NATURAL JOIN products where productid = id and orderid = $1',[orderID]);
 
 		if (!result) {
 			return res.send('No data found'); 
