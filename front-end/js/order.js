@@ -56,6 +56,7 @@ function loadOrderData(orders){
 
 function loadOrderDetails(data_Details){
 	var total_price = 0;
+	$('#cardbody').empty();
 	data_Details.forEach(data_Detail=>{
 		//alert('ID: $1 Task: $2 Name: $3',task.id,task.task,task.name);
 		
