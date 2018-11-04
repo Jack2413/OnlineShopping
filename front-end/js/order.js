@@ -57,10 +57,11 @@ function loadOrderData(orders){
 function loadOrderDetails(data_Details){
 	var total_price = 0;
 	$('#cardbody').empty();
+	var HTML;
 	data_Details.forEach(data_Detail=>{
 		//alert('ID: $1 Task: $2 Name: $3',task.id,task.task,task.name);
 		
-	var HTML =  '<div id="product-list" class="row">'
+	HTML +=  '<div id="product-list" class="row">'
              +	'<div class="col-12 col-sm-12 col-md-2 text-center">'
              +  '<img class="img-responsive" src=../images/products/'+data_Detail.imagecode+'.png alt="prewiew" width="100" height="100">'
              +	'</div>'
@@ -81,11 +82,11 @@ function loadOrderDetails(data_Details){
         	 +	'</div>'
         	 +	'<hr>';
 
-    $('#cardbody').prepend(HTML);
+    
     total_price += data_Detail.price*data_Detail.amount;
 
     });
-    var HTML2 = '<div class="card-footer">'
+    HTML += '<div class="card-footer">'
         +  '<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>'
         +  '<div class="pull-right" style="margin: 10px">'
         +  '<div class="pull-right" style="margin: 5px">Total price: <b>$500</b>'
@@ -93,7 +94,7 @@ function loadOrderDetails(data_Details){
         +  '</div>'
         +  '</div>';
 
-    $('#cardbody').prepend(HTML2);
+    $('#cardbody').prepend(HTML);
 }
 
 
