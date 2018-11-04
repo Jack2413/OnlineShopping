@@ -84,8 +84,8 @@ function loadOrderDetails(data_Details){
         	 +	'<hr>';
 
     
-    total_price += data_Detail.price*data_Detail.amount;
-    alert(total_price)
+    total_price += parseInt(data_Detail.price)*parseInt(data_Detail.amount);
+    alert(total_price);
 
     });
     HTML += '<div class="card-footer">'
