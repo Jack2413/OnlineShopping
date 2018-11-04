@@ -6,8 +6,8 @@ $(document).ready(function(e) {
 		alert('123123');
 		alert($(this).parent().parent().html());
 		var $orderInfo = $(this).parent().parent();
-		var $orderID = $(this).find('.orderid').text();
-		alert($orderid);
+		var $orderID = $orderInfo.find('.orderid').text();
+		alert($orderID);
 
 		$.ajax({
 				method: 'POST',
