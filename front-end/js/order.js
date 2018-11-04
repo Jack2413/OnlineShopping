@@ -84,8 +84,7 @@ function loadOrderDetails(data_Details){
         	 +	'<hr>';
 
     
-    total_price += parseInt(data_Detail.price)*parseInt(data_Detail.amount);
-    alert(parseInt(data_Detail.price)*parseInt(data_Detail.amount));
+    total_price += parseFloat(data_Detail.price.replace(/[^0-9.-]+/g, ''))*parseInt(data_Detail.amount);
 
     });
     HTML += '<div class="card-footer">'
@@ -97,7 +96,9 @@ function loadOrderDetails(data_Details){
         +  '</div>';
 
     $('#cardbody').empty();
-    $('#cardbody').prepend(HTML);
+    if(!HTML){
+ 	   $('#cardbody').prepend(HTML);
+	}
 }
 
 
