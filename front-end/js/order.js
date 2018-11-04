@@ -7,7 +7,7 @@ $(document).ready(function(e) {
 		var $orderInfo = $(this).parent('tr');
 		alert($orderInfo);
 		var $orderid = $orderInfo.find('.orderid').text();
-		alert(orderid);
+		alert($orderid);
 
 		$.ajax({
 				method: 'POST',
