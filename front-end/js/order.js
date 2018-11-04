@@ -5,7 +5,7 @@ $(document).ready(function(e) {
 	$('#orderbody').on('click', '#view', function() {
 		alert('123123');
 		var $orderInfo = $(this).parent('tr');
-		alert($orderInfo);
+		alert($orderInfo.html());
 		var $orderid = $orderInfo.find('.orderid').text();
 		alert($orderid);
 
