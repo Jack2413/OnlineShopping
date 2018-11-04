@@ -55,8 +55,9 @@ function loadOrderData(orders){
 }
 
 function loadOrderDetails(data_Details){
+	
+	
 	var total_price = 0;
-	$('#cardbody').empty();
 	var HTML;
 	data_Details.forEach(data_Detail=>{
 		//alert('ID: $1 Task: $2 Name: $3',task.id,task.task,task.name);
@@ -84,6 +85,7 @@ function loadOrderDetails(data_Details){
 
     
     total_price += data_Detail.price*data_Detail.amount;
+    alert(total_price)
 
     });
     HTML += '<div class="card-footer">'
@@ -94,6 +96,7 @@ function loadOrderDetails(data_Details){
         +  '</div>'
         +  '</div>';
 
+    $('#cardbody').empty();
     $('#cardbody').prepend(HTML);
 }
 
