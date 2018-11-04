@@ -85,13 +85,13 @@ function loadOrderDetails(data_Details){
 
     
     total_price += parseInt(data_Detail.price)*parseInt(data_Detail.amount);
-    alert(total_price);
+    alert(parseInt(data_Detail.price)*parseInt(data_Detail.amount));
 
     });
     HTML += '<div class="card-footer">'
         +  '<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>'
         +  '<div class="pull-right" style="margin: 10px">'
-        +  '<div class="pull-right" style="margin: 5px">Total price: <b>$500</b>'
+        +  '<div class="pull-right" style="margin: 5px">Total price: <b>'+total_price+'</b>'
         +  '</div>'
         +  '</div>'
         +  '</div>';
