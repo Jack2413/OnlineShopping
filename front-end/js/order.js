@@ -79,9 +79,12 @@ function loadOrderDetails(data_Details){
              + 	'</div>'
         	 +	'</div>'
         	 +	'<hr>';
-    		total_price += data_Detail.price*data_Detail.amount;
+
+    $('#cardbody').prepend(HTML);
+    total_price += data_Detail.price*data_Detail.amount;
+
     });
-       HTML +=  '<div class="card-footer">'
+    var HTML2 = '<div class="card-footer">'
           	+ '<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>'
           	+ '<div class="pull-right" style="margin: 10px">'
           	+ '<div class="pull-right" style="margin: 5px">Total price: <b>$'+total_price+'</b>'
@@ -89,8 +92,7 @@ function loadOrderDetails(data_Details){
           	+ '</div>'
           	+ '</div>';
 
-       $('#cardbody').prepend(HTML);
-
+    $('#cardbody').prepend(HTML2);
 }
 
 
