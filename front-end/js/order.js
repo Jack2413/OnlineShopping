@@ -56,30 +56,30 @@ function loadOrderData(orders){
 
 function loadOrderDetails(data_Details){
 	var total_price = 0;
-	orders.forEach(data_Details=>{
+	data_Details.forEach(data_Detail=>{
 		//alert('ID: $1 Task: $2 Name: $3',task.id,task.task,task.name);
 		
 	var HTML =  '<div id="product-list" class="row">'
              +	'<div class="col-12 col-sm-12 col-md-2 text-center">'
-             +  '<img class="img-responsive" src=../images/products/'+data_Details.imagecode+'.png alt="prewiew" width="100" height="100">'
+             +  '<img class="img-responsive" src=../images/products/'+data_Detail.imagecode+'.png alt="prewiew" width="100" height="100">'
              +	'</div>'
              +	'<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">'
-             + 	'<h4 class="product-name"><strong>'+data_Details.name+'</strong></h4>'
-             +	'<h4><small>'+data_Details.description+'</small></h4>'
+             + 	'<h4 class="product-name"><strong>'+data_Detail.name+'</strong></h4>'
+             +	'<h4><small>'+data_Detail.description+'</small></h4>'
              +  '</div>'
              +  '<div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">'
              +  '<div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">'
-             +  '<h6><strong>'+data_Details.price+'<span class="text-muted">x</span></strong></h6>'
+             +  '<h6><strong>'+data_Detail.price+'<span class="text-muted">x</span></strong></h6>'
              +  '</div>'
              +  '<div class="col-4 col-sm-4 col-md-4" style="padding-top: 5px">'
              +  '<div class="quantity">'
-             +  '<h6><strong>'+data_Details.amount+'</h6>'
+             +  '<h6><strong>'+data_Detail.amount+'</h6>'
              +  '</div>'
              +  '</div>'
              + 	'</div>'
         	 +	'</div>'
         	 +	'<hr>';
-    		total_price += data_Details.price*data_Details.amount;
+    		total_price += data_Detail.price*data_Detail.amount;
     });
        HTML +=  '<div class="card-footer">'
           	+ '<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>'
