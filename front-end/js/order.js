@@ -4,8 +4,9 @@ $(document).ready(function(e) {
 	loadOrder();
 	$('#orderbody').on('click', '#view', function() {
 		alert('123123');
-		alert($(this).html());
-		$(this).find('.orderid').text();
+		alert($(this).parent().parent().html());
+		var $orderInfo = $(this).parent().parent();
+		var $orderID = $(this).find('.orderid').text();
 		alert($orderid);
 
 		$.ajax({
