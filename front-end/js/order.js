@@ -3,7 +3,9 @@ var ERROR_LOG = console.error.bind(console);
 $(document).ready(function(e) {
 	loadOrder();
 	$('#viewButton').click(function() {
+		alert('123123');
 		var $orderInfo = $(this).parent('tr');
+		alert($orderInfo);
 		var $orderid = $orderInfo.find('.orderid').text();
 		alert(orderid);
 
