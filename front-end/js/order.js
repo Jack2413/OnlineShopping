@@ -2,7 +2,7 @@ var url = 'https://nwen304onlineshoping.herokuapp.com';
 var ERROR_LOG = console.error.bind(console);
 $(document).ready(function(e) {
 	loadOrder();
-	$('#viewButton').click(function() {
+	$('#orderbody').on('click', '#view', function() {
 		alert('123123');
 		var $orderInfo = $(this).parent('tr');
 		alert($orderInfo);
@@ -55,7 +55,7 @@ function loadOrderData(orders){
         orderHTML += '<td class="email">'+order.email+'</td>'
         orderHTML += '<td class="orderid">'+order.orderid+'</td>'
         orderHTML += '<td class="thedate">'+order.thedate+'</td>'
-        orderHTML += '<td><a class="btn btn-success" id="viewButton">View</a></td></tr>'
+        orderHTML += '<td><a class="btn btn-success" id="view">View</a></td></tr>'
 			
 		$('#orderbody').prepend(orderHTML);
 		count ++;
