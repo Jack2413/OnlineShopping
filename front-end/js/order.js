@@ -53,7 +53,7 @@ function loadOrderData(orders){
         orderHTML += '<td class="email">'+order.email+'</td>'
         orderHTML += '<td class="orderid">'+order.orderid+'</td>'
         orderHTML += '<td class="thedate">'+order.thedate+'</td>'
-        orderHTML += '<td class="btn btn-success" id="viewButton">View</td></tr>'
+        orderHTML += '<td><a class="btn btn-success" id="viewButton">View</a></td></tr>'
 			
 		$('#orderbody').prepend(orderHTML);
 		count ++;
