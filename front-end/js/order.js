@@ -96,9 +96,9 @@ function loadOrderDetails(data_Details){
         +  '</div>';
 
     $('#cardbody').empty();
-    if(!HTML){
- 	   $('#cardbody').prepend(HTML);
-	}
+    
+ 	$('#cardbody').prepend(HTML);
+	
 }
 
 
