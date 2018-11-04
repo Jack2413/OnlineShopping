@@ -88,7 +88,7 @@ function loadOrderDetails(data_Details){
     var HTML2 = '<div class="card-footer">'
         +  '<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>'
         +  '<div class="pull-right" style="margin: 10px">'
-        +  '<div class="pull-right" style="margin: 5px">Total price: <b>$'+total_price+'</b>'
+        +  '<div class="pull-right" style="margin: 5px">Total price: <b>$500</b>'
         +  '</div>'
         +  '</div>'
         +  '</div>';
