@@ -5,7 +5,7 @@ $(document).ready(function(e) {
 });
 
 function loadOrder () {
-	alert(window.localStorage.getItem("email"));
+	
 	$.ajax ({
 		method: 'POST',
 		url: url+'/getOrder', 
@@ -26,7 +26,6 @@ function loadOrderData(orders){
 		var orderHTML = '<tr><th scope="row">'+count+'</th>'
         orderHTML += '<td>'+order.email+'</td>'
         orderHTML += '<td>'+order.orderid+'</td>'
-        orderHTML += '<td>'+order.totalprice+'</td>'
         orderHTML += '<td>'+order.thedate+'</td>'
         orderHTML += '<td><a href="viewOrder.html" class="btn btn-success">View</a></td></tr>'
 			
