@@ -11,7 +11,7 @@ $(document).ready(function(e) {
 				method: 'POST',
 				url: url+'/getOrderDetails',
 				data: JSON.stringify({
-					orderID: $orderid
+					orderID: $orderID
 				}),
 				contentType: "application/json",
 				datatype: "json"
