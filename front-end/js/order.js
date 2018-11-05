@@ -44,7 +44,7 @@ $(document).ready(function(e) {
          var change_amount = parseInt($(this).val()) - parseInt(previous_amount);
          alert(change_amount);
          
-		 var price_change = change_amount*parseFloat(product_price);
+		 var price_change = change_amount*parseFloat(product_price.replace(/[^0-9.-]+/g, ''));
 		 alert(price_change);
 
 		 var new_total = parseFloat(total_price) + price_change;
