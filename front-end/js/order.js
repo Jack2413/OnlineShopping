@@ -26,10 +26,11 @@ $(document).ready(function(e) {
     $("#cardbody").on('focus', '#product_amount',function () {
         // Store the current value on focus and on change
         previous_amount = $(this).val();
-        alert(previous_amount);
+        
         
     }).change(function() {
         // Do something with the previous value after the change
+        alert(previous_amount);
         alert(this.value);
 
         // Make sure the previous value is updated
