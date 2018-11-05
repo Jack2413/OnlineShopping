@@ -23,7 +23,7 @@ $(document).ready(function(e) {
 
     var previous_amount;
 
-    $("#product_amount").on('focus', function () {
+    $("#product_amount").on('focus', 'click',function () {
         // Store the current value on focus and on change
         previous_amount = this.value;
         alert(previous_amount);
