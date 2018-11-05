@@ -60,9 +60,6 @@ $(document).ready(function(e) {
 
 });
 
-
-
-
 function loadOrder () {
 	
 	$.ajax ({
@@ -100,7 +97,9 @@ function loadOrderDetails(data_Details){
 	var HTML;
 	data_Details.forEach(data_Detail=>{
 		//alert('ID: $1 Task: $2 Name: $3',task.id,task.task,task.name);
-		
+	var permission = window.localStorage.getItem("permission");
+
+	if (permission==0) {
 	HTML +=  '<div id="product-list" class="row">'
              +	'<div class="col-12 col-sm-12 col-md-2 text-center">'
              +  '<img class="img-responsive" src=../images/products/'+data_Detail.imagecode+'.png alt="prewiew" width="100" height="100">'
@@ -126,11 +125,33 @@ function loadOrderDetails(data_Details){
              + 	'</div>'
         	 +	'</div>'
         	 +	'<hr>';
+    }else{
+    		HTML +=  '<div id="product-list" class="row">'
+             +	'<div class="col-12 col-sm-12 col-md-2 text-center">'
+             +  '<img class="img-responsive" src=../images/products/'+data_Detail.imagecode+'.png alt="prewiew" width="100" height="100">'
+             +	'</div>'
+             +	'<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">'
+             + 	'<h4 class="product-name"><strong>'+data_Detail.name+'</strong></h4>'
+             +	'<h4><small>'+data_Detail.description+'</small></h4>'
+             +  '</div>'
+             +  '<div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">'
+             +  '<div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">'
+             +  '<h6><strong id = "product_price">'+data_Detail.price+'<span class="text-muted">x</span></strong></h6>'
+             +  '</div>'
+             +  '<div class="col-4 col-sm-4 col-md-4" style="padding-top: 5px">'
+             +  '<div class="quantity">'
+             +  '</div>'
+             +  '</div>'
+             + 	'</div>'
+        	 +	'</div>'
+        	 +	'<hr>';
+    }
 
-    
     total_price += parseFloat(data_Detail.price.replace(/[^0-9.-]+/g, ''))*parseInt(data_Detail.amount);
 
     });
+
+    if (permission==0) {
     HTML += '<div class="card-footer">'
         +  '<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>'
         +  '<div class="pull-right" style="margin: 10px">'
@@ -139,6 +160,15 @@ function loadOrderDetails(data_Details){
         +  '</div>'
         +  '</div>'
         +  '</div>';
+    }else{
+    	HTML += '<div class="card-footer">'
+        +  '<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>'
+        +  '<div class="pull-right" style="margin: 10px">'
+        +  '<div class="pull-right" style="margin: 5px">Total price: <b id = "total_price">'+total_price+'</b>'
+        +  '</div>'
+        +  '</div>'
+        +  '</div>';
+    }
 
     $('#cardbody').empty();
     
