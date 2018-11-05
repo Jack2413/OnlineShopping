@@ -30,7 +30,7 @@ $(document).ready(function(e) {
     }).change(function() {
         // Do something with the previous value after the change
         alert($(this).parent().parent().parent().html());
-        alert($(this).parent().parent().parent().find('#total_price').text();
+        alert($(this).parent().parent().parent().find('#total_price').text());
         alert($(this).parent().parent().parent().find('#product_price').text());
         var change_amount = $(this).val() - previous_amount;
         alert($(this).val());
