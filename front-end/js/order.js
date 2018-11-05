@@ -23,18 +23,18 @@ $(document).ready(function(e) {
 
     var previous_amount;
 
-    $("#cardbody").on('focus', '#product_amount',function () {
-        // Store the current value on focus and on change
-        previous_amount = $(this).val();
+    // $("#cardbody").on('focus', '#product_amount',function () {
+    //     // Store the current value on focus and on change
+    //     previous_amount = $(this).val();
         
         
-    }).change(function() {
-        // Do something with the previous value after the change
-        alert(previous_amount);
-        alert($(this).val());
+    // }).change(function() {
+    //     // Do something with the previous value after the change
+    //     alert(previous_amount);
+    //     alert($(this).val());
 
-        // Make sure the previous value is updated
-    });
+    //     // Make sure the previous value is updated
+    // });
 
     $("#cardbody").on('keypress','click', '#product_amount',function () {
         // Store the current value on focus and on change
