@@ -39,8 +39,8 @@ $(document).ready(function(e) {
 
     $("#cardbody").on("change paste keyup",'#product_amount', function() {
 
-    	 alert($(this).parent().parent().parent().html());
-    	 var total_price = $(this).parent().parent().parent().find('#total_price').text();
+    	 alert($('#total_price'));
+    	 total_price = $("#cardbody").find('#total_price').text();
     	 alert(total_price);
 
          var product_price = $(this).parent().parent().parent().find('#product_price').text();
@@ -53,7 +53,7 @@ $(document).ready(function(e) {
 		 
 		 var new_total = parseFloat(total_price) + parseFloat(price_change);
 		 alert(new_total);
-		 $(this).parent().parent().parent().find('#total_price').text(new_total);
+		 $("#cardbody").find('#total_price').text(new_total);
 	});
 
 
