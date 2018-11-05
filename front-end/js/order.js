@@ -64,7 +64,7 @@ $(document).ready(function(e) {
 				datatype: "json"
 
 		}).then (save, ERROR_LOG);
-    }
+    });
 
     $('#cardbody').on('click', '#DeleteButton', function() {
 
@@ -80,7 +80,7 @@ $(document).ready(function(e) {
 				datatype: "json"
 
 		}).then (deleteFunction, ERROR_LOG);
-    }    
+    });    
 
 
   //   change(function() {
