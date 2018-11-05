@@ -92,12 +92,12 @@ function loadOrderData(orders){
 
 function loadOrderDetails(data_Details){
 	
-	
+	var permission = window.localStorage.getItem("permission");
 	var total_price = 0;
 	var HTML;
 	data_Details.forEach(data_Detail=>{
 		//alert('ID: $1 Task: $2 Name: $3',task.id,task.task,task.name);
-	var permission = window.localStorage.getItem("permission");
+	
 
 	if (permission==0) {
 	HTML +=  '<div id="product-list" class="row">'
