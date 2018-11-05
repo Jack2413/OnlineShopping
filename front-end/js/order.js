@@ -27,23 +27,33 @@ $(document).ready(function(e) {
         // Store the current value on focus and on change
         previous_amount = $(this).val();
         
-    }).change(function() {
-        // Do something with the previous value after the change
-        alert($(this).parent().parent().parent().html());
-        alert($(this).parent().parent().parent().find('#total_price').text());
-        alert($(this).parent().parent().parent().find('#product_price').text());
-        var change_amount = $(this).val() - previous_amount;
+    });
+
+    $("#cardbody").on('keypress','click', '#product_amount',function () {
+        // Store the current value on focus and on change
         alert($(this).val());
         alert(previous_amount);
-		var price_change = change_amount*$(this).val();
-		var previous_total = $(this).parent().parent().parent().find('#total_price').val();
-		alert(previous_total);
-		alert($(this).parent().parent().parent().find('#total_price').html());
-		var new_total = previous_total + price_change;
-		//alert(change_amount,price_change,previous_total,new_total);
-		previous_total.val(new_total);
-
+        
     });
+
+
+  //   change(function() {
+  //       // Do something with the previous value after the change
+        
+  //       var total_price = $(this).parent().parent().parent().find('#total_price').text();
+  //       var product_price = $(this).parent().parent().parent().find('#product_price').text();
+  //       var change_amount = $(this).val() - previous_amount;
+  //       alert($(this).val());
+  //       alert(previous_amount);
+		// var price_change = change_amount*$(this).val();
+		// var previous_total = $(this).parent().parent().parent().find('#total_price').val();
+		// alert(previous_total);
+		// alert($(this).parent().parent().parent().find('#total_price').html());
+		// var new_total = previous_total + price_change;
+		// //alert(change_amount,price_change,previous_total,new_total);
+		// previous_total.val(new_total);
+
+  //   });
 
 });
 
