@@ -41,7 +41,7 @@ $(document).ready(function(e) {
 
     	 var total_price = $(this).parent().parent().parent().find('#total_price').text();
          var product_price = $(this).parent().parent().parent().find('#product_price').text();
-         var change_amount = parseInt($(this).val()) - parseInt(revious_amount);
+         var change_amount = parseInt($(this).val()) - parseInt(previous_amount);
          alert(change_amount);
          
 		 var price_change = change_amount*parseFloat(product_price);
