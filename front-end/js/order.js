@@ -33,9 +33,11 @@ $(document).ready(function(e) {
 		var price_change = change_amount*$(this).val();
 		alert(price_change);
 		var previous_total = $(this).parent().parent().parent().find('#total_price').val();
+		alert(previous_total);
+		alert($(this).parent().parent().parent().find('#total_price').html());
 		var new_total = previous_total + price_change;
 		//alert(change_amount,price_change,previous_total,new_total);
-		$('#total_price').val(new_total);
+		previous_total.val(new_total);
 
     });
 
