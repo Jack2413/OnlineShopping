@@ -8,7 +8,7 @@ const path = require("path");
 const { Pool } = require("pg");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var connectionURL =
-  "postgres://uqvwhecqlnogzx:262ccd3653dd4fcbae6bb3a37af8bde55c3bece47b29ac05f7832cd3725c3fa7@ec2-54-235-90-0.compute-1.amazonaws.com:5432/dfikpgnoar8965";
+  "postgres://jfmozbapyuirid:41744a1b0c40bbe1b0cdda91b7b9a7f7a93d04569ea38308eaf4d91d518d5fe9@ec2-54-235-90-0.compute-1.amazonaws.com:5432/dfikpgnoar8965";
 const pool = new Pool({
   connectionString: connectionURL,
   ssl: true
