@@ -47,7 +47,8 @@ $(document).ready(function(e) {
 		 var price_change = change_amount*parseFloat(product_price.replace(/[^0-9.-]+/g, ''));
 		 alert(price_change);
 
-		 var new_total = parseFloat(total_price) + price_change;
+		 alert(total_price);
+		 var new_total = parseFloat(total_price) + parseFloat(price_change);
 		 alert(new_total);
 		 $(this).parent().parent().parent().find('#total_price').text(new_total);
 	});
