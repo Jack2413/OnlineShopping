@@ -46,7 +46,7 @@ $(document).ready(function(e) {
 		 var price_change = change_amount*parseFloat(product_price.replace(/[^0-9.-]+/g, ''));
  
 		 var new_total = parseFloat(total_price) + parseFloat(price_change);
-		 alert(new_total);
+
 		 $("#cardbody").find('#total_price').text(new_total);
 	});
 
