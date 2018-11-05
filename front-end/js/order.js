@@ -23,9 +23,10 @@ $(document).ready(function(e) {
 
     var previous_amount;
 
-    // $("#cardbody").on('focus', '#product_amount',function () {
-    //     // Store the current value on focus and on change
-    //     previous_amount = $(this).val();
+    $("#cardbody").on('focus', '#product_amount',function () {
+        // Store the current value on focus and on change
+        previous_amount = $(this).val();
+    });
         
         
     // }).change(function() {
@@ -36,12 +37,10 @@ $(document).ready(function(e) {
     //     // Make sure the previous value is updated
     // });
 
-    $("#cardbody").on('keypress','click', '#product_amount',function () {
-        // Store the current value on focus and on change
-        alert($(this).val());
-        alert(previous_amount);
-        
-    });
+    $("#cardbody").on("change paste keyup",'#product_amount', function() {
+    	alert(previous_amount);
+   		alert($(this).val());
+	});
 
 
   //   change(function() {
