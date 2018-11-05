@@ -178,6 +178,7 @@ $(document).ready(function(e) {
 		function(result){
 			alert(result.feedback);
 			if(result.status==200){
+				alert($('#navbarResponsive').html());
 				window.localStorage.setItem("login_state", "login");
 				window.localStorage.setItem("username", result.username);
 				window.localStorage.setItem("email", $email);
