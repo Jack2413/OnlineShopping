@@ -23,9 +23,9 @@ $(document).ready(function(e) {
 
     var previous_amount;
 
-    $("#product_amount").on('focus', 'click',function () {
+    $("#cardbody").on('focus', '#product_amount',function () {
         // Store the current value on focus and on change
-        previous_amount = this.value;
+        previous_amount = $(this).val();
         alert(previous_amount);
     }).change(function() {
         // Do something with the previous value after the change
