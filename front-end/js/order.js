@@ -31,7 +31,7 @@ $(document).ready(function(e) {
     }).change(function() {
         // Do something with the previous value after the change
         alert(previous_amount);
-        alert(this.value);
+        alert($(this).val());
 
         // Make sure the previous value is updated
     });
