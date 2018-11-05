@@ -150,7 +150,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/reset", async (req, res) => {
+app.put("/reset", async (req, res) => {
   try {
     console.log("get in reset function");
     const client = await pool.connect();
@@ -220,7 +220,7 @@ app.post("/reset", async (req, res) => {
 
 });
 
-app.post("/getOrder", async (req, res) => {
+app.put("/getOrder", async (req, res) => {
 	try {
 		console.log("get in Order function");
 		const client = await pool.connect();
@@ -251,7 +251,7 @@ app.post("/getOrder", async (req, res) => {
 	} 
 });
 
-app.post("/getOrderDetails", async (req, res) => {
+app.put("/getOrderDetails", async (req, res) => {
 	try {
 		console.log("get in OrderDetails function");
 		const client = await pool.connect();

@@ -131,7 +131,7 @@ $(document).ready(function(e) {
 		}
 
 		$.ajax({
-				method: 'POST',
+				method: 'PUT',
 				url: url+'/reset',
 				data: JSON.stringify({
 					email: $email,

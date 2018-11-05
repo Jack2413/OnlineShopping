@@ -8,7 +8,7 @@ $(document).ready(function(e) {
 		var $orderID = $orderInfo.find('.orderid').text();
 
 		$.ajax({
-				method: 'POST',
+				method: 'PUT',
 				url: url+'/getOrderDetails',
 				data: JSON.stringify({
 					orderID: $orderID
@@ -27,7 +27,7 @@ $(document).ready(function(e) {
 function loadOrder () {
 	
 	$.ajax ({
-		method: 'POST',
+		method: 'PUT',
 		url: url+'/getOrder', 
 		data: JSON.stringify({
 			email: window.localStorage.getItem("email"),
