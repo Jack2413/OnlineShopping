@@ -1,11 +1,13 @@
 var url = 'https://nwen304onlineshoping.herokuapp.com';
 var ERROR_LOG = console.error.bind(console);
+var SelectOrderID;
 $(document).ready(function(e) {
 	loadOrder();
 	$('#orderbody').on('click', '#view', function() {
 
 		var $orderInfo = $(this).parent().parent();
 		var $orderID = $orderInfo.find('.orderid').text();
+		var SelectOrderID = $orderID;
 
 		$.ajax({
 				method: 'PUT',
@@ -67,14 +69,14 @@ $(document).ready(function(e) {
     });
 
     $('#cardbody').on('click', '#DeleteButton', function() {
-
+    	var $productID = $(this).parent().parent().parent().val();
+    	alert($productID);
 		$.ajax({
 				method: 'DELETE',
 				url: url+'/deleteOrderDetails',
 				data: JSON.stringify({
-					orderID: $orderID,
+					orderID: SelectOrderID,
 					productID: $productID,
-					email: $email
 				}),
 				contentType: "application/json",
 				datatype: "json"
@@ -126,13 +128,14 @@ function loadOrderDetails(data_Details){
 	
 	var permission = window.localStorage.getItem("permission");
 	var total_price = 0;
+	
 	var HTML;
 	data_Details.forEach(data_Detail=>{
 		//alert('ID: $1 Task: $2 Name: $3',task.id,task.task,task.name);
 	
 
 	if (permission==0) {
-	HTML +=  '<div id="product-list" class="row">'
+	HTML +=  '<div id="product-list" class="row" value='+data_Detail.id+'>'
              +	'<div class="col-12 col-sm-12 col-md-2 text-center">'
              +  '<img class="img-responsive" src=../images/products/'+data_Detail.imagecode+'.png alt="prewiew" width="100" height="100">'
              +	'</div>'
