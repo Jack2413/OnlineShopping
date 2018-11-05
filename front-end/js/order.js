@@ -26,14 +26,15 @@ $(document).ready(function(e) {
     $("#cardbody").on('focus', '#product_amount',function () {
         // Store the current value on focus and on change
         previous_amount = $(this).val();
-        alert(previous_amount);
+        
     }).change(function() {
         // Do something with the previous value after the change
-        var change_amount = $('#product_amount').val() - previous_amount;
-		var price_change = change_amount*$('#product_price').val();
-		var previous_total = $('#total_price').val();
+        var change_amount = $(this).val() - previous_amount;
+		var price_change = change_amount*$(this).val();
+		alert(price_change);
+		var previous_total = $(this).parent().parent().parent().find('#total_price').val();
 		var new_total = previous_total + price_change;
-		alert(change_amount,price_change,previous_total,new_total);
+		//alert(change_amount,price_change,previous_total,new_total);
 		$('#total_price').val(new_total);
 
     });
