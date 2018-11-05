@@ -26,8 +26,7 @@ $(document).ready(function(e) {
     $("#cardbody").on('focus', '#product_amount',function () {
         // Store the current value on focus and on change
         previous_amount = $(this).val();
-    });
-        
+    }); 
         
     // }).change(function() {
     //     // Do something with the previous value after the change
@@ -49,6 +48,39 @@ $(document).ready(function(e) {
 
 		 $("#cardbody").find('#total_price').text(new_total);
 	});
+
+	$('#cardbody').on('click', '#SaveButton', function() {
+    	
+    	var $orderInfo = $(this).parent().parent().parent('product-list');
+		var $orderID = $orderInfo.find('.orderid').text();
+
+		$.ajax({
+				method: 'PUT',
+				url: url+'/getOrderDetails',
+				data: JSON.stringify({
+					orderID: $orderID
+				}),
+				contentType: "application/json",
+				datatype: "json"
+
+		}).then (save, ERROR_LOG);
+    }
+
+    $('#cardbody').on('click', '#DeleteButton', function() {
+
+		$.ajax({
+				method: 'DELETE',
+				url: url+'/deleteOrderDetails',
+				data: JSON.stringify({
+					orderID: $orderID,
+					productID: $productID,
+					email: $email
+				}),
+				contentType: "application/json",
+				datatype: "json"
+
+		}).then (deleteFunction, ERROR_LOG);
+    }    
 
 
   //   change(function() {
@@ -118,7 +150,7 @@ function loadOrderDetails(data_Details){
              +  '</div>'
              +  '</div>'
              +  '<div class="col-2 col-sm-2 col-md-2 text-right">'
-             +  '<button type="button" class="btn btn-outline-danger btn-xs">'
+             +  '<button id="deleteButton" type="button" class="btn btn-outline-danger btn-xs">'
              +  '<i class="fa fa-trash" aria-hidden="true"></i>'
              +  '</button>'
              +  '</div>'
@@ -155,7 +187,7 @@ function loadOrderDetails(data_Details){
     HTML += '<div class="card-footer">'
         +  '<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>'
         +  '<div class="pull-right" style="margin: 10px">'
-        +  '<a href="#" class="btn btn-success pull-right">SAVE</a>'
+        +  '<a href="#" class="btn btn-success pull-right" id = "SaveButton">SAVE</a>'
         +  '<div class="pull-right" style="margin: 5px">Total price: <b id = "total_price">'+total_price+'</b>'
         +  '</div>'
         +  '</div>'

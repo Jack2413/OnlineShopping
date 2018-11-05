@@ -273,4 +273,30 @@ app.put("/getOrderDetails", async (req, res) => {
 	} 
 });
 
+app.put("/DeleteOrderDetails", async (req, res) => {
+	try {
+		console.log("get in DeleteOrderDetails function");
+		const client = await pool.connect();
+
+		console.log(req.body);
+		var orderID = req.body.orderID;
+		var productID = req.body.productID;
+		var email = req.body.email;
+
+		console.log("orderID: "+orderID+"productID: "+productID+"email: "+emailID);
+
+		var result = await client.query('select amount, id, name, price,description,imagecode from orderdetails NATURAL JOIN products where productid = id and orderid = $1',[orderID]);
+
+		if (!result) {
+			return res.send('No data found'); 
+		}else{ 
+			return res.send(result.rows);
+		}
+		client.release();
+	} catch (err) { 
+		console.error(err); 
+		res.send("Error " + err);
+	} 
+});
+
 app.listen(port, () => console.log("Listening on Heroku Server"));
