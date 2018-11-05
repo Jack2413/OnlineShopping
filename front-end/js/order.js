@@ -39,7 +39,7 @@ $(document).ready(function(e) {
 
     $("#cardbody").on("change paste keyup",'#product_amount', function() {
 
-    	 var total_price = $(this).parent().parent().parent().find('#total_price').html();
+    	 var total_price = $(this).parent().parent().parent().parent().find('#total_price').text();
     	 alert(total_price);
 
          var product_price = $(this).parent().parent().parent().find('#product_price').text();
