@@ -20,7 +20,26 @@ $(document).ready(function(e) {
 		//alert($username+' '+$email+' '+$password);
 	});
 
+
+    var previous_amount;
+
+    $("#product_amount").on('focus', function () {
+        // Store the current value on focus and on change
+        previous_amount = this.value;
+        alert(previous_amount);
+    }).change(function() {
+        // Do something with the previous value after the change
+        var change_amount = $('#product_amount').val() - previous_amount;
+		var price_change = change_amount*$('#product_price').val();
+		var previous_total = $('#total_price').val();
+		var new_total = previous_total + price_change;
+		alert(change_amount,price_change,previous_total,new_total);
+		$('#total_price').val(new_total);
+
+    });
+
 });
+
 
 
 
@@ -72,11 +91,11 @@ function loadOrderDetails(data_Details){
              +  '</div>'
              +  '<div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">'
              +  '<div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">'
-             +  '<h6><strong>'+data_Detail.price+'<span class="text-muted">x</span></strong></h6>'
+             +  '<h6><strong id = "product_price">'+data_Detail.price+'<span class="text-muted">x</span></strong></h6>'
              +  '</div>'
              +  '<div class="col-4 col-sm-4 col-md-4" style="padding-top: 5px">'
              +  '<div class="quantity">'
-             +	'<input type="number" step="1" max="99" min="1" value='+data_Detail.amount+' title="Qty" class="qty"size="4">'
+             +	'<input id= "product_amount" type="number" step="1" max="99" min="1" value='+data_Detail.amount+' title="Qty" class="qty"size="4">'
              +  '</div>'
              +  '</div>'
              +  '<div class="col-2 col-sm-2 col-md-2 text-right">'
@@ -96,7 +115,7 @@ function loadOrderDetails(data_Details){
         +  '<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>'
         +  '<div class="pull-right" style="margin: 10px">'
         +  '<a href="#" class="btn btn-success pull-right">SAVE</a>'
-        +  '<div class="pull-right" style="margin: 5px">Total price: <b>'+total_price+'</b>'
+        +  '<div class="pull-right" style="margin: 5px">Total price: <b id = "total_price">'+total_price+'</b>'
         +  '</div>'
         +  '</div>'
         +  '</div>';
