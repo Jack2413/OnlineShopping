@@ -18,8 +18,8 @@ $(document).ready(function(e) {
 
 		}).then (loadOrderDetails, ERROR_LOG);
 		//alert($username+' '+$email+' '+$password);
-
 	});
+
 });
 
 
@@ -76,8 +76,13 @@ function loadOrderDetails(data_Details){
              +  '</div>'
              +  '<div class="col-4 col-sm-4 col-md-4" style="padding-top: 5px">'
              +  '<div class="quantity">'
-             +  '<h6><strong>'+data_Detail.amount+'</h6>'
+             +	'<input type="number" step="1" max="99" min="1" value='+data_Detail.amount+' title="Qty" class="qty"size="4">'
              +  '</div>'
+             +  '</div>'
+             +  '<div class="col-2 col-sm-2 col-md-2 text-right">'
+             +  '<button type="button" class="btn btn-outline-danger btn-xs">'
+             +  '<i class="fa fa-trash" aria-hidden="true"></i>'
+             +  '</button>'
              +  '</div>'
              + 	'</div>'
         	 +	'</div>'
@@ -90,6 +95,7 @@ function loadOrderDetails(data_Details){
     HTML += '<div class="card-footer">'
         +  '<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>'
         +  '<div class="pull-right" style="margin: 10px">'
+        +  '<a href="#" class="btn btn-success pull-right">SAVE</a>'
         +  '<div class="pull-right" style="margin: 5px">Total price: <b>'+total_price+'</b>'
         +  '</div>'
         +  '</div>'
