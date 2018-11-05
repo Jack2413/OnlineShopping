@@ -172,6 +172,7 @@ function loadOrderDetails(data_Details){
              +  '</div>'
              +  '<div class="col-4 col-sm-4 col-md-4" style="padding-top: 5px">'
              +  '<div class="quantity">'
+             + 	'<h6><strong>'+data_Detail.amount+'</h6>'
              +  '</div>'
              +  '</div>'
              + 	'</div>'
