@@ -60,12 +60,20 @@ $(document).ready(function(e) {
 				method: 'PUT',
 				url: url+'/getOrderDetails',
 				data: JSON.stringify({
-					orderID: $orderID
+					orderID: SelectOrderID,
+					amount : $amount,
+					productID: $productID
 				}),
 				contentType: "application/json",
 				datatype: "json"
 
-		}).then (save, ERROR_LOG);
+		}).then(
+		function(result){
+			alert(result);
+		}, 
+		function(error){
+			alert(error);
+		});
     });
 
     $('#cardbody').on('click', '#deleteButton', function() {
@@ -92,6 +100,7 @@ $(document).ready(function(e) {
 		});
     });    
 
+});
 
   //   change(function() {
   //       // Do something with the previous value after the change
