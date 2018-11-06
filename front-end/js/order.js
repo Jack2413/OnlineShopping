@@ -69,7 +69,10 @@ $(document).ready(function(e) {
     });
 
     $('#cardbody').on('click', '#deleteButton', function() {
-    	alert($('#cardbody').find('#product-list').val());
+    	
+    	alert($(this).parent().parent().parent().parent().find('.row').val())
+    	alert($(this).parent().parent().parent().parent().find('.row').html())
+    	alert($(this).parent().parent().parent().parent('#product-list').val())
     	var $productID = $(this).parent().parent().parent().parent().find('#product-list').val();
     	alert($productID);
 		$.ajax({
