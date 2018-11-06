@@ -21,6 +21,7 @@ CREATE TABLE products (
 CREATE TABLE  cart (
   email varchar(32) NOT NULL,
   productId INTEGER NOT NULL,
+  productname varchar(32) NOT NULL,
   amount INTEGER NOT NULL,
   totalPrice MONEY NOT NULL,
   FOREIGN KEY (email) REFERENCES users (email),
@@ -75,4 +76,11 @@ INSERT INTO orderDetails (email, totalPrice, theDate) VALUES('test@gmail.com', 1
 INSERT INTO orderDetails (email, totalPrice, theDate) VALUES('user@gmail.com', 55, CURRENT_TIMESTAMP);
 INSERT INTO orderDetails (email, totalPrice, theDate) VALUES('user@gmail.com', 115, CURRENT_TIMESTAMP);
 
+-- some transactions to build cart functionality
+INSERT INTO cart (email, productId, productname, amount, totalprice)
+VALUES('test@gmail.com', 38, 'DAVE THE MINION', 2, 30);
 
+
+SELECT id FROM products WHERE NAME = 'DAVE THE MINION';
+SELECT price FROM products WHERE NAME = 'DAVE THE MINION';.
+DELETE FROM cart WHERE productname = 'DAVE THE MINION';
