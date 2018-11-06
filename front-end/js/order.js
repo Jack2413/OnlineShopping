@@ -93,6 +93,7 @@ $(document).ready(function(e) {
 
 		}).then(
 		function(result){
+			$(this).parent().parent().parent().parent().empty();
 			alert(result);
 		}, 
 		function(error){
