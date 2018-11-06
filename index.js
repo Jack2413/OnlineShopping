@@ -273,9 +273,9 @@ app.put("/getOrderDetails", async (req, res) => {
 	} 
 });
 
-app.put("/DeleteOrderDetails", async (req, res) => {
+app.put("/deleteOrderDetails", async (req, res) => {
 	try {
-		console.log("get in DeleteOrderDetails function");
+		console.log("get in deleteOrderDetails function");
 		const client = await pool.connect();
 
 		console.log(req.body);
@@ -283,9 +283,9 @@ app.put("/DeleteOrderDetails", async (req, res) => {
 		var productID = req.body.productID;
 		var email = req.body.email;
 
-		console.log("orderID: "+orderID+"productID: "+productID+"email: "+emailID);
+		console.log("orderID: "+orderID+"productID: "+productID+"email: "+email);
 
-		var result = await client.query('select amount, id, name, price,description,imagecode from orderdetails NATURAL JOIN products where productid = id and orderid = $1',[orderID]);
+		var result = await client.query('DELETE FROM OrderDetails WHERE orderID=$1 and productid=$2 and email=$3',[orderID,productID,email]);
 
 		if (!result) {
 			return res.send('No data found'); 
