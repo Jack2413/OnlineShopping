@@ -83,7 +83,13 @@ $(document).ready(function(e) {
 				contentType: "application/json",
 				datatype: "json"
 
-		}).then (deleteFunction, ERROR_LOG);
+		}).then(
+		function(result){
+			alert(result);
+		}, 
+		function(error){
+			alert(error);
+		});
     });    
 
 
@@ -94,7 +100,6 @@ $(document).ready(function(e) {
 
   //   });
 
-});
 
 function loadOrder () {
 	
