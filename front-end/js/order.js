@@ -70,8 +70,8 @@ $(document).ready(function(e) {
 
     $('#cardbody').on('click', '#deleteButton', function() {
     	
-    	alert($(this).parent().parent().parent().parent().parent().html())
-    	var $productID = $(this).parent().parent().parent().parent().val();
+    	alert($(this).parent().parent().parent().parent().find('#product-list').html())
+    	var $productID = $(this).parent().parent().parent().find('#product-list').value;
     	alert($productID);
 		$.ajax({
 				method: 'DELETE',
