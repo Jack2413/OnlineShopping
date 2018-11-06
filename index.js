@@ -281,11 +281,10 @@ app.delete("/deleteOrderDetails", async (req, res) => {
 		console.log(req.body);
 		var orderID = req.body.orderID;
 		var productID = req.body.productID;
-		var email = req.body.email;
 
-		console.log("orderID: "+orderID+"productID: "+productID+"email: "+email);
+		console.log("orderID: "+orderID+"productID: "+productID);
 
-		var result = await client.query('DELETE FROM OrderDetails WHERE orderID=$1 and productid=$2 and email=$3',[orderID,productID,email]);
+		var result = await client.query('DELETE FROM OrderDetails WHERE orderID=$1 and productid=$2',[orderID,productID]);
 
 		if (!result) {
 			return res.send('No data found'); 
