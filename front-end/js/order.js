@@ -7,7 +7,7 @@ $(document).ready(function(e) {
 
 		var $orderInfo = $(this).parent().parent();
 		var $orderID = $orderInfo.find('.orderid').text();
-		var SelectOrderID = $orderID;
+		SelectOrderID = $orderID;
 
 		$.ajax({
 				method: 'PUT',
