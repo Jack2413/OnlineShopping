@@ -69,8 +69,8 @@ $(document).ready(function(e) {
     });
 
     $('#cardbody').on('click', '#deleteButton', function() {
-    	alert($(this).parent().parent().parent().parent().html())
-    	var $productID = $(this).parent().parent().parent().parent('#product-list').val();
+    	alert($(this).parent().parent().parent().parent().html());
+    	var $productID = $(this).parent().parent().parent().parent().find('#product_price').val();
     	alert($productID);
 		$.ajax({
 				method: 'DELETE',
