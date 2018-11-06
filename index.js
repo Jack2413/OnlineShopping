@@ -273,7 +273,7 @@ app.put("/getOrderDetails", async (req, res) => {
 	} 
 });
 
-app.put("/deleteOrderDetails", async (req, res) => {
+app.delete("/deleteOrderDetails", async (req, res) => {
 	try {
 		console.log("get in deleteOrderDetails function");
 		const client = await pool.connect();
