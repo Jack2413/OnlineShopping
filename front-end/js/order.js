@@ -70,8 +70,8 @@ $(document).ready(function(e) {
 
     $('#cardbody').on('click', '#deleteButton', function() {
     	
-    	alert($('#cardbody').find('#product-list').html())
-    	var $productID = $(this).parent().parent().parent().parent().find('#product-list').val();
+    	
+    	var $productID = $(this).val();
     	alert($productID);
 		$.ajax({
 				method: 'DELETE',
@@ -155,7 +155,7 @@ function loadOrderDetails(data_Details){
              +  '</div>'
              +  '</div>'
              +  '<div class="col-2 col-sm-2 col-md-2 text-right">'
-             +  '<button id="deleteButton" type="button" class="btn btn-outline-danger btn-xs">'
+             +  '<button id="deleteButton" type="button" value = '+data_Detail.id+' class="btn btn-outline-danger btn-xs">'
              +  '<i class="fa fa-trash" aria-hidden="true"></i>'
              +  '</button>'
              +  '</div>'
