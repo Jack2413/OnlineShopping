@@ -68,7 +68,7 @@ $(document).ready(function(e) {
 		}).then (save, ERROR_LOG);
     });
 
-    $('#cardbody').on('click', '#DeleteButton', function() {
+    $('#cardbody').on('click', '#deleteButton', function() {
     	var $productID = $(this).parent().parent().parent().val();
     	alert($productID);
 		$.ajax({
