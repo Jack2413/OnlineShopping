@@ -115,7 +115,7 @@ app.get("/search/:name", async (req, res) => {
   }
 });
 
-app.post("/add", urlencodedParser, async (req, res) => {
+app.post("/addtoproduct", urlencodedParser, async (req, res) => {
   try {
     const client = await pool.connect();
     var result = await client.query(

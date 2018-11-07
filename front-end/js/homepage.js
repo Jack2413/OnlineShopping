@@ -20,18 +20,18 @@ $(document).ready(function(e) {
     var des = $("#product-des").val();
     var newproduct = { name: name, price: price, description: des };
     console.log(newproduct);
-    addproduct(newproduct);
+    addtoproduct(newproduct);
   });
 
-  $("#addtocart").click(() => {
-    alert("Add item to cart!");
-  });
+  // $("#addtocart").click(() => {
+  //   alert("Add item to cart!");
+  // });
 
   $("#search").click(() => {
     var name = $("#searchitem").val();
     var name = { name: name };
     console.log(name);
-    searchproduct2();
+    searchproduct();
   });
 
   function getthewholepage() {
@@ -56,10 +56,10 @@ $(document).ready(function(e) {
     });
   }
 
-  function addproduct(todo) {
+  function addtoproduct(todo) {
     $.ajax({
       type: "POST",
-      url: "/add",
+      url: "/addtoproduct",
       data: todo,
       success: returnedata => {
         //alert("before getpost success!!!");
@@ -67,6 +67,15 @@ $(document).ready(function(e) {
       }
     });
   }
+
+  //click Add button in card to add this product to cart
+  Addincardclicked = elem => {
+    // alert(e.id);
+    var name = elem.id;
+    var price = parseInt(elem.id);
+    alert(name);
+    alert(price);
+  };
 
   function addtocart(todo) {
     $.ajax({
@@ -79,7 +88,7 @@ $(document).ready(function(e) {
     });
   }
 
-  function searchproduct2() {
+  function searchproduct() {
     if ($("#searchitem").val() == "") {
       getthewholepage();
     } else {
@@ -110,6 +119,7 @@ $(document).ready(function(e) {
   }
 
   function stackproductlist(name, price, des) {
+    var info = 3 + name;
     var taskHTML =
       '<div class="col-lg-4 col-md-6 mb-4">' +
       '<div class="card h-100">' +
@@ -117,8 +127,11 @@ $(document).ready(function(e) {
       '<div class="card-body">' +
       ' <h4 class="card-title"><a href="#">Item One</a></h4>' +
       '<h5 class="card-price">$24.99</h5>' +
-      '<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>' +
-      '<button id="addtocart" type="button" class="btn btn-primary btn">Add</button> </div> </div> </div>';
+      '<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p></div>' +
+      '<div class="card-footer">' +
+      '<button id="' +
+      info +
+      '" onclick=Addincardclicked(this)  type="button" class="btn btn-primary btn">Add</button> </div> </div> </div>';
     var $newTask = $(taskHTML);
     $newTask.find(".card-title").text(name);
     $newTask.find(".card-price").text(price);
