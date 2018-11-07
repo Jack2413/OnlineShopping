@@ -18,15 +18,14 @@ CREATE TABLE products (
   PRIMARY KEY (id)
 );
 
+-- every user has only one cart, if user click checkout button, all information involves this useremail is deleted. this design is meant to keep the cart information if user reloads the page. 
 CREATE TABLE  cart (
   email varchar(32) NOT NULL,
-  productId INTEGER NOT NULL,
-  productname varchar(32) NOT NULL,
+  name varchar(32) NOT NULL,
+  price money NOT NULL,
   amount INTEGER NOT NULL,
-  totalPrice MONEY NOT NULL,
   FOREIGN KEY (email) REFERENCES users (email),
-  FOREIGN KEY (productId) REFERENCES products (id),
-  PRIMARY KEY (productId,email)
+  PRIMARY KEY (name, email)
 );
 
 CREATE TABLE orders (
@@ -77,8 +76,11 @@ INSERT INTO orderDetails (email, totalPrice, theDate) VALUES('user@gmail.com', 5
 INSERT INTO orderDetails (email, totalPrice, theDate) VALUES('user@gmail.com', 115, CURRENT_TIMESTAMP);
 
 -- some transactions to build cart functionality
-INSERT INTO cart (email, productId, productname, amount, totalprice)
-VALUES('test@gmail.com', 38, 'DAVE THE MINION', 2, 30);
+INSERT INTO cart (email, name, price, amount)
+VALUES('test@gmail.com', 'DAVE THE MINION', 15, 2);
+
+INSERT INTO cart (email, name, price, amount)
+VALUES('test@gmail.com', 'STUART THE MINION', 30, 3);
 
 
 SELECT id FROM products WHERE NAME = 'DAVE THE MINION';

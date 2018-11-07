@@ -3,7 +3,6 @@ $(document).ready(function(e) {
   console.log("homepage.js working");
   var addtocartinfo = $("addtocart").text();
   getthewholepage();
-
   //current todoitem
   var g;
   var count = 1;
@@ -42,17 +41,6 @@ $(document).ready(function(e) {
       success: data => {
         // alert(JSON.stringify(data.length));
         redraw(data);
-      }
-    });
-  }
-
-  function getcartdata() {
-    $.ajax({
-      method: "GET",
-      url: "/cartdb",
-      success: data => {
-        // alert(JSON.stringify(data.length));
-        redrawcart(data);
       }
     });
   }
@@ -121,16 +109,6 @@ $(document).ready(function(e) {
     }
   }
 
-  function redrawcart(data) {
-    $("#cart-list").empty();
-    //alert(JSON.stringify(name))
-    for (var i = 0; i < data.length; i++) {
-      var productId = data[i].productId;
-      var amount = data[i].amount;
-      stackcartitems(productId, amount);
-    }
-  }
-
   function stackproductlist(name, price, des) {
     var taskHTML =
       '<div class="col-lg-4 col-md-6 mb-4">' +
@@ -154,35 +132,5 @@ $(document).ready(function(e) {
     $("#product-name").val("");
     $("#product-price").val("");
     $("#product-des").val("");
-  }
-
-  function stackcartitems(productId, amount) {
-    var taskHTML =
-      '<div id="cart-item" class="row">' +
-      '<div class="col-12 text-sm-center col-sm-12 text-md-left' +
-      'col-md-6">' +
-      '<h6 class="productincart-name"><strong>Product' +
-      "Name</strong></h4>" +
-      "</div>" +
-      '<div class="col-12 col-sm-12 text-sm-center col-md-4 ' +
-      'text-md-right row">' +
-      '<div class="col-3 col-sm-3 col-md-6 text-md-right" ' +
-      'style="padding-top: 5px">' +
-      '<h6 class="productincart-price"><strong>25.00 </strong></h6>' +
-      "</div>" +
-      '<div class="col-4 col-sm-4 col-md-4 text-md-right" ' +
-      'style="padding-top: 5px">' +
-      '<h6 class="productincart-amount"><strong>1 </strong></h6>' +
-      "</div></div></div><hr>";
-
-    var $newCart = $(taskHTML);
-    $newCart.find(".productincart-name").text(productId);
-    $newCart.find(".productincart-amount").text(amount);
-
-    $newCart.hide();
-    $("#cart-items").append($newCart);
-    //$("#product-list") = [...$("#product-list"), $newTask];
-
-    $newCart.show();
   }
 }); // end ready

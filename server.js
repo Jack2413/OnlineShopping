@@ -74,6 +74,27 @@ app.get("/db", async (req, res) => {
   }
 });
 
+//
+app.get("/cartdb", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query("SELECT * FROM cart");
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("connected to cartdb get/cartdb");
+      // result.rows.forEach(row => {
+      //   console.log(row);
+      // });
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
 app.get("/search/:name", async (req, res) => {
   try {
     const client = await pool.connect();
