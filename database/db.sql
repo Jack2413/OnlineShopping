@@ -80,9 +80,10 @@ INSERT INTO cart (email, name, price, amount)
 VALUES('test@gmail.com', 'DAVE THE MINION', 15, 2);
 
 INSERT INTO cart (email, name, price, amount)
-VALUES('test@gmail.com', 'STUART THE MINION', 30, 3);
+VALUES('test@gmail.com', 'STUART THE MINION', '$30.00', 3);
 
 
 SELECT id FROM products WHERE NAME = 'DAVE THE MINION';
 SELECT price FROM products WHERE NAME = 'DAVE THE MINION';.
 DELETE FROM cart WHERE productname = 'DAVE THE MINION';
+DELETE FROM cart WHERE email = 'test@gmail.com';

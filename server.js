@@ -140,6 +140,33 @@ app.post("/addtoproduct", urlencodedParser, async (req, res) => {
   }
 });
 
+app.post("/addtocart", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "INSERT INTO cart (email, name, price, amount) VALUES ('" +
+        req.body.email +
+        "','" +
+        req.body.name +
+        "','" +
+        req.body.price +
+        "'," +
+        1 +
+        ")"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("post/cartdb succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
 //Get function
 //to get all the tasks from Heroku database, and return the result to front-end
 app.post("/login", async (req, res) => {

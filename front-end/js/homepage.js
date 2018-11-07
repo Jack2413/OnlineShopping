@@ -3,10 +3,6 @@ $(document).ready(function(e) {
   console.log("homepage.js working");
   var addtocartinfo = $("addtocart").text();
   getthewholepage();
-  //current todoitem
-  var g;
-  var count = 1;
-  //$("#new-todo").dialog({ modal: true, autoOpen: false });
 
   //delete all data from database button
   $("#resetcart").click(() => {
@@ -68,13 +64,16 @@ $(document).ready(function(e) {
     });
   }
 
+  //hardcoding current user's email
+  var currentemail = "test@gmail.com";
+
   //click Add button in card to add this product to cart
   Addincardclicked = elem => {
-    // alert(e.id);
-    var name = elem.id;
-    var price = parseInt(elem.id);
-    alert(name);
-    alert(price);
+    var array = elem.id.split(",");
+    var price = array[0];
+    var name = array[1];
+    var producttocart = { name: name, price: price, email: currentemail };
+    addtocart(producttocart);
   };
 
   function addtocart(todo) {
@@ -83,7 +82,7 @@ $(document).ready(function(e) {
       url: "/addtocart",
       data: todo,
       success: returnedata => {
-        alert("add to cart");
+        alert("add this product to cart");
       }
     });
   }
@@ -119,7 +118,7 @@ $(document).ready(function(e) {
   }
 
   function stackproductlist(name, price, des) {
-    var info = 3 + name;
+    var info = price + "," + name;
     var taskHTML =
       '<div class="col-lg-4 col-md-6 mb-4">' +
       '<div class="card h-100">' +
