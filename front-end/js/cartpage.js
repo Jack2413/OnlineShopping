@@ -82,14 +82,17 @@ $(document).ready(function(e) {
   //hardcoding current user's email
   var currentemail = "test@gmail.com";
   function redrawcart(data) {
-    $("#cart-list").empty();
-    //alert(JSON.stringify(name))
+    var totalprice = 0;
+    $("#cart-items").empty();
     for (var i = 0; i < data.length; i++) {
       var name = data[i].name;
       var price = data[i].price;
       var amount = data[i].amount;
+
+      totalprice += price.replace(/[^\d.]/g, "") * amount;
       stackcartitems(name, price, amount, currentemail);
     }
+    $("#ttprice").text(totalprice);
   }
 
   function stackcartitems(name, price, amount, currentemail) {
