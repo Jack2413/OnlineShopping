@@ -140,6 +140,7 @@ app.post("/addtoproduct", urlencodedParser, async (req, res) => {
   }
 });
 
+// user add one product to his cart
 app.post("/addtocart", urlencodedParser, async (req, res) => {
   try {
     const client = await pool.connect();
@@ -158,6 +159,30 @@ app.post("/addtocart", urlencodedParser, async (req, res) => {
       return res.send("No data found");
     } else {
       console.log("post/cartdb succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+// amount of product increse 1 in cart page
+app.put("/cartadd1", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "UPDATE cart SET amount = amount + 1 WHERE email = '" +
+        req.body.email +
+        "' AND name = '" +
+        req.body.name +
+        "';"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("post/db succesful");
     }
     res.send(result.rows);
     client.release();
