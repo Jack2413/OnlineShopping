@@ -10,16 +10,29 @@ $(document).ready(function(e) {
     var name = array[0];
     var email = array[1];
     var todo = { name: name, email: email };
-    alert(JSON.stringify(todo));
     cartadd1(todo);
   };
 
-  minus1 = () => {
-    alert("minus 1 clicked");
+  minus1 = elem => {
+    var array = elem.id.split(",");
+    var name = array[0];
+    var email = array[1];
+    var amount = array[2];
+    var todo = { name: name, email: email };
+
+    if (amount >= 2) {
+      cartminus1(todo);
+    } else {
+      cartdelete(todo);
+    }
   };
 
-  deleteproduct = () => {
-    alert("deleteproduct clicked");
+  deleteproduct = elem => {
+    var array = elem.id.split(",");
+    var name = array[0];
+    var email = array[1];
+    var todo = { name: name, email: email };
+    cartdelete(todo);
   };
 
   function cartadd1(todo) {
@@ -28,7 +41,28 @@ $(document).ready(function(e) {
       url: "/cartadd1",
       data: todo,
       success: data => {
-        // alert(JSON.stringify(data.length));
+        getcartpage();
+      }
+    });
+  }
+
+  function cartminus1(todo) {
+    $.ajax({
+      method: "PUT",
+      url: "/cartminus1",
+      data: todo,
+      success: data => {
+        getcartpage();
+      }
+    });
+  }
+
+  function cartdelete(todo) {
+    $.ajax({
+      method: "PUT",
+      url: "/cartdelete",
+      data: todo,
+      success: data => {
         getcartpage();
       }
     });
@@ -40,7 +74,6 @@ $(document).ready(function(e) {
       method: "GET",
       url: "/cartdb",
       success: data => {
-        // alert(JSON.stringify(data.length));
         redrawcart(data);
       }
     });
@@ -61,6 +94,7 @@ $(document).ready(function(e) {
 
   function stackcartitems(name, price, amount, currentemail) {
     var info = name + "," + currentemail;
+    var minusinfo = name + "," + currentemail + "," + amount;
     var taskHTML =
       '<div id="cart-item" class="row">' +
       '<div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">' +
@@ -81,9 +115,13 @@ $(document).ready(function(e) {
       info +
       '"onclick=add1(this) type="button" class="btn btn-outline-secondary btn-xs">	' +
       "<strong>+</strong></button>" +
-      '<button onclick=minus1() type="button" class="btn btn-outline-secondary btn-xs">	' +
+      '<button id="' +
+      minusinfo +
+      '"onclick=minus1(this) type="button" class="btn btn-outline-secondary btn-xs">	' +
       "<strong>-</strong></button>" +
-      '<button onclick=deleteproduct() type="button" class="btn btn-outline-danger btn-xs">	' +
+      '<button id="' +
+      info +
+      '"onclick=deleteproduct(this) type="button" class="btn btn-outline-danger btn-xs">	' +
       '<i class="fa fa-trash" aria-hidden="true"></i>	</button>' +
       "</div>" +
       "</div></div><hr>";

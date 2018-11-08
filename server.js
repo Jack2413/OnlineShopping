@@ -192,6 +192,52 @@ app.put("/cartadd1", urlencodedParser, async (req, res) => {
   }
 });
 
+app.put("/cartminus1", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "UPDATE cart SET amount = amount - 1 WHERE email = '" +
+        req.body.email +
+        "' AND name = '" +
+        req.body.name +
+        "';"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("post/db succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.put("/cartdelete", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "DELETE FROM cart WHERE email = '" +
+        req.body.email +
+        "' AND name = '" +
+        req.body.name +
+        "';"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("post/db succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
 //Get function
 //to get all the tasks from Heroku database, and return the result to front-end
 app.post("/login", async (req, res) => {
