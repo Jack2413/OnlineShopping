@@ -87,3 +87,5 @@ SELECT id FROM products WHERE NAME = 'DAVE THE MINION';
 SELECT price FROM products WHERE NAME = 'DAVE THE MINION';.
 DELETE FROM cart WHERE productname = 'DAVE THE MINION';
 DELETE FROM cart WHERE email = 'test@gmail.com';
+
+UPDATE cart SET amount = amount + 1 WHERE email = 'test@gmail.com' AND name = 'DAVE THE MINION';
