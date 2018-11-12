@@ -196,8 +196,7 @@ $(document).ready(function(e) {
 	});
 
 	$('#logout').click(function(){
-		window.localStorage.clear();
-		window.location.href = "index.html";
+		logout();
 	});
 
 	$('#RegisterButton').click(function(){
@@ -211,8 +210,20 @@ $(document).ready(function(e) {
 		window.location.href = url;
 	});
 
-
 });
+
+var timeout = null;
+$(document).on('mousemove','keypress', function() {
+    clearTimeout(timeout);
+    timeout = setTimeout(function() {
+        logout();
+    }, 5000);
+});
+
+function logout(){
+	window.localStorage.clear();
+	window.location.href = "index.html";
+}
 
 function isEmail(email) {
   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
