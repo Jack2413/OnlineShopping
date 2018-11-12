@@ -1,7 +1,7 @@
 $(document).ready(function(e) {
   var ERROR_LOG = console.error.bind(console);
   console.log("homepage.js working");
-  var addtocartinfo = $("addtocart").text();
+
   getthewholepage();
 
   //delete all data from database button
@@ -64,15 +64,21 @@ $(document).ready(function(e) {
     });
   }
 
-  //hardcoding current user's email
-  var currentemail = "test@gmail.com";
-
   //click Add button in card to add this product to cart
   Addincardclicked = elem => {
+    var currentemail = window.localStorage.getItem("email");
     var array = elem.id.split(",");
     var price = array[0];
     var name = array[1];
-    var producttocart = { name: name, price: price, email: currentemail };
+    var id = array[2];
+    var producttocart = {
+      name: name,
+      price: price,
+      email: currentemail,
+      productid: id
+    };
+    console.log(producttocart);
+
     addtocart(producttocart);
   };
 
@@ -114,12 +120,13 @@ $(document).ready(function(e) {
       var price = data[i].price;
       var des = data[i].description;
       var imagecode = data[i].imagecode;
-      stackproductlist(name, price, des, imagecode);
+      var id = data[i].id;
+      stackproductlist(name, price, des, imagecode, id);
     }
   }
 
-  function stackproductlist(name, price, des, imagecode) {
-    var info = price + "," + name;
+  function stackproductlist(name, price, des, imagecode, id) {
+    var info = price + "," + name + "," + id;
     var taskHTML =
       '<div class="col-lg-4 col-md-6 mb-4">' +
       '<div class="card h-100">' +

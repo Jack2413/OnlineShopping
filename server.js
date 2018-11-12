@@ -147,10 +147,13 @@ app.post("/addtoproduct", urlencodedParser, async (req, res) => {
 app.post("/addtocart", urlencodedParser, async (req, res) => {
   try {
     const client = await pool.connect();
+    console.log(req.body);
     var result = await client.query(
-      "INSERT INTO cart (email, name, price, amount) VALUES ('" +
+      "INSERT INTO cart (email, id, name, price, amount) VALUES ('" +
         req.body.email +
-        "','" +
+        "'," +
+        req.body.productid +
+        ",'" +
         req.body.name +
         "','" +
         req.body.price +
