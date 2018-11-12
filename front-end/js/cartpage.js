@@ -70,11 +70,11 @@ $(document).ready(function(e) {
 
   function getcartpage() {
     //alert(window.localStorage.getItem("email"));
-
+    var currentemail = window.localStorage.getItem("email");
     $("#cart-items").empty();
     $.ajax({
       method: "GET",
-      url: "/cartdb",
+      url: "/cartdb/" + currentemail,
       success: data => {
         redrawcart(data);
       }
@@ -82,7 +82,7 @@ $(document).ready(function(e) {
   }
 
   //hardcoding current user's email
-  var currentemail = window.localStorage.getItem("email");
+
   function redrawcart(data) {
     var totalprice = 0;
     $("#cart-items").empty();
@@ -90,7 +90,7 @@ $(document).ready(function(e) {
       var name = data[i].name;
       var price = data[i].price;
       var amount = data[i].amount;
-
+      var currentemail = window.localStorage.getItem("email");
       totalprice += price.replace(/[^\d.]/g, "") * amount;
       stackcartitems(name, price, amount, currentemail);
     }
