@@ -323,6 +323,189 @@ app.delete("/deleteOrderDetails", async (req, res) => {
 	} 
 });
 
+//get updated data from /db
+app.get("/db", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query("SELECT * FROM products");
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("connected to db get/db");
+      // result.rows.forEach(row => {
+      //   console.log(row);
+      // });
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
 
+//
+app.get("/cartdb", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query("SELECT * FROM cart");
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("connected to cartdb get/cartdb");
+      // result.rows.forEach(row => {
+      //   console.log(row);
+      // });
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.get("/search/:name", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    console.log(req.params.name);
+    var result = await client.query(
+      "SELECT * FROM products WHERE name = '" + req.params.name + "'"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("connected to db get/search");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.post("/addtoproduct", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "INSERT INTO products (name, price, description) VALUES ('" +
+        req.body.name +
+        "'," +
+        req.body.price +
+        ",'" +
+        req.body.description +
+        "')"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("post/db succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+// user add one product to his cart
+app.post("/addtocart", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "INSERT INTO cart (email, name, price, amount) VALUES ('" +
+        req.body.email +
+        "','" +
+        req.body.name +
+        "','" +
+        req.body.price +
+        "'," +
+        1 +
+        ")"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("post/cartdb succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+// amount of product increse 1 in cart page
+app.put("/cartadd1", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "UPDATE cart SET amount = amount + 1 WHERE email = '" +
+        req.body.email +
+        "' AND name = '" +
+        req.body.name +
+        "';"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("post/db succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.put("/cartminus1", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "UPDATE cart SET amount = amount - 1 WHERE email = '" +
+        req.body.email +
+        "' AND name = '" +
+        req.body.name +
+        "';"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("post/db succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.put("/cartdelete", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "DELETE FROM cart WHERE email = '" +
+        req.body.email +
+        "' AND name = '" +
+        req.body.name +
+        "';"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("post/db succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
 
 app.listen(port, () => console.log("Listening on Heroku Server"));
