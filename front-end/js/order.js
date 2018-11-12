@@ -21,27 +21,28 @@ $(document).ready(function(e) {
         // Store the current value on focus and on change
         
 	    //alert($(this).val());
-	    previous_amount = $(this).val();
+	    if (!$(this).val()==""){
+	    	previous_amount = $(this).val();
+		}
     	
 
     }); 
 
 
-    $("#cardbody").on("change paste keyup",'#product_amount', function() {
+    $("#cardbody").on("change",'#product_amount', function() {
 
-
-	    
-	    
-	   	alert($(this).val());
+	    if(!$(this).val()==""){
+	   		alert($(this).val());
 	    	var total_price = $("#cardbody").find('#total_price').text();
 
-	        var product_price = $(this).parent().parent().parent().find('#product_price').text();
-	        var change_amount = parseInt($(this).val()) - parseInt(previous_amount);        
+	    	var product_price = $(this).parent().parent().parent().find('#product_price').text();
+	    	var change_amount = parseInt($(this).val()) - parseInt(previous_amount);        
 			var price_change = change_amount*parseFloat(product_price.replace(/[^0-9.-]+/g, ''));
 	 
 			var new_total = parseFloat(total_price) + parseFloat(price_change);
 
 			$("#cardbody").find('#total_price').text(new_total);
+		}
 		
 
 	});
