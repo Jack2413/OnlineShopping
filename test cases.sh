@@ -13,14 +13,34 @@ echo 'Test reset password'
 curl -H "Content-Type: application/json" -X PUT -d '{"email":"test@gmail.com","oldpassword":"123123","newpassword":"123123"}' https://nwen304onlineshoping.herokuapp.com/reset
 echo
 
-echo 'Delete the task'
+echo 'Test get order'
+curl -H "Content-Type: application/json" -X PUT -d '{"email":"test@gmail.com"}' https://nwen304onlineshoping.herokuapp.com/getOrder
+echo
+
+echo 'Test get orderDetails'
+curl -H "Content-Type: application/json" -X PUT -d '{"orderID":"5"}' https://nwen304onlineshoping.herokuapp.com/getOrderDetails
+echo
+
+echo 'Test modify orderDetails'
+curl -H "Content-Type: application/json" -X PUT -d '{"orderID":"5","productID":"40","amount":"3"}' https://nwen304onlineshoping.herokuapp.com/getOrderDetails
+echo
+
+echo 'Test Delete orderDetails'
 curl -H "Content-Type: application/json" -X DELETE -d '{"orderID":"5","productID":"40"}' https://nwen304onlineshoping.herokuapp.com/deleteOrderDetails
 echo
 
-echo 'get all the prducts'
-curl -H "Content-Type: application/json" -X GET -d https://nwen304onlineshoping.herokuapp.com/cartdb
+echo 'Test add product'
+curl -H "Content-Type: application/json" -X POST -d '{"name":"MINION FAMILY", "price":"15", "descroption":"123"}' https://nwen304onlineshoping.herokuapp.com/cartadd1
+echo
+
+echo 'Test cartminus1'
+curl -H "Content-Type: application/json" -X DELETE -d '{"orderID":"5","productID":"40"}' https://nwen304onlineshoping.herokuapp.com/deleteOrderDetails
+echo
+
+echo 'Test cartadd1'
+curl -H "Content-Type: application/json" -X POST -d '{"name":"MINION FAMILY", "price":"15", "descroption":"123"}' https://nwen304onlineshoping.herokuapp.com/addtoproduct
 echo
 
 echo 'Test add product'
-curl -H "Content-Type: application/json" -X POST -d '{"name":"", "price":"15", "descroption","123"}' https://nwen304onlineshoping.herokuapp.com/addtoproduct
+curl -H "Content-Type: application/json" -X POST -d '{"name":"MINION FAMILY", "price":"15", "descroption":"123"}' https://nwen304onlineshoping.herokuapp.com/addtoproduct
 echo
