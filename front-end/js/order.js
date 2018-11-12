@@ -18,28 +18,26 @@ $(document).ready(function(e) {
 
     $("#cardbody").on('focus', '#product_amount',function () {
         // Store the current value on focus and on change
-        previous_amount = $(this).val();
+        if(!$(this).val()){
+        	previous_amount = $(this).val();
+        }
     }); 
-        
-    // }).change(function() {
-    //     // Do something with the previous value after the change
-    //     alert(previous_amount);
-    //     alert($(this).val());
 
-    //     // Make sure the previous value is updated
-    // });
 
     $("#cardbody").on("change paste keyup",'#product_amount', function() {
+    	if(!$(this).val()){
+	    	 alter($(this).val());
 
-    	 var total_price = $("#cardbody").find('#total_price').text();
+	    	 var total_price = $("#cardbody").find('#total_price').text();
 
-         var product_price = $(this).parent().parent().parent().find('#product_price').text();
-         var change_amount = parseInt($(this).val()) - parseInt(previous_amount);        
-		 var price_change = change_amount*parseFloat(product_price.replace(/[^0-9.-]+/g, ''));
- 
-		 var new_total = parseFloat(total_price) + parseFloat(price_change);
+	         var product_price = $(this).parent().parent().parent().find('#product_price').text();
+	         var change_amount = parseInt($(this).val()) - parseInt(previous_amount);        
+			 var price_change = change_amount*parseFloat(product_price.replace(/[^0-9.-]+/g, ''));
+	 
+			 var new_total = parseFloat(total_price) + parseFloat(price_change);
 
-		 $("#cardbody").find('#total_price').text(new_total);
+			 $("#cardbody").find('#total_price').text(new_total);
+		}
 	});
 
 	$('#cardbody').on('click', '#SaveButton', function() {
