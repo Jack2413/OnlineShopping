@@ -32,45 +32,35 @@ $(document).ready(function(e) {
     $("#cardbody").on("change",'#product_amount', function() {
 
 	    if(!$(this).val()==""){
-	   		alert($(this).val());
+	   		//alert($(this).val());
 	    	var total_price = $("#cardbody").find('#total_price').text();
 
 	    	var product_price = $(this).parent().parent().parent().find('#product_price').text();
-	    	var change_amount = parseInt($(this).val()) - parseInt(previous_amount);        
+	    	var amount = $(this).val();
+	    	var change_amount = parseInt(amount) - parseInt(previous_amount);        
 			var price_change = change_amount*parseFloat(product_price.replace(/[^0-9.-]+/g, ''));
 	 
 			var new_total = parseFloat(total_price) + parseFloat(price_change);
 
 			$("#cardbody").find('#total_price').text(new_total);
 		}
-		
-
-	});
-
-	$('#cardbody').on('click', '#SaveButton', function() {
-    	
-    	var $orderInfo = $(this).parent().parent().parent('product-list');
-		var $orderID = $orderInfo.find('.orderid').text();
+		var $productID = $(this).parent().parent().parent().find('#deleteButton').val();
+		alert($productID);
 
 		$.ajax({
 				method: 'PUT',
-				url: url+'/getOrderDetails',
+				url: url+'/modifyOrder',
 				data: JSON.stringify({
 					orderID: $selectOrderID,
-					amount : $amount,
-					productID: $productID
+					productID: $productID,
+					amount: amount
 				}),
 				contentType: "application/json",
 				datatype: "json"
 
-		}).then(
-		function(result){
-			alert(result);
-		}, 
-		function(error){
-			alert(error);
 		});
-    });
+	});
+
 
     $('#cardbody').on('click', '#deleteButton', function() {
     	

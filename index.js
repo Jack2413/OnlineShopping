@@ -273,6 +273,30 @@ app.put("/getOrderDetails", async (req, res) => {
 	} 
 });
 
+app.put("/modifyOrder", async (req, res) => {
+	try {
+		console.log("get in modifyOrder function");
+		const client = await pool.connect();
+
+		console.log(req.body);
+		var orderID = req.body.orderID;
+		var productID = req.body.productID;
+		console.log("orderID: "+orderID "productID "+productID);
+
+		var result = await client.query('UPDATE OrderDetails SET amount = $1 WHERE orderID = $2 and productID = $3',[amount,orderID,productID]);
+
+		if (!result) {
+			return res.send('No data found'); 
+		}else{ 
+			return res.send("success");
+		}
+		client.release();
+	} catch (err) { 
+		console.error(err); 
+		res.send("Error " + err);
+	} 
+});
+
 app.delete("/deleteOrderDetails", async (req, res) => {
 	try {
 		console.log("get in deleteOrderDetails function");
@@ -297,5 +321,7 @@ app.delete("/deleteOrderDetails", async (req, res) => {
 		res.send("Error " + err);
 	} 
 });
+
+
 
 app.listen(port, () => console.log("Listening on Heroku Server"));
