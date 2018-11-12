@@ -213,11 +213,15 @@ $(document).ready(function(e) {
 });
 
 var timeout = null;
-$(document).on('mousemove','keypress', function() {
-    clearTimeout(timeout);
-    timeout = setTimeout(function() {
-        logout();
-    }, 5000);
+$(document).on('mousemove keypress',function() {
+	var login_state = window.localStorage.getItem("login_state");
+	if(login_state=="login"){
+	    clearTimeout(timeout);
+	    timeout = setTimeout(function() {
+	        alert("You are stop using the application automaticly logout");
+	        logout();
+	    }, 5000);
+	}
 });
 
 function logout(){
