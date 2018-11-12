@@ -208,7 +208,6 @@ function loadOrderDetails(data_Details){
     HTML += '<div class="card-footer">'
         +  '<div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>'
         +  '<div class="pull-right" style="margin: 10px">'
-        +  '<a href="#" class="btn btn-success pull-right" id = "SaveButton">SAVE</a>'
         +  '<div class="pull-right" style="margin: 5px">Total price: <b id = "total_price">'+total_price+'</b>'
         +  '</div>'
         +  '</div>'
