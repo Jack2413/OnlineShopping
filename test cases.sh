@@ -14,6 +14,13 @@ curl -H "Content-Type: application/json" -X PUT -d '{"email":"test@gmail.com","o
 echo
 
 echo 'Delete the task'
-curl -H "Content-Type: application/json" -X DELETE -d '{"orderID":"5" "productID":"40"}' https://nwen304onlineshoping.herokuapp.com/deleteOrderDetails
+curl -H "Content-Type: application/json" -X DELETE -d '{"orderID":"5","productID":"40"}' https://nwen304onlineshoping.herokuapp.com/deleteOrderDetails
 echo
 
+echo 'get all the prducts'
+curl -H "Content-Type: application/json" -X GET -d https://nwen304onlineshoping.herokuapp.com/cartdb
+echo
+
+echo 'Test add product'
+curl -H "Content-Type: application/json" -X POST -d '{"name":"", "price":"15", "descroption","123"}' https://nwen304onlineshoping.herokuapp.com/addtoproduct
+echo
