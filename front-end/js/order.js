@@ -1,24 +1,15 @@
 var url = 'https://nwen304onlineshoping.herokuapp.com';
 var ERROR_LOG = console.error.bind(console);
-var SelectOrderID;
+var $selectOrderID;
 $(document).ready(function(e) {
 	loadOrder();
 	$('#orderbody').on('click', '#view', function() {
 
 		var $orderInfo = $(this).parent().parent();
 		var $orderID = $orderInfo.find('.orderid').text();
-		SelectOrderID = $orderID;
+		$selectOrderID = $orderID;
 
-		$.ajax({
-				method: 'PUT',
-				url: url+'/getOrderDetails',
-				data: JSON.stringify({
-					orderID: $orderID
-				}),
-				contentType: "application/json",
-				datatype: "json"
-
-		}).then (loadOrderDetails, ERROR_LOG);
+		loadDetails();
 		//alert($username+' '+$email+' '+$password);
 	});
 
@@ -60,7 +51,7 @@ $(document).ready(function(e) {
 				method: 'PUT',
 				url: url+'/getOrderDetails',
 				data: JSON.stringify({
-					orderID: SelectOrderID,
+					orderID: $selectOrderID,
 					amount : $amount,
 					productID: $productID
 				}),
@@ -85,7 +76,7 @@ $(document).ready(function(e) {
 				method: 'DELETE',
 				url: url+'/deleteOrderDetails',
 				data: JSON.stringify({
-					orderID: SelectOrderID,
+					orderID: $selectOrderID,
 					productID: $productID,
 				}),
 				contentType: "application/json",
@@ -93,7 +84,7 @@ $(document).ready(function(e) {
 
 		}).then(
 		function(result){
-			$(this).parent().parent().parent().parent().empty();
+			loadDetails();
 			alert(result);
 		}, 
 		function(error){
@@ -123,6 +114,20 @@ function loadOrder () {
 		datatype: "json"
 				
 	}).then (loadOrderData, ERROR_LOG);
+}
+
+function loadDetails(){
+
+		$.ajax({
+				method: 'PUT',
+				url: url+'/getOrderDetails',
+				data: JSON.stringify({
+					orderID: $selectOrderID
+				}),
+				contentType: "application/json",
+				datatype: "json"
+
+		}).then (loadOrderDetails, ERROR_LOG);
 }
 
 function loadOrderData(orders){
