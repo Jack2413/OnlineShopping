@@ -3,9 +3,11 @@ var app = express();
 var port = process.env.PORT || 8080;
 var bodyParser = require("body-parser");
 var crypto = require("crypto");
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 crypto.DEFAULT_ENCODING = "hex";
 const path = require("path");
 const { Pool } = require("pg");
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: true
