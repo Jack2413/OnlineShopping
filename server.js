@@ -75,10 +75,13 @@ app.get("/db", async (req, res) => {
 });
 
 //
-app.get("/cartdb", async (req, res) => {
+app.get("/cartdb/:email", async (req, res) => {
   try {
     const client = await pool.connect();
-    var result = await client.query("SELECT * FROM cart");
+    console.log(req.params.email);
+    var result = await client.query(
+      "SELECT * FROM cart WHERE email = '" + req.params.email + "'"
+    );
     if (!result) {
       return res.send("No data found");
     } else {
