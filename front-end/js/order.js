@@ -17,6 +17,7 @@ $(document).ready(function(e) {
     var previous_amount;
 
     $("#cardbody").on('focus', '#product_amount',function () {
+    	alter($(this).val());
         // Store the current value on focus and on change
         if(!$(this).val()){
         	previous_amount = $(this).val();
@@ -25,6 +26,7 @@ $(document).ready(function(e) {
 
 
     $("#cardbody").on("change paste keyup",'#product_amount', function() {
+    	alter($(this).val());
     	if(!$(this).val()){
 	    	 alter($(this).val());
 
