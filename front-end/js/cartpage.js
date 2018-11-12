@@ -35,6 +35,32 @@ $(document).ready(function(e) {
     cartdelete(todo);
   };
 
+  checkoutclicked = () => {
+    //alert("checkout button clicked");
+    var currentemail = window.localStorage.getItem("email");
+    $.ajax({
+      method: "GET",
+      //hardcoding a bit, cuz I can not login now
+      url: "/cartdb/" + "test@gmail.com",
+      success: data => {
+        var todo = { email: data[1].email };
+        addtoorder(todo);
+      }
+    });
+  };
+
+  function addtoorder(todo) {
+    alert("email: " + todo.email);
+    $.ajax({
+      method: "POST",
+      url: "/addtoorders",
+      data: todo,
+      success: data => {
+        alert("addtoorder success");
+      }
+    });
+  }
+
   function cartadd1(todo) {
     $.ajax({
       method: "PUT",

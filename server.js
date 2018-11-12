@@ -143,6 +143,27 @@ app.post("/addtoproduct", urlencodedParser, async (req, res) => {
   }
 });
 
+app.post("/addtoorders", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "INSERT INTO orders (email, theDate) VALUES ('" +
+        req.body.email +
+        "',CURRENT_TIMESTAMP)"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("post/db succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
 // user add one product to his cart
 app.post("/addtocart", urlencodedParser, async (req, res) => {
   try {

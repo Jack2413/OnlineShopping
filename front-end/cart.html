@@ -132,7 +132,12 @@
         <div class="col-sm-12">
           <div class="coupon col-md-5 col-sm-5 no-padding-left pull-left"></div>
           <div class="pull-right" style="margin: 10px">
-            <a href="order.html" class="btn btn-success pull-right">Checkout</a>
+            <button
+              class="btn btn-success pull-right"
+              onclick="checkoutclicked(this)"
+            >
+              Checkout
+            </button>
           </div>
           <h4 class="pull-right" style="margin: 5px">
             Total price: <b id="ttprice">$0.00</b>
