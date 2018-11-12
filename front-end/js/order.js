@@ -20,7 +20,7 @@ $(document).ready(function(e) {
     	
         // Store the current value on focus and on change
         
-	    alert($(this).val());
+	    //alert($(this).val());
 	    previous_amount = $(this).val();
     	
 
