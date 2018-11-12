@@ -176,7 +176,7 @@ $(document).ready(function(e) {
 
 		}).then (
 		function(result){
-			alert(result.feedback);
+
 			if(result.status==200){
 
 				window.localStorage.setItem("login_state", "login");

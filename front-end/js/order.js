@@ -45,7 +45,7 @@ $(document).ready(function(e) {
 			$("#cardbody").find('#total_price').text(new_total);
 		}
 		var $productID = $(this).parent().parent().parent().find('#deleteButton').val();
-		alert($productID);
+		//alert($productID);
 
 		$.ajax({
 				method: 'PUT',
