@@ -281,7 +281,7 @@ app.put("/modifyOrder", async (req, res) => {
 		console.log(req.body);
 		var orderID = req.body.orderID;
 		var productID = req.body.productID;
-		console.log("orderID: "+orderID "productID "+productID);
+		console.log("orderID: "+orderID +"productID "+productID);
 
 		var result = await client.query('UPDATE OrderDetails SET amount = $1 WHERE orderID = $2 and productID = $3',[amount,orderID,productID]);
 
