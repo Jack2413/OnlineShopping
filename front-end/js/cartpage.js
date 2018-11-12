@@ -69,6 +69,8 @@ $(document).ready(function(e) {
   }
 
   function getcartpage() {
+    //alert(window.localStorage.getItem("email"));
+
     $("#cart-items").empty();
     $.ajax({
       method: "GET",
@@ -80,7 +82,7 @@ $(document).ready(function(e) {
   }
 
   //hardcoding current user's email
-  var currentemail = "test@gmail.com";
+  var currentemail = window.localStorage.getItem("email");
   function redrawcart(data) {
     var totalprice = 0;
     $("#cart-items").empty();
