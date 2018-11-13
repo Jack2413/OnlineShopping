@@ -78,7 +78,7 @@ app.get("/db", async (req, res) => {
 app.get("/cartdb/:email", async (req, res) => {
   try {
     const client = await pool.connect();
-    console.log(req.params.email);
+    //console.log(req.params.email);
     var result = await client.query(
       "SELECT * FROM cart WHERE email = '" + req.params.email + "'"
     );
@@ -151,12 +151,18 @@ app.post("/addtoorders", urlencodedParser, async (req, res) => {
         req.body.email +
         "',CURRENT_TIMESTAMP)"
     );
+
+    var orderid = await client.query(
+      "SELECT orderid FROM orders ORDER BY thedate DESC LIMIT 1;"
+    );
+
     if (!result) {
       return res.send("No data found");
     } else {
-      console.log("post/db succesful");
+      orderid.rows.forEach(row => {
+        res.json(row.orderid);
+      });
     }
-    res.send(result.rows);
     client.release();
   } catch (err) {
     console.error(err);

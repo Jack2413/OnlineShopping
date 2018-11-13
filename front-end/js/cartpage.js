@@ -35,28 +35,29 @@ $(document).ready(function(e) {
     cartdelete(todo);
   };
 
-  checkoutclicked = () => {
+  checkoutclicked = elem => {
     //alert("checkout button clicked");
-    var currentemail = window.localStorage.getItem("email");
+    var currentemail = "test@gmail.com";
+    var todo = { email: currentemail };
+    addtoorder(todo, elem);
+
     $.ajax({
       method: "GET",
       //hardcoding a bit, cuz I can not login now
-      url: "/cartdb/" + "test@gmail.com",
-      success: data => {
-        var todo = { email: data[1].email };
-        addtoorder(todo);
-      }
+      url: "/cartdb/" + currentemail,
+      success: data => {}
     });
   };
 
-  function addtoorder(todo) {
+  function addtoorder(todo, elem) {
     alert("email: " + todo.email);
     $.ajax({
       method: "POST",
       url: "/addtoorders",
       data: todo,
-      success: data => {
-        alert("addtoorder success");
+      success: orderid => {
+        alert("addtoorder success, orderid: " + orderid);
+        elem.id = orderid;
       }
     });
   }
