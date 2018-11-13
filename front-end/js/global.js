@@ -202,6 +202,35 @@ $(document).ready(function(e) {
     //alert($email+' '+$password);
   });
 
+  $('#ForgotResetButton').click(function() {
+  	var $email = $("#ForgotInputEmail").val();
+  	if (!isEmail($email)) {
+  		alert("Is Not Vaild Email")
+      	return;
+    }
+
+    $.ajax({
+    	method: "POST",
+    	url: url + "/forgot",
+    	data: JSON.stringify({
+        email: $email
+      }),
+      contentType: "application/json",
+      datatype: "json"
+
+    }).then(function(result){
+    	alert(result.feedback);
+    	if(result.status == 200){
+    		alert("Not ok");
+    	} else if(result.status == 400){
+    		alert("Ok");
+    	}
+
+    },ERROR_LOG);
+
+
+  });
+
   $("#logout").click(function() {
     logout();
   });

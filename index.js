@@ -325,6 +325,26 @@ app.delete("/deleteOrderDetails", async (req, res) => {
 	} 
 });
 
+app.post("/forgot", async (req, res) => {
+	try {
+		console.log("get in forgot function");
+		const client = await pool.connect();
+		console.log(req.body);
+		var email = req.body.email;
+		var result = await client.query("select email from users where email = $1",[email]);
+		
+		if(!result){
+	    	return res.json({feedback : "The account is not exist", status : 400});
+		}else{
+    		return res.json({feedback : "An email has been send to "+ email + " for further informations", status : 200});
+		}
+		client.release();
+	} catch (err) { 
+		console.error(err); 
+		res.send("Error " + err);
+	} 
+});
+
 //get updated data from /db
 app.get("/db", async (req, res) => {
   try {
