@@ -68,9 +68,6 @@ app.post("/login", async (req, res) => {
     ]);
     console.log("result " + result.rows);
 
-    if (result === undefined) {
-      return res.json({feedback : "Invalid Username or Password", status : 400});
-    }
     var db_username = result.rows[0].username;
     console.log("db_username :" + db_username);
 
@@ -104,7 +101,7 @@ app.post("/login", async (req, res) => {
     client.release();
   } catch (err) {
     console.error(err);
-    return res.json({feedback : err, status : 400});
+    return res.json({feedback : "Invalid Username or Password", status : 400});
   }
 });
 
@@ -332,7 +329,7 @@ app.post("/forgot", async (req, res) => {
 		console.log(req.body);
 		var email = req.body.email;
 		var result = await client.query("select email from users where email = $1",[email]);
-		
+		console.log("result "+result);
 		if(!result){
 	    	return res.json({feedback : "The account is not exist", status : 400});
 		}else{
