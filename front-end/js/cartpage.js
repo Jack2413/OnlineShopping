@@ -40,24 +40,63 @@ $(document).ready(function(e) {
     var currentemail = "test@gmail.com";
     var todo = { email: currentemail };
     addtoorder(todo, elem);
-
-    $.ajax({
-      method: "GET",
-      //hardcoding a bit, cuz I can not login now
-      url: "/cartdb/" + currentemail,
-      success: data => {}
-    });
+    getcurrentorderid();
   };
 
   function addtoorder(todo, elem) {
-    alert("email: " + todo.email);
+    //alert("email: " + todo.email);
     $.ajax({
       method: "POST",
       url: "/addtoorders",
       data: todo,
       success: orderid => {
-        alert("addtoorder success, orderid: " + orderid);
-        elem.id = orderid;
+        //alert("addtoorder success, orderid: " + orderid);
+        // elem.id = orderid;
+        // alert(elem.id);
+        //addtoorderdetails(elem.id);
+      }
+    });
+  }
+
+  function getcurrentorderid() {
+    $.ajax({
+      method: "GET",
+      //hardcoding a bit, cuz I can not login now
+      url: "/currentorderid",
+      success: data => {
+        addtoorderdetails(data[0].orderid);
+      }
+    });
+  }
+
+  function addtoorderdetails(currentorderID) {
+    var data = JSON.parse(localStorage.getItem("currentcart"));
+    for (var i = 0; i < data.length; i++) {
+      var orderid = currentorderID;
+      var email = data[i].email;
+      var productid = data[i].id;
+      var amount = data[i].amount;
+      var totalprice = window.localStorage.getItem("totalprice");
+      //alert("totalprice: " + totalprice);
+      var todo = {
+        orderid: orderid,
+        email: email,
+        productid: productid,
+        amount: amount,
+        totalprice: totalprice
+      };
+      addtoorderdetailslinebyline(todo);
+    }
+    alert("add to orderdetails success");
+  }
+
+  function addtoorderdetailslinebyline(todo) {
+    $.ajax({
+      method: "POST",
+      url: "/addtoorderdetails",
+      data: todo,
+      success: data => {
+        alert(" 1 line to orderdetails");
       }
     });
   }
@@ -97,13 +136,14 @@ $(document).ready(function(e) {
 
   function getcartpage() {
     //alert(window.localStorage.getItem("email"));
-    var currentemail = window.localStorage.getItem("email");
+    var currentemail = "test@gmail.com";
     $("#cart-items").empty();
     $.ajax({
       method: "GET",
       url: "/cartdb/" + currentemail,
       success: data => {
         redrawcart(data);
+        localStorage.setItem("currentcart", JSON.stringify(data));
       }
     });
   }
@@ -120,6 +160,7 @@ $(document).ready(function(e) {
       var amount = data[i].amount;
       var currentemail = window.localStorage.getItem("email");
       totalprice += price.replace(/[^\d.]/g, "") * amount;
+      window.localStorage.setItem("totalprice", totalprice);
       stackcartitems(name, price, amount, currentemail);
     }
     $("#ttprice").text(totalprice);

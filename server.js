@@ -143,26 +143,72 @@ app.post("/addtoproduct", urlencodedParser, async (req, res) => {
   }
 });
 
+app.get("/currentorderid", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    //console.log(req.params.email);
+    var orderid = await client.query(
+      "SELECT orderid FROM orders ORDER BY thedate DESC LIMIT 1;"
+    );
+
+    if (!orderid) {
+      return res.send("No data found");
+    } else {
+      // orderid.rows.forEach(row => {
+      //   res.json(row.orderid);
+      // });
+    }
+    res.send(orderid.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
 app.post("/addtoorders", urlencodedParser, async (req, res) => {
   try {
     const client = await pool.connect();
     var result = await client.query(
-      "INSERT INTO orders (email, theDate) VALUES ('" +
+      "INSERT INTO orders (email, thedate) VALUES ('" +
         req.body.email +
         "',CURRENT_TIMESTAMP)"
     );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+    }
+    res.send(result.rows);
+    console.log("add to order success");
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
 
-    var orderid = await client.query(
-      "SELECT orderid FROM orders ORDER BY thedate DESC LIMIT 1;"
+app.post("/addtoorderdetails", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "INSERT INTO orderdetails (orderid, email, productid, amount, totalprice) VALUES (" +
+        req.body.orderid +
+        ",'" +
+        req.body.email +
+        "'," +
+        req.body.productid +
+        "," +
+        req.body.amount +
+        ",'" +
+        req.body.totalprice +
+        "')"
     );
 
     if (!result) {
       return res.send("No data found");
     } else {
-      orderid.rows.forEach(row => {
-        res.json(row.orderid);
-      });
     }
+    res.send(res.rows);
     client.release();
   } catch (err) {
     console.error(err);

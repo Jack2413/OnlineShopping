@@ -31,8 +31,8 @@ CREATE TABLE  cart (
 
 CREATE TABLE orders (
   email varchar(32) NOT NULL,
-  orderID serial NOT NULL,
-  theDate timestamp NOT NULL,
+  orderid serial NOT NULL,
+  thedate timestamp NOT NULL,
   FOREIGN KEY (email) REFERENCES users (email),
   PRIMARY KEY (orderID)
 );
@@ -90,5 +90,7 @@ DELETE FROM cart WHERE productname = 'DAVE THE MINION';
 DELETE FROM cart WHERE email = 'test@gmail.com';
 
 UPDATE cart SET amount = amount + 1 WHERE email = 'test@gmail.com' AND name = 'DAVE THE MINION';
+
+INSERT INTO orders (email, thedate) VALUES ('test@gmail.com', CURRENT_TIMESTAMP);
 
 SELECT orderid FROM orders ORDER BY thedate DESC LIMIT 1;
