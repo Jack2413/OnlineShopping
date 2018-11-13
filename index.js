@@ -329,7 +329,7 @@ app.post("/forgot", async (req, res) => {
 		console.log(req.body);
 		var email = req.body.email;
 		var result = await client.query("select email from users where email = $1",[email]);
-		console.log("result "+result);
+		console.log("result "+result.rows);
 		if(!result){
 	    	return res.json({feedback : "The account is not exist", status : 400});
 		}else{
