@@ -1,4 +1,5 @@
 var express = require("express");
+var {google} = require("googleapis");
 var app = express();
 var port = process.env.PORT || 8080;
 var bodyParser = require("body-parser");
@@ -27,6 +28,42 @@ var confige = {
   iterations: 872791,
   encryptBytes: 128
 };
+
+//==============
+// Google OAuth
+//==============
+
+// Create an oAuth2 client to authorize the API call
+const client = new google.auth.OAuth2(
+  '14808020967-md5hcmqvm7agttppg31gslldf4uhjcig.apps.googleusercontent.com', 
+  'ZNaha4XvCAhtxAhRtPT8wM7y', 
+  'http://localhost:8080/oauthCallback/'
+);
+
+// Generate url that will be used for authorization
+const scopes = ['https://www.googleapis.com/auth/plus.me'];
+this.authorizeUrl = client.generateAuthUrl({
+  access_type: 'offline',
+  scope: scopes,
+});
+
+app.use("/login-with-google", (req, res) => {
+  const url = this.authorizeUrl;
+  res.send('<h1>Authentication using google oAuth</h1><a href=' + url + '>Login</a>')
+});
+
+app.use("/oauthCallback", (req, res) => {
+  const code = req.query.code;
+  client.getToken(code, (err, tokens) => {
+    if (err) {
+      console.error('Error getting oAuth tokens:');
+      throw err;
+    }
+    client.credentials = tokens;
+    const home = 'http://localhost:8080'
+    res.send('<h3>Authentication successful!</h3><a href=' + home + '>Home</a>');
+  });
+}); // Google OAuth end.
 
 app
   .use(express.static(path.join(__dirname + "/front-end")))
