@@ -92,6 +92,12 @@ $(document).ready(function(e) {
   });
 
   $("#submitButton").click(function() {
+
+  	var isChecked = $('#agree').prop('checked');
+  	if(!isChecked){
+  		alert("You have to agree the Terms and Conditions and Privacy Policy before you submit.")
+  	}
+
     var $username = $("#InputUsername").val();
     var $email = $("#InputEmail").val();
     var $password = $("#InputPassword").val();
@@ -221,9 +227,9 @@ $(document).ready(function(e) {
     }).then(function(result){
     	alert(result.feedback);
     	if(result.status == 200){
-    		alert("Not ok");
-    	} else if(result.status == 400){
     		alert("Ok");
+    	} else if(result.status == 400){
+    		alert("Not ok");
     	}
 
     },ERROR_LOG);
