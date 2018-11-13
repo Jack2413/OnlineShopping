@@ -225,9 +225,9 @@ $(document).on("mousemove keypress scroll", function() {
   if (login_state == "login") {
     clearTimeout(timeout);
     timeout = setTimeout(function() {
-      alert("You are stop using the application automaticly logout");
+      alert("You are stop using the application, automaticly logout");
       logout();
-    }, 300000);
+    }, 30000);
   }
 });
 
