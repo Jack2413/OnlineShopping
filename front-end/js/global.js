@@ -220,7 +220,7 @@ $(document).ready(function(e) {
 });
 
 var timeout = null;
-$(document).on("mousemove keypress", function() {
+$(document).on("mousemove keypress scroll", function() {
   var login_state = window.localStorage.getItem("login_state");
   if (login_state == "login") {
     clearTimeout(timeout);
