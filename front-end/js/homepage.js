@@ -2,7 +2,8 @@ $(document).ready(function(e) {
   var ERROR_LOG = console.error.bind(console);
   console.log("homepage.js working");
 
-  var currentemail = window.localStorage.getItem("email");
+  //var currentemail = window.localStorage.getItem("email");
+  var currentemail = "Administrator@gmail.com";
 
   adminfunctionality(currentemail);
 
@@ -97,11 +98,18 @@ $(document).ready(function(e) {
 
   //click Add button in card to add this product to cart
   Addincardclicked = elem => {
-    var currentemail = window.localStorage.getItem("email");
-    if (currentemail) {
+    // var currentemail = window.localStorage.getItem("email");
+    var currentemail = "Administrator@gmail.com";
+
+    if (!currentemail) {
       alert("please login!!!");
       return;
     }
+    if (currentemail === "Administrator@gmail.com") {
+      alert("Administrator is not allowed to buy products!!!");
+      return;
+    }
+
     var array = elem.id.split(",");
     var price = array[0];
     var name = array[1];

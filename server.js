@@ -519,6 +519,121 @@ app.post("/reset", async (req, res) => {
   }
 });
 
+app.get("/getOrder/:email", async (req, res) => {
+  try {
+    console.log("get in Order function");
+    const client = await pool.connect();
+
+    var email = req.params.email;
+    console.log("email: " + email);
+    var db_permission = await client.query(
+      "SELECT permission FROM users WHERE EMAIL = $1",
+      [email]
+    );
+    var permission = db_permission.rows[0].permission;
+    console.log("permission: " + permission);
+    var result;
+
+    if (permission == 0) {
+      result = await client.query("SELECT * FROM orders");
+    } else {
+      result = await client.query("SELECT * FROM orders WHERE EMAIL = $1", [
+        email
+      ]);
+    }
+
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      return res.send(result.rows);
+    }
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.get("/getOrderDetails/:orderID", async (req, res) => {
+  try {
+    console.log("get in OrderDetails function");
+    const client = await pool.connect();
+
+    var orderID = req.params.orderID;
+    console.log("orderID: " + orderID);
+    var result = await client.query(
+      "select amount, id, name, price,description,imagecode from orderdetails NATURAL JOIN products where productid = id and orderid = $1",
+      [orderID]
+    );
+
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      return res.send(result.rows);
+    }
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.put("/modifyOrder", async (req, res) => {
+  try {
+    console.log("get in modifyOrder function");
+    const client = await pool.connect();
+
+    console.log(req.body);
+    var orderID = req.body.orderID;
+    var productID = req.body.productID;
+    var amount = req.body.amount;
+    console.log("orderID: " + orderID + "productID " + productID);
+
+    var result = await client.query(
+      "UPDATE OrderDetails SET amount = $1 WHERE orderID = $2 and productID = $3",
+      [amount, orderID, productID]
+    );
+
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      return res.send("success");
+    }
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.delete("/deleteOrderDetails", async (req, res) => {
+  try {
+    console.log("get in deleteOrderDetails function");
+    const client = await pool.connect();
+
+    console.log(req.body);
+    var orderID = req.body.orderID;
+    var productID = req.body.productID;
+
+    console.log("orderID: " + orderID + "productID: " + productID);
+
+    var result = await client.query(
+      "DELETE FROM OrderDetails WHERE orderID=$1 and productid=$2",
+      [orderID, productID]
+    );
+
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      return res.send(result.rows);
+    }
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
 app
   .get("/", (req, res) => res.render("pages/index"))
   .listen(port, () => console.log("Listening on Heroku Server"));
