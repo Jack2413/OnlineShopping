@@ -47,11 +47,6 @@ this.authorizeUrl = client.generateAuthUrl({
   scope: scopes,
 });
 
-// app.get("/login-with-google", (req, res) => {
-//   const url = this.authorizeUrl;
-//   res.send('<h1>Authentication using google oAuth</h1><a href=' + url + '>Login</a>');
-// });
-
 app.use("/oauthCallback", (req, res) => {
   const code = req.query.code;
   client.getToken(code, (err, tokens) => {
@@ -63,7 +58,16 @@ app.use("/oauthCallback", (req, res) => {
     const home = 'http://localhost:8080'
     res.send('<h3>Authentication successful!</h3><a href=' + home + '>Home</a>');
   });
-}); // Google OAuth end.
+}); 
+
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+}
+
+// Google OAuth end.
 
 app
   .use(express.static(path.join(__dirname + "/front-end")))
