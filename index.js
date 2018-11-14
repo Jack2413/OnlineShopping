@@ -28,6 +28,7 @@ var confige = {
   encryptBytes: 128
 };
 
+
 app
   .use(express.static(path.join(__dirname + "/front-end")))
   .set("views", path.join(__dirname, "views"))
@@ -390,12 +391,18 @@ function sendAnResetEmail(email){
 	    pass: 'OnlingShoping'
 	  }
 	});
+	var token = crypto.randomBytes(confige.saltBytes).toString("hex");
+	var resetPasswordExpires = Date.now() + 300000 //5min
+	await client.query(
+      insert 
+    );
 
 	var mailOptions = {
 	  from: 'nwen304onlingshoping@gmail.com',
 	  to: '888jack219@gmail.com',
 	  subject: 'Sending Email using Node.js',
-	  text: 'click the link below to reset the password\n'
+	  text: 'click the link below to reset the password\n'+
+	  +'https://nwen304onlineshoping.herokuapp.com/ForgotReset.html/'+token
 	};
 
 	transporter.sendMail(mailOptions, function(error, info){

@@ -94,3 +94,5 @@ UPDATE cart SET amount = amount + 1 WHERE email = 'test@gmail.com' AND name = 'D
 INSERT INTO orders (email, thedate) VALUES ('test@gmail.com', CURRENT_TIMESTAMP);
 
 SELECT orderid FROM orders ORDER BY thedate DESC LIMIT 1;
+
+select imagecode, count(name)  from products, orderdetails where id = productid group by imagecode order by count(name) desc limit 3

@@ -78,7 +78,7 @@ app.get("/recommandation", async (req, res) => {
   try {
     const client = await pool.connect();
     var result = await client.query(
-      "SELECT imagecode,COUNT(imagecode)  FROM products NATURAL JOIN orderdetails GROUP BY imagecode LIMIT 3"
+      "select imagecode, count(name)  from products, orderdetails where id = productid group by imagecode order by count(name) desc limit 3"
     );
     if (!result) {
       return res.send("No data found");
@@ -328,6 +328,25 @@ app.put("/cartdelete", urlencodedParser, async (req, res) => {
       return res.send("No data found");
     } else {
       console.log("post/db succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.put("/emptycart", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "DELETE FROM cart WHERE email = '" + req.body.email + "';"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("PUT/emptycart succesful");
     }
     res.send(result.rows);
     client.release();
