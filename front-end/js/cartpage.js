@@ -41,6 +41,7 @@ $(document).ready(function(e) {
     var todo = { email: currentemail };
     addtoorder(todo, elem);
     getcurrentorderid();
+    emptycart(todo);
   };
 
   function addtoorder(todo, elem) {
@@ -55,6 +56,15 @@ $(document).ready(function(e) {
         // alert(elem.id);
         //addtoorderdetails(elem.id);
       }
+    });
+  }
+
+  function emptycart(todo) {
+    $.ajax({
+      method: "PUT",
+      url: "/emptycart",
+      data: todo,
+      success: data => {}
     });
   }
 

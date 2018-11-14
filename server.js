@@ -337,6 +337,25 @@ app.put("/cartdelete", urlencodedParser, async (req, res) => {
   }
 });
 
+app.put("/emptycart", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "DELETE FROM cart WHERE email = '" + req.body.email + "';"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("PUT/emptycart succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
 //Get function
 //to get all the tasks from Heroku database, and return the result to front-end
 app.post("/login", async (req, res) => {

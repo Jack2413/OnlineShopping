@@ -5,7 +5,7 @@ var bodyParser = require("body-parser");
 var crypto = require("crypto");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 crypto.DEFAULT_ENCODING = "hex";
-var nodemailer = require('nodemailer');
+var nodemailer = require("nodemailer");
 const path = require("path");
 const { Pool } = require("pg");
 
@@ -360,46 +360,46 @@ app.post("/forgot", async (req, res) => {
       [email]
     );
     console.log("result " + result.rows[0]);
-    if (result.rows[0]===undefined) {
+    if (result.rows[0] === undefined) {
       return res.json({ feedback: "The account is not exist", status: 400 });
     } else {
       sendAnResetEmail(email);
-      return res.json({feedback: "An email has been send to " + email + " for further informations",status: 200});
+      return res.json({
+        feedback:
+          "An email has been send to " + email + " for further informations",
+        status: 200
+      });
     }
     client.release();
-
-    
-
   } catch (err) {
     console.error(err);
     res.send("Error " + err);
   }
 });
 
-function sendAnResetEmail(email){
-	var transporter = nodemailer.createTransport({
-	  service: 'gmail',
-	  auth: {
-	    user: 'nwen304onlingshoping@gmail.com',
-	    pass: 'OnlingShoping'
-	  }
-	});
+function sendAnResetEmail(email) {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "nwen304onlingshoping@gmail.com",
+      pass: "OnlingShoping"
+    }
+  });
 
-	var mailOptions = {
-	  from: 'nwen304onlingshoping@gmail.com',
-	  to: '888jack219@gmail.com',
-	  subject: 'Sending Email using Node.js',
-	  text: 'That was easy!'
-	};
+  var mailOptions = {
+    from: "nwen304onlingshoping@gmail.com",
+    to: "888jack219@gmail.com",
+    subject: "Sending Email using Node.js",
+    text: "That was easy!"
+  };
 
-	transporter.sendMail(mailOptions, function(error, info){
-	  if (error) {
-	    console.log(error);
-	  } else {
-	    console.log('Email sent: ' + info.response);
-	  }
-	});
-
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
 }
 
 app.get("/db", async (req, res) => {
@@ -676,6 +676,25 @@ app.put("/cartdelete", urlencodedParser, async (req, res) => {
       return res.send("No data found");
     } else {
       console.log("post/db succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.put("/emptycart", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "DELETE FROM cart WHERE email = '" + req.body.email + "';"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("PUT/emptycart succesful");
     }
     res.send(result.rows);
     client.release();
