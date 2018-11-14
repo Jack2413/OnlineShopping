@@ -374,7 +374,7 @@ app.get("/forgot/:email", async (req, res) => {
       var resetPasswordExpires = new Date(); // 5min 
       await client.query("UPDATE users SET resetPasswordToken = $1,resetPasswordExpires = $2 where email = $3",[resetPasswordToken,resetPasswordExpires,email]);
 
-      sendAnResetEmail(email,token);
+      sendAnResetEmail(email,resetPasswordToken);
       return res.json({feedback: "An email has been send to " + email + " for further informations",status: 200});
     }
     client.release();
