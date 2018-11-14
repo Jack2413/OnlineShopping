@@ -204,7 +204,7 @@ $(document).ready(function(e) {
 
   //for google oauth
   $("#loginWithGoogleButton").click(function() {
-    window.location.href = "/login-with-google";
+    window.location.href = url + "/login-with-google.html";
   });
 
   $("#logout").click(function() {
