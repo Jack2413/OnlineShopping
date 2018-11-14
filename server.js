@@ -78,7 +78,7 @@ app.get("/recommandation", async (req, res) => {
   try {
     const client = await pool.connect();
     var result = await client.query(
-      "SELECT imagecode,COUNT(imagecode)  FROM products NATURAL JOIN orderdetails GROUP BY imagecode LIMIT 3"
+      "select imagecode, count(name)  from products, orderdetails where id = productid group by imagecode order by count(name) desc limit 3"
     );
     if (!result) {
       return res.send("No data found");
