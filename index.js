@@ -75,7 +75,7 @@ app.post("/login", async (req, res) => {
       	return res.json({
 	        feedback: "Invalid Username or Password",
 	        status: 400
-    	}
+    	});
     }
 
     var db_username = result.rows[0].username;
