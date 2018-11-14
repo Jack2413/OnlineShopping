@@ -98,8 +98,7 @@ $(document).ready(function(e) {
   //click Add button in card to add this product to cart
   Addincardclicked = elem => {
     var currentemail = window.localStorage.getItem("email");
-
-    if (!currentemail) {
+    if (currentemail) {
       alert("please login!!!");
       return;
     }
