@@ -2,7 +2,8 @@ $(document).ready(function(e) {
   var ERROR_LOG = console.error.bind(console);
   console.log("homepage.js working");
 
-  var currentemail = window.localStorage.getItem("email");
+  //var currentemail = window.localStorage.getItem("email");
+  var currentemail = "test@gmail.com";
 
   adminfunctionality(currentemail);
 
@@ -97,7 +98,8 @@ $(document).ready(function(e) {
 
   //click Add button in card to add this product to cart
   Addincardclicked = elem => {
-    var currentemail = window.localStorage.getItem("email");
+    // var currentemail = window.localStorage.getItem("email");
+    var currentemail = "test@gmail.com";
 
     if (!currentemail) {
       alert("please login!!!");

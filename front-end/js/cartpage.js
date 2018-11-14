@@ -36,8 +36,8 @@ $(document).ready(function(e) {
   };
 
   checkoutclicked = elem => {
-    var currentemail = window.localStorage.getItem("email");
-    //var currentemail = "test@gmail.com";
+    //var currentemail = window.localStorage.getItem("email");
+    var currentemail = "test@gmail.com";
     var todo = { email: currentemail };
     addtoorder(todo, elem);
     getcurrentorderid();
@@ -145,8 +145,8 @@ $(document).ready(function(e) {
   }
 
   function getcartpage() {
-    var currentemail = window.localStorage.getItem("email");
-    //var currentemail = "test@gmail.com";
+    //var currentemail = window.localStorage.getItem("email");
+    var currentemail = "test@gmail.com";
     $("#cart-items").empty();
     $.ajax({
       method: "GET",
@@ -168,7 +168,8 @@ $(document).ready(function(e) {
       var name = data[i].name;
       var price = data[i].price;
       var amount = data[i].amount;
-      var currentemail = window.localStorage.getItem("email");
+      // var currentemail = window.localStorage.getItem("email");
+      var currentemail = "test@gmail.com";
       totalprice += price.replace(/[^\d.]/g, "") * amount;
       window.localStorage.setItem("totalprice", totalprice);
       stackcartitems(name, price, amount, currentemail);
