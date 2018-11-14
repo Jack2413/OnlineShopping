@@ -400,7 +400,7 @@ function sendAnResetEmail(email,token){
 	  from: 'nwen304onlingshoping@gmail.com',
 	  to: '888jack219@gmail.com',
 	  subject: 'Sending Email using Node.js',
-	  text: 'click the link below to reset the password\n'+
+	  text: 'click the link below to reset the password'+'\n'+
 	  +'https://nwen304onlineshoping.herokuapp.com/ForgotReset.html/'+token
 	};
 
