@@ -36,8 +36,8 @@ $(document).ready(function(e) {
   };
 
   checkoutclicked = elem => {
-    //alert("checkout button clicked");
-    var currentemail = "test@gmail.com";
+    var currentemail = window.localStorage.getItem("email");
+    //var currentemail = "test@gmail.com";
     var todo = { email: currentemail };
     addtoorder(todo, elem);
     getcurrentorderid();
@@ -135,8 +135,8 @@ $(document).ready(function(e) {
   }
 
   function getcartpage() {
-    //alert(window.localStorage.getItem("email"));
-    var currentemail = "test@gmail.com";
+    var currentemail = window.localStorage.getItem("email");
+    //var currentemail = "test@gmail.com";
     $("#cart-items").empty();
     $.ajax({
       method: "GET",

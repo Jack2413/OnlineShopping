@@ -140,13 +140,15 @@ app.post("/addtoproduct", urlencodedParser, async (req, res) => {
   try {
     const client = await pool.connect();
     var result = await client.query(
-      "INSERT INTO products (name, price, description) VALUES ('" +
+      "INSERT INTO products (name, price, description, imagecode) VALUES ('" +
         req.body.name +
         "'," +
         req.body.price +
         ",'" +
         req.body.description +
-        "')"
+        "'," +
+        req.body.imagecode +
+        ")"
     );
     if (!result) {
       return res.send("No data found");
