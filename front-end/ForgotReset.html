@@ -26,14 +26,19 @@
 		<div class="col-md-4 col-sd-4 col-xs-12">
 
 			<form class="from-conatiner">
-			<h1>Forgot From</h1>
+			<h1>Reset From</h1>
 			  <div class="form-group">
-			    <label for="ForgotInputEmail">Enter Your Email</label>
-			    <input type="email" class="form-control" id="ForgotInputEmail" placeholder="Email">
-			    <p id="EmailText"></p>
+			    <label for="InputPassword">Enter Your Reset Password</label>
+			    <input type="password" class="form-control" id="InputPassword" placeholder="Password">
+			    <progress value="0" max="100" id="strength" style="width: 100%"></progress>
+			    <p id="InputText"></p>
 			  </div>
-			  <button type="button" class="btn btn-success btn-block" id="ForgotResetButton">Reset Password</button>
-			  <button type="button" class="btn btn-success btn-block" id="loginPageButton">Back To Login</button>
+			   <div class="form-group">
+			    <label for="ConfirmPassword">Confirm Password</label>
+			    <input type="password" class="form-control" id="ConfirmPassword" placeholder="Password">
+			    <p id="ConfirmText"></p>
+			  </div>
+			  <button type="button" class="btn btn-success btn-block" id="ForgotSummitButton">Summit</button>
 			</form>
 		</div>
 		<div class="col-md-4 col-sd-4 col-xs-12"></div>

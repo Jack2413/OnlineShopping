@@ -69,6 +69,14 @@ app.post("/login", async (req, res) => {
     ]);
     console.log("result " + result.rows);
 
+    if(result.rows[0]===undefined){
+    	console.log("invalid username or password");
+      	return res.json({
+	        feedback: "Invalid Username or Password",
+	        status: 400
+    	}
+    }
+
     var db_username = result.rows[0].username;
     console.log("db_username :" + db_username);
 
@@ -387,7 +395,7 @@ function sendAnResetEmail(email){
 	  from: 'nwen304onlingshoping@gmail.com',
 	  to: '888jack219@gmail.com',
 	  subject: 'Sending Email using Node.js',
-	  text: 'That was easy!'
+	  text: 'click the link below to reset the password\n'
 	};
 
 	transporter.sendMail(mailOptions, function(error, info){
