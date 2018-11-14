@@ -261,10 +261,9 @@ $(document).ready(function(e) {
       },
       function(error) {
         alert(error);
-      }
-    );
+      });
 
-  }
+  });
 
   $("#logout").click(function() {
     logout();
