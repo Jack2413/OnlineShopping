@@ -100,13 +100,8 @@ $(document).ready(function(e) {
 function loadOrder () {
 	
 	$.ajax ({
-		method: 'PUT',
-		url: url+'/getOrder', 
-		data: JSON.stringify({
-			email: window.localStorage.getItem("email"),
-		}),
-		contentType: "application/json",
-		datatype: "json"
+		method: 'GET',
+		url: url+'/getOrder/'+window.localStorage.getItem("email")
 				
 	}).then (loadOrderData, ERROR_LOG);
 }
@@ -114,13 +109,8 @@ function loadOrder () {
 function loadDetails(){
 
 		$.ajax({
-				method: 'PUT',
-				url: url+'/getOrderDetails',
-				data: JSON.stringify({
-					orderID: $selectOrderID
-				}),
-				contentType: "application/json",
-				datatype: "json"
+				method: 'GET',
+				url: url+'/getOrderDetails/'+$selectOrderID
 
 		}).then (loadOrderDetails, ERROR_LOG);
 }

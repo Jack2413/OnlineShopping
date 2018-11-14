@@ -216,13 +216,8 @@ $(document).ready(function(e) {
     }
 
     $.ajax({
-    	method: "POST",
-    	url: url + "/forgot",
-    	data: JSON.stringify({
-        email: $email
-      }),
-      contentType: "application/json",
-      datatype: "json"
+    	method: "GET",
+    	url: url + "/forgot/"+$email
 
     }).then(function(result){
     	alert(result.feedback);

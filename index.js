@@ -232,13 +232,12 @@ app.put("/reset", async (req, res) => {
   }
 });
 
-app.put("/getOrder", async (req, res) => {
+app.get("/getOrder/:email", async (req, res) => {
   try {
     console.log("get in Order function");
     const client = await pool.connect();
 
-    console.log(req.body);
-    var email = req.body.email;
+    var email = req.params.email;
     console.log("email: " + email);
     var db_permission = await client.query(
       "SELECT permission FROM users WHERE EMAIL = $1",
@@ -268,13 +267,12 @@ app.put("/getOrder", async (req, res) => {
   }
 });
 
-app.put("/getOrderDetails", async (req, res) => {
+app.get("/getOrderDetails/:orderID", async (req, res) => {
   try {
     console.log("get in OrderDetails function");
     const client = await pool.connect();
 
-    console.log(req.body);
-    var orderID = req.body.orderID;
+    var orderID = req.params.orderID;
     console.log("orderID: " + orderID);
     var result = await client.query(
       "select amount, id, name, price,description,imagecode from orderdetails NATURAL JOIN products where productid = id and orderid = $1",
@@ -349,12 +347,12 @@ app.delete("/deleteOrderDetails", async (req, res) => {
   }
 });
 //test
-app.post("/forgot", async (req, res) => {
+app.get("/forgot/:email", async (req, res) => {
   try {
     console.log("get in forgot function");
     const client = await pool.connect();
-    console.log(req.body);
-    var email = req.body.email;
+    
+    var email = req.params.email;
     var result = await client.query(
       "select email from users where email = $1",
       [email]
