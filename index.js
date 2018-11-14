@@ -393,7 +393,7 @@ function sendAnResetEmail(email){
 	});
 	var resetPasswordToken = crypto.randomBytes(confige.saltBytes).toString("hex");
 	var resetPasswordExpires = Date.now() + 300000 //5min
-	await client.query(update );
+	await client.query("UPDATE users SET resetPasswordToken = $1 WHERE resetPasswordExpires = $2",[resetPasswordToken,resetPasswordExpires]);
 
 	var mailOptions = {
 	  from: 'nwen304onlingshoping@gmail.com',
