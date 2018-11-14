@@ -2,19 +2,28 @@ $(document).ready(function(e) {
   var ERROR_LOG = console.error.bind(console);
   console.log("homepage.js working");
 
+  var currentemail = window.localStorage.getItem("email");
+
+  adminfunctionality(currentemail);
+
+  getrecommandation();
+
   getthewholepage();
 
-  //delete all data from database button
-  $("#resetcart").click(() => {
-    alert("delete all data from cart??");
-  });
+  //document.getElementById("modaltoggle").style.visibility = "hidden";
 
   $("#additem").click(() => {
     console.log("Add newitem to products!");
     var name = $("#product-name").val();
     var price = $("#product-price").val();
+    var imagecode = $("#product-imagecode").val();
     var des = $("#product-des").val();
-    var newproduct = { name: name, price: price, description: des };
+    var newproduct = {
+      name: name,
+      price: price,
+      imagecode: imagecode,
+      description: des
+    };
     console.log(newproduct);
     addtoproduct(newproduct);
   });
@@ -29,6 +38,28 @@ $(document).ready(function(e) {
     console.log(name);
     searchproduct();
   });
+
+  function adminfunctionality(email) {
+    if (email !== "Administrator@gmail.com") {
+      $("#modaltoggle").attr("class", "btn btn-secondary");
+      $("#modaltoggle").attr("disabled", "true");
+    }
+  }
+
+  function getrecommandation() {
+    $.ajax({
+      method: "GET",
+      url: "/recommandation",
+      success: data => {
+        for (var i = 0; i < data.length; i++) {
+          $("#" + i + "popular").attr(
+            "src",
+            "../images/products/" + data[i].imagecode + ".png"
+          );
+        }
+      }
+    });
+  }
 
   function getthewholepage() {
     $.ajax({
@@ -67,6 +98,11 @@ $(document).ready(function(e) {
   //click Add button in card to add this product to cart
   Addincardclicked = elem => {
     var currentemail = window.localStorage.getItem("email");
+
+    if (!currentemail) {
+      alert("please login!!!");
+      return;
+    }
     var array = elem.id.split(",");
     var price = array[0];
     var name = array[1];
@@ -132,7 +168,7 @@ $(document).ready(function(e) {
       '<div class="card h-100">' +
       ' <a href="#"><img class="card-img-top" src=../images/products/' +
       imagecode +
-      '.png alt="preview width="100"></a>' +
+      '.png alt="preview style="width:100;height:100;"></a>' +
       '<div class="card-body" height="100">' +
       ' <h4 class="card-title"><a href="#">Item One</a></h4>' +
       '<h5 class="card-price">$24.99</h5>' +
