@@ -359,7 +359,7 @@ app.post("/forgot", async (req, res) => {
       [email]
     );
     console.log("result " + result.rows[0].email);
-    if (!result.rows[0].email) {
+    if (result.rows[0]===undefined) {
       return res.json({ feedback: "The account is not exist", status: 400 });
     } else {
       return res.json({
