@@ -2,12 +2,9 @@ $(document).ready(function(e) {
   var ERROR_LOG = console.error.bind(console);
   console.log("homepage.js working");
 
-  getthewholepage();
+  getrecommandation();
 
-  //delete all data from database button
-  $("#resetcart").click(() => {
-    alert("delete all data from cart??");
-  });
+  getthewholepage();
 
   $("#additem").click(() => {
     console.log("Add newitem to products!");
@@ -29,6 +26,21 @@ $(document).ready(function(e) {
     console.log(name);
     searchproduct();
   });
+
+  function getrecommandation() {
+    $.ajax({
+      method: "GET",
+      url: "/recommandation",
+      success: data => {
+        for (var i = 0; i < data.length; i++) {
+          $("#" + i + "popular").attr(
+            "src",
+            "../images/products/" + data[i].imagecode + ".png"
+          );
+        }
+      }
+    });
+  }
 
   function getthewholepage() {
     $.ajax({

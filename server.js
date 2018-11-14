@@ -74,6 +74,24 @@ app.get("/db", async (req, res) => {
   }
 });
 
+app.get("/recommandation", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "SELECT imagecode,COUNT(imagecode)  FROM products NATURAL JOIN orderdetails GROUP BY imagecode LIMIT 3"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
 //
 app.get("/cartdb/:email", async (req, res) => {
   try {
