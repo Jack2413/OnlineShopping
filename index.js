@@ -93,15 +93,23 @@ app.post("/login", async (req, res) => {
 
     if (!result) {
       console.log("invalid username or password");
-      return res.json({feedback : "Invalid Username or Password", status : 400});
+      return res.json({
+        feedback: "Invalid Username or Password",
+        status: 400
+      });
     } else {
       console.log("login success");
-      return res.json({feedback : "login Success", status : 200, username : db_username, permission : db_permission});
+      return res.json({
+        feedback: "login Success",
+        status: 200,
+        username: db_username,
+        permission: db_permission
+      });
     }
     client.release();
   } catch (err) {
     console.error(err);
-    return res.json({feedback : "Invalid Username or Password", status : 400});
+    return res.json({ feedback: "Invalid Username or Password", status: 400 });
   }
 });
 
@@ -134,15 +142,14 @@ app.post("/register", async (req, res) => {
       [username, email, encrypt_password, salt]
     );
 
-    if(!result){
-    	console.log("email already been used.");
-    	return res.json({feedback : "email already been used", status : 400});
-	}else{
-    	return res.json({feedback : "register success", status : 200});
-	}
-    
-    client.release();
+    if (!result) {
+      console.log("email already been used.");
+      return res.json({ feedback: "email already been used", status: 400 });
+    } else {
+      return res.json({ feedback: "register success", status: 200 });
+    }
 
+    client.release();
   } catch (err) {
     console.error(err);
     res.send("Error " + err);
@@ -171,7 +178,10 @@ app.put("/reset", async (req, res) => {
     console.log("result " + result.rows);
 
     if (result === undefined) {
-      return res.json({feedback : "Invalid Username or Password", status : 400});
+      return res.json({
+        feedback: "Invalid Username or Password",
+        status: 400
+      });
     }
 
     var database_password = result.rows[0].encrypted_password;
@@ -190,7 +200,10 @@ app.put("/reset", async (req, res) => {
 
     if (!result) {
       console.log("invalid username or password");
-      return res.json({feedback : "Invalid Username or Password", status : 400});
+      return res.json({
+        feedback: "Invalid Username or Password",
+        status: 400
+      });
     }
 
     salt = crypto.randomBytes(confige.saltBytes).toString("hex");
@@ -209,140 +222,159 @@ app.put("/reset", async (req, res) => {
     );
 
     console.log("reset success");
-    return res.json({feedback : "reset success", status : 200});
+    return res.json({ feedback: "reset success", status: 200 });
 
     client.release();
   } catch (err) {
     console.error(err);
     res.send("Error " + err);
   }
-
 });
 
 app.put("/getOrder", async (req, res) => {
-	try {
-		console.log("get in Order function");
-		const client = await pool.connect();
+  try {
+    console.log("get in Order function");
+    const client = await pool.connect();
 
-		console.log(req.body);
-		var email = req.body.email;
-		console.log("email: "+email);
-		var db_permission = await client.query('SELECT permission FROM users WHERE EMAIL = $1',[email]);
-    	var permission = db_permission.rows[0].permission;
-    	console.log("permission: "+permission);
-    	var result;
+    console.log(req.body);
+    var email = req.body.email;
+    console.log("email: " + email);
+    var db_permission = await client.query(
+      "SELECT permission FROM users WHERE EMAIL = $1",
+      [email]
+    );
+    var permission = db_permission.rows[0].permission;
+    console.log("permission: " + permission);
+    var result;
 
-    	if(permission==0){
-    		result = await client.query('SELECT * FROM orders');
-    	}else{
-    		result = await client.query('SELECT * FROM orders WHERE EMAIL = $1',[email]);
-    	}
+    if (permission == 0) {
+      result = await client.query("SELECT * FROM orders");
+    } else {
+      result = await client.query("SELECT * FROM orders WHERE EMAIL = $1", [
+        email
+      ]);
+    }
 
-		if (!result) {
-			return res.send('No data found'); 
-		}else{ 
-			return res.send(result.rows);
-		}
-		client.release();
-	} catch (err) { 
-		console.error(err); 
-		res.send("Error " + err);
-	} 
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      return res.send(result.rows);
+    }
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
 });
 
 app.put("/getOrderDetails", async (req, res) => {
-	try {
-		console.log("get in OrderDetails function");
-		const client = await pool.connect();
+  try {
+    console.log("get in OrderDetails function");
+    const client = await pool.connect();
 
-		console.log(req.body);
-		var orderID = req.body.orderID;
-		console.log("orderID: "+orderID);
-		var result = await client.query('select amount, id, name, price,description,imagecode from orderdetails NATURAL JOIN products where productid = id and orderid = $1',[orderID]);
+    console.log(req.body);
+    var orderID = req.body.orderID;
+    console.log("orderID: " + orderID);
+    var result = await client.query(
+      "select amount, id, name, price,description,imagecode from orderdetails NATURAL JOIN products where productid = id and orderid = $1",
+      [orderID]
+    );
 
-		if (!result) {
-			return res.send('No data found'); 
-		}else{ 
-			return res.send(result.rows);
-		}
-		client.release();
-	} catch (err) { 
-		console.error(err); 
-		res.send("Error " + err);
-	} 
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      return res.send(result.rows);
+    }
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
 });
 
 app.put("/modifyOrder", async (req, res) => {
-	try {
-		console.log("get in modifyOrder function");
-		const client = await pool.connect();
+  try {
+    console.log("get in modifyOrder function");
+    const client = await pool.connect();
 
-		console.log(req.body);
-		var orderID = req.body.orderID;
-		var productID = req.body.productID;
-		var amount = req.body.amount;
-		console.log("orderID: "+orderID +"productID "+productID);
+    console.log(req.body);
+    var orderID = req.body.orderID;
+    var productID = req.body.productID;
+    var amount = req.body.amount;
+    console.log("orderID: " + orderID + "productID " + productID);
 
-		var result = await client.query('UPDATE OrderDetails SET amount = $1 WHERE orderID = $2 and productID = $3',[amount,orderID,productID]);
+    var result = await client.query(
+      "UPDATE OrderDetails SET amount = $1 WHERE orderID = $2 and productID = $3",
+      [amount, orderID, productID]
+    );
 
-		if (!result) {
-			return res.send('No data found'); 
-		}else{ 
-			return res.send("success");
-		}
-		client.release();
-	} catch (err) { 
-		console.error(err); 
-		res.send("Error " + err);
-	} 
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      return res.send("success");
+    }
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
 });
 
 app.delete("/deleteOrderDetails", async (req, res) => {
-	try {
-		console.log("get in deleteOrderDetails function");
-		const client = await pool.connect();
+  try {
+    console.log("get in deleteOrderDetails function");
+    const client = await pool.connect();
 
-		console.log(req.body);
-		var orderID = req.body.orderID;
-		var productID = req.body.productID;
+    console.log(req.body);
+    var orderID = req.body.orderID;
+    var productID = req.body.productID;
 
-		console.log("orderID: "+orderID+"productID: "+productID);
+    console.log("orderID: " + orderID + "productID: " + productID);
 
-		var result = await client.query('DELETE FROM OrderDetails WHERE orderID=$1 and productid=$2',[orderID,productID]);
+    var result = await client.query(
+      "DELETE FROM OrderDetails WHERE orderID=$1 and productid=$2",
+      [orderID, productID]
+    );
 
-		if (!result) {
-			return res.send('No data found'); 
-		}else{ 
-			return res.send(result.rows);
-		}
-		client.release();
-	} catch (err) { 
-		console.error(err); 
-		res.send("Error " + err);
-	} 
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      return res.send(result.rows);
+    }
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
 });
 
 app.post("/forgot", async (req, res) => {
-	try {
-		console.log("get in forgot function");
-		const client = await pool.connect();
-		console.log(req.body);
-		var email = req.body.email;
-		var result = await client.query("select email from users where email = $1",[email]);
-		console.log("result "+result);
-		if(!result){
-	    	return res.json({feedback : "The account is not exist", status : 400});
-		}else{
-    		return res.json({feedback : "An email has been send to "+ email + " for further informations", status : 200});
-		}
-		client.release();
-	} catch (err) { 
-		console.error(err); 
-		res.send("Error " + err);
-	} 
+  try {
+    console.log("get in forgot function");
+    const client = await pool.connect();
+    console.log(req.body);
+    var email = req.body.email;
+    var result = await client.query(
+      "select email from users where email = $1",
+      [email]
+    );
+    console.log("result " + result);
+    if (!result) {
+      return res.json({ feedback: "The account is not exist", status: 400 });
+    } else {
+      return res.json({
+        feedback:
+          "An email has been send to " + email + " for further informations",
+        status: 200
+      });
+    }
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
 });
 
-//get updated data from /db
 app.get("/db", async (req, res) => {
   try {
     const client = await pool.connect();
@@ -363,11 +395,32 @@ app.get("/db", async (req, res) => {
   }
 });
 
-//
-app.get("/cartdb", async (req, res) => {
+app.get("/recommandation", async (req, res) => {
   try {
     const client = await pool.connect();
-    var result = await client.query("SELECT * FROM cart");
+    var result = await client.query(
+      "SELECT imagecode,COUNT(imagecode)  FROM products NATURAL JOIN orderdetails GROUP BY imagecode LIMIT 3"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+//
+app.get("/cartdb/:email", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    //console.log(req.params.email);
+    var result = await client.query(
+      "SELECT * FROM cart WHERE email = '" + req.params.email + "'"
+    );
     if (!result) {
       return res.send("No data found");
     } else {
@@ -408,13 +461,15 @@ app.post("/addtoproduct", urlencodedParser, async (req, res) => {
   try {
     const client = await pool.connect();
     var result = await client.query(
-      "INSERT INTO products (name, price, description) VALUES ('" +
+      "INSERT INTO products (name, price, description, imagecode) VALUES ('" +
         req.body.name +
         "'," +
         req.body.price +
         ",'" +
         req.body.description +
-        "')"
+        "'," +
+        req.body.imagecode +
+        ")"
     );
     if (!result) {
       return res.send("No data found");
@@ -429,14 +484,90 @@ app.post("/addtoproduct", urlencodedParser, async (req, res) => {
   }
 });
 
+app.get("/currentorderid", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    //console.log(req.params.email);
+    var orderid = await client.query(
+      "SELECT orderid FROM orders ORDER BY thedate DESC LIMIT 1;"
+    );
+
+    if (!orderid) {
+      return res.send("No data found");
+    } else {
+      // orderid.rows.forEach(row => {
+      //   res.json(row.orderid);
+      // });
+    }
+    res.send(orderid.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.post("/addtoorders", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "INSERT INTO orders (email, thedate) VALUES ('" +
+        req.body.email +
+        "',CURRENT_TIMESTAMP)"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+    }
+    res.send(result.rows);
+    console.log("add to order success");
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.post("/addtoorderdetails", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "INSERT INTO orderdetails (orderid, email, productid, amount, totalprice) VALUES (" +
+        req.body.orderid +
+        ",'" +
+        req.body.email +
+        "'," +
+        req.body.productid +
+        "," +
+        req.body.amount +
+        ",'" +
+        req.body.totalprice +
+        "')"
+    );
+
+    if (!result) {
+      return res.send("No data found");
+    } else {
+    }
+    res.send(res.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
 // user add one product to his cart
 app.post("/addtocart", urlencodedParser, async (req, res) => {
   try {
     const client = await pool.connect();
+    console.log(req.body);
     var result = await client.query(
-      "INSERT INTO cart (email, name, price, amount) VALUES ('" +
+      "INSERT INTO cart (email, id, name, price, amount) VALUES ('" +
         req.body.email +
-        "','" +
+        "'," +
+        req.body.productid +
+        ",'" +
         req.body.name +
         "','" +
         req.body.price +
