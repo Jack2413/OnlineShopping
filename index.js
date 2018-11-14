@@ -330,7 +330,7 @@ app.post("/forgot", async (req, res) => {
 		var email = req.body.email;
 		var result = await client.query("select email from users where email = $1",[email]);
 		console.log("result "+result.rows);
-		if(!result){
+		if(result.rows=== undefined){
 	    	return res.json({feedback : "The account is not exist", status : 400});
 		}else{
     		return res.json({feedback : "An email has been send to "+ email + " for further informations", status : 200});
