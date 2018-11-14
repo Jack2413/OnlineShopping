@@ -349,6 +349,7 @@ app.delete("/deleteOrderDetails", async (req, res) => {
 });
 
 app.post("/forgot", async (req, res) => {
+<<<<<<< HEAD
   try {
     console.log("get in forgot function");
     const client = await pool.connect();
@@ -373,6 +374,25 @@ app.post("/forgot", async (req, res) => {
     console.error(err);
     res.send("Error " + err);
   }
+=======
+	try {
+		console.log("get in forgot function");
+		const client = await pool.connect();
+		console.log(req.body);
+		var email = req.body.email;
+		var result = await client.query("select email from users where email = $1",[email]);
+		console.log("result "+result.rows);
+		if(result.rows=== undefined){
+	    	return res.json({feedback : "The account is not exist", status : 400});
+		}else{
+    		return res.json({feedback : "An email has been send to "+ email + " for further informations", status : 200});
+		}
+		client.release();
+	} catch (err) { 
+		console.error(err); 
+		res.send("Error " + err);
+	} 
+>>>>>>> dc4fc8395cad3d2dbf6695a855a2c4dd557bfbbe
 });
 
 app.get("/db", async (req, res) => {
