@@ -47,7 +47,7 @@ this.authorizeUrl = client.generateAuthUrl({
   scope: scopes,
 });
 
-app.use("/login-with-google.html", (req, res) => {
+app.use("/login-with-google", (req, res) => {
   const url = this.authorizeUrl;
   res.send('<h1>Authentication using google oAuth</h1><a href=' + url + '>Login</a>');
 });
