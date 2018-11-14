@@ -371,8 +371,7 @@ app.get("/forgot/:email", async (req, res) => {
       return res.json({ feedback: "The account is not exist", status: 400 });
     } else {
       var resetPasswordToken = crypto.randomBytes(confige.saltBytes).toString("hex");
-      var resetPasswordExpires = new Date() + 300000 //5min
-      await client.query("UPDATE users SET resetPasswordToken = $1 WHERE resetPasswordExpires = $2",[resetPasswordToken,resetPasswordExpires]);
+      await client.query("UPDATE users SET resetPasswordToken = $1",[resetPasswordToken]);
 
       sendAnResetEmail(email);
       return res.json({feedback: "An email has been send to " + email + " for further informations",status: 200});
