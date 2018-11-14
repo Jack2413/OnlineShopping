@@ -391,11 +391,9 @@ function sendAnResetEmail(email){
 	    pass: 'OnlingShoping'
 	  }
 	});
-	var token = crypto.randomBytes(confige.saltBytes).toString("hex");
+	var resetPasswordToken = crypto.randomBytes(confige.saltBytes).toString("hex");
 	var resetPasswordExpires = Date.now() + 300000 //5min
-	// await client.query(
-       
- //    );
+	await client.query(update );
 
 	var mailOptions = {
 	  from: 'nwen304onlingshoping@gmail.com',

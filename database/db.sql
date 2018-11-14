@@ -49,6 +49,10 @@ CREATE TABLE  orderDetails (
   PRIMARY KEY (orderID,productId,email)
 );
 
+
+ALTER TABLE users ADD COLUMN resetPasswordToken varchar(128);
+ALTER TABLE users ADD COLUMN resetPasswordExpires timestamp;
+
 INSERT INTO products (name, price, description) VALUES('apple', 5, 'this is fruit',1);
 INSERT INTO products (name, price, description) VALUES('pear', 3, 'this is fruit as well',2);
 

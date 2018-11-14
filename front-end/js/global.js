@@ -228,9 +228,43 @@ $(document).ready(function(e) {
     	}
 
     },ERROR_LOG);
-
-
   });
+
+  $('#ForgotSummitButton').click(function() {
+  	var $email = $("#InputEmail").val();
+    var $newpassword = $("#InputPassword").val();
+    var $confirmPassword = $("#ConfirmPassword").val();
+
+    if (
+      !isEmail($email) ||
+      $newpassword.length < 6 ||
+      $newpassword != $confirmPassword
+    ) {
+      return;
+    }
+
+    $.ajax({
+      method: "PUT",
+      url: url + "/forgotReset",
+      data: JSON.stringify({
+        email: $email,
+        newpassword: $newpassword
+      }),
+      contentType: "application/json",
+      datatype: "json"
+    }).then(
+      function(result) {
+        alert(result.feedback);
+        if (result.status == 200) {
+          window.location.href = url + "/login.html";
+        }
+      },
+      function(error) {
+        alert(error);
+      }
+    );
+
+  }
 
   $("#logout").click(function() {
     logout();
