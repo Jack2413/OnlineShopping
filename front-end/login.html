@@ -4,6 +4,7 @@
 	<title>Login Page</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="google-signin-client_id" content="14808020967-asmpn1e4io81vpun1dp47nsi9dfdu22e.apps.googleusercontent.com">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -17,7 +18,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/jQuery-MD5.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
 <div class="container-fluid login_bg">
@@ -40,9 +41,9 @@
 			    <label>
 			      <a class="nav-link" href="login.html" align="right">Forget password</a>
 			    </label>
-			  </div>
+				</div>
+				<div class="g-signin2" data-onsuccess="onSignIn"></div>
 				<button type="button" class="btn btn-success btn-block" id="loginButton">Login</button>
-				<button type="button" class="btn btn-success btn-block" id="loginWithGoogleButton">Login with Google</button>
 			  <button type="button" class="btn btn-success btn-block" id="RegisterButton">Register</button>
 			</form>
 		</div>

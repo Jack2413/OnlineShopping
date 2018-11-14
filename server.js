@@ -47,10 +47,10 @@ this.authorizeUrl = client.generateAuthUrl({
   scope: scopes,
 });
 
-app.use("/login-with-google", (req, res) => {
-  const url = this.authorizeUrl;
-  res.send('<h1>Authentication using google oAuth</h1><a href=' + url + '>Login</a>');
-});
+// app.get("/login-with-google", (req, res) => {
+//   const url = this.authorizeUrl;
+//   res.send('<h1>Authentication using google oAuth</h1><a href=' + url + '>Login</a>');
+// });
 
 app.use("/oauthCallback", (req, res) => {
   const code = req.query.code;
