@@ -202,11 +202,6 @@ $(document).ready(function(e) {
     //alert($email+' '+$password);
   });
 
-  // //for google oauth
-  // $("#loginWithGoogleButton").click(function() {
-  //   window.location.href = url + "/login-with-google";
-  // });
-
   $("#logout").click(function() {
     logout();
   });
