@@ -358,7 +358,7 @@ app.post("/forgot", async (req, res) => {
       "select email from users where email = $1",
       [email]
     );
-    console.log("result " + result.rows[0].email);
+    console.log("result " + result.rows[0]);
     if (result.rows[0]===undefined) {
       return res.json({ feedback: "The account is not exist", status: 400 });
     } else {
