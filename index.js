@@ -447,6 +447,7 @@ app.put("/ForgotReset/:token", async (req, res) => {
       confige.encryptBytes,
       "sha512"
     );
+    
     console.log("salt: " + salt + "encrypt_password: " + encrypt_password);
 
     var result = await client.query(
