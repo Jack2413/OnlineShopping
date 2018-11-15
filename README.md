@@ -84,42 +84,42 @@ LOGIN, RESET, SIGN UP, FORGOT PASSWORD=====>
 
 Get 
 /forgot/:email
-Reset detail
+–Reset detail
 
 post
 /login
-login
+–login
 
 post
 /register
-register
+–register
 
 put
 /reset
-Password reset
+–Password reset
 
 
 ORDERS=====>
 
 Get 
 /currentorderid
-Get current order id in order to insert cart information into orderdetails
+–Get current order id in order to insert cart information into orderdetails
 
 get
 /getOrder/:email
-Get customer’s orders in order page
+–Get customer’s orders in order page
 
 get
 /getOrderDetails/:orderID
-To show the details of certain order
+–To show the details of certain order
 
 post
 /addtoorders
-Add customer email to orders then get a order id.
+–Add customer email to orders then get a order id.
 
 post
 /addtoorderdetails
-insert cart information into orderdetails
+–insert cart information into orderdetails
 
 
 
@@ -127,57 +127,57 @@ ADMINISTRATOR=====>
 
 put
 /modifyOrder
-Administrator can modify order infomation
+–Administrator can modify order infomation
 
 delete
 /deleteOrderDetails
-Adiministrator can delete records in orderdetails
+–Adiministrator can delete records in orderdetails
 
 post
 /addtoproduct
-Administrator add product to homepage
+–Administrator add product to homepage
 
 
 HOMEPAGE=====>
 
 get
 /db
-Products for homepage 
+–Products for homepage 
 
 Get 
 /recommandation
-Recommand 3 top sellers
+–Recommand 3 top sellers
 
 Get 
 /search/:name
-Find the product accoring to name
+–Find the product accoring to name
 
 
 CART PAGE=====>
 
 Get 
 /cartdb/:email
-Get customer’s cart infomation
+–Get customer’s cart infomation
 
 post
 /addtocart 
-Add certain product to cart 
+–Add certain product to cart 
 
 Put 
 /cartadd1
-Amount+1 in cart page
+–Amount+1 in cart page
 
 Put 
 /carminus1
-Amount-1 in cart page
+–Amount-1 in cart page
 
 Put 
 /emptycart
-Click checkoutbutton empty cart 
+–Click checkoutbutton empty cart 
 
 put
 /cartdelete
-Delete one record instantly
+–Delete one record instantly
 
 
 
