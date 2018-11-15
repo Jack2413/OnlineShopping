@@ -6,7 +6,8 @@ https://youtu.be/Ps6XwzGULfE
 administrator->
 https://youtu.be/WurhfYh604g
 		 	 	 		
-			
+login, reset and register->
+https://www.youtube.com/watch?v=WdQGMfZd0fQ
 				
 					
 a. How to use your system?
