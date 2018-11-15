@@ -18,7 +18,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const cookieSession = require('cookie-session');
 const fs = require('fs');
-require('./passport.js')(passport, GoogleStrategy, app, fs, cookieSession);
+//require('./passport.js')(passport, GoogleStrategy, app, fs, cookieSession);
 
 var confige = {
   // size of the generated hash

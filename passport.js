@@ -69,7 +69,7 @@ module.exports = function(passport, GoogleStrategy, app, fs, cookieSession) {
         });
         
         // authenticate request
-        app.get('https://nwen304onlineshoping.herokuapp.com/loginWithGoogle', passport.authenticate('google', {
+        app.get('/loginWithGoogle', passport.authenticate('google', {
                 scope: ['profile'] // specify required data
         }));
         
