@@ -9,9 +9,9 @@ https://youtu.be/WurhfYh604g
 			
 				
 					
-a. How to use your system
+a. How to use your system?
 
-Way1 go to .https://nwen304onlineshoping.herokuapp.com/
+Go to -> https://nwen304onlineshoping.herokuapp.com/
 
 
 Accounts: 
@@ -27,50 +27,59 @@ Username: Administrator@gmail.com
 Password: 123123
 
 
-sign in / sign out is working at the moment, but it is not stable (sometime runtime error occurs)due to unexpected reason on heroku side.  I hardcode 2 branches test@gmail.com and Administrator  mimic logged with 2 types of accounts.
-To test use the other 2 branches use:
+Sign in / Sign out:
+Working at the moment, but it is not stable (a runtime error sometimes occurs) due to unexpected reasons (perhpas on the heroku side). 2 branches have been hardcoded (test@gmail.com and Administrator) which mimic being logged with the 2 types of accounts.
+To test these branches use:
 Nodemon server.js
 
-Forgot password: reset password.
+Forgot password: 
+Allows user to reset their password, see password reset functionalities bellow.
 
 Homepage Functionalities:
 Recommendation system: 
-We choose top 3 popular(best seller) product to recommend for our customers. So if nothing in order details, this website will 
+We choose the top 3 most popular (best selling) products to recommend to our customers. So if there is nothing in the order details, the website will not recommend anything.
 
-Search button:  type the full name of product, then click search; this search bar does not support vague search.
+Search button: 
+Type the full name of product, then click search; this search bar does not support vague search.
 
-Launch modal to add item button:  this function will be activated when administrator signs in, in order to add new product to this website. The inconvenient part is administrator need to add images to our database first,  then he can add new products, database got extra 2 images(imagecode 5, imagecode 6), so Administrator can only add 2 products with pictures.
+Launch modal to add item button: 
+This function will be activated when an administrator signs in, in order to add new products to the website. The inconvenient part is an administrator needs to add images to our database first, then he can add new products, the database has 2 extra images (imagecode 5, imagecode 6), so an Administrator can only add 2 products with pictures.
 
-Add button: the add button below each product is the button to add this product to cart, we try to keep the homepage simple, if customers regret their decision, they can amend products information in cart page.   Unlogged customers are not allowed to use Add button.
+Add button: 
+The add button below each product is the button to add this product to cart, we've tried to keep the homepage simple, if customers regret their decision, they can amend products information in the cart page. Unlogged customers are not allowed to use Add button.
 
 Cartpage functionalities:
-+/-/delete button:  use these 3 button to change the amount of products.
-Checkout button: for user who decides to checkout(buy all the product in cart). When checkout button is clicked, all product in cart will be added to orders and orderdetails, The cart will be emptied.
++/-/delete button: Use these 3 buttons to change the amount of products.
+Checkout button: for user who decides to checkout(buy all the product in cart). When checkout button is clicked, all products in the cart will be added to orders and orderdetails, The cart will be emptied.
 
 Order page functionalities:
-Administrator can see all orders owned by different customers, customer can see his own orders.
+Administrator can see all orders owned by different customers, customers can see their own orders.
 View button: click view button to see details of certain order.
 
 Orderdetails functionalities: 
-Administrator can amend products amount and delete the products , customers can only browse it.
+Administrator can amend product amount and delete the products, customers can only browse it.
 
-register functionlities:
+Register functionlities:
+The user has to insert a username, email, password and agree to the privacy provisions to summit the reset from. There are several rules for fill in the application. 
+1. The user name can not be empty. 
+2. The password must be at less 6 digits. 
+3. If the email has been used for registration already, you can not use the same email to register again. If the rules above are met, it should be Registered successfully.   
 
-the user have to insert username, email, password and agreed the privacy provisions to summit the reset from. There are several rules for fill in the application. 1. the user name can not be empty 2. the password must be at less 6 decit 3. the if the email have been use for registered, you can not use the same email to register again. If meet the above request, it should be Registered successfully.   
-
-login functionlities:
-
-the user have to insert the Registered emaill and correct password
+Login functionlities:
+The user has to insert their (correct) Registered emaill and password.
 
 Password reset functionalities:
-there are two keen of reset functions, frist one is design for who knows his old password and the second one is design for who forgot his old password. In the frist function the user have to insert his email, old password and the new password to complete the reset function. if the old password do not match the password in database, will reject reset the from, otherwise will be reset successfully.
+There are two reset functions, the first one is designed for users who know their old password and the second one is designed for users who forgot their old password. 
 
-In the second function, the user have to provide his registered email account, if the account is exist the server will automaticly send an email to the users email address. That is, contains a reset from link with token(to identify the user), it allows user click on the link to reset his password. the token have a expair time (5 min). if the user do not reset the password in 5 min or the user try to hack the tokens. the server will respond "use Invaild token or over expair time" and reject the reset from. If the user done every thing currently, reset password should be successful.
+In the first function the user has to insert their email, old password and the new password to complete the reset function. If the old password does not match the password in the database, the website will reject the reset form, otherwise the password will be reset successfully.
 
-Once the password reseted, it will jump back to login page you have to login again.
+In the second function, the user has to provide their registered email account, if the account exists in the database the server will automaticly send an email to the users email address. Containing a reset form link and token (to identify the user), it allows the user to click on the link to reset their password. The token has an expiry time (5 min). If the user does not reset the password in 5 min or the user tries to hack the tokens. the server will respond "used Invaild token or past expiry time" and reject the reset from. If the user has done everything correctly, reset password should be successful.
+
+Once the password is reset, it will jump back to login page and the user must login again.
 
 
-b. What the REST interface is
+b. What the REST interface is?
+
 All the back end stuff is in index.js file, server.js is for testing. 
 Database schemas are in db.sql file.
 
@@ -82,7 +91,7 @@ EXPLANATION
 
 LOGIN, RESET, SIGN UP, FORGOT PASSWORD=====>
 
-Get 
+get 
 /forgot/:email
 –Reset detail
 
@@ -101,7 +110,7 @@ put
 
 ORDERS=====>
 
-Get 
+get 
 /currentorderid
 –Get current order id in order to insert cart information into orderdetails
 
@@ -144,18 +153,18 @@ get
 /db
 –Products for homepage 
 
-Get 
+get 
 /recommandation
 –Recommand 3 top sellers
 
-Get 
+get 
 /search/:name
 –Find the product accoring to name
 
 
 CART PAGE=====>
 
-Get 
+get 
 /cartdb/:email
 –Get customer’s cart infomation
 
@@ -182,20 +191,20 @@ put
 
 
 
-c. What error handling has been implemented in your system
+c. What error handling has been implemented in your system?
 We use post man and curl to test our api.
 We use try catch in server side to test database.
 
 d. Database design
 We have five tables, users, products, cart, orders, orderdetails. 
 We use users table’s primary key email to track user, products table’s primary key id to  track product.
-In cart table, we use productname + email to track cart. This is not the best option, because I should use id + email. Product name is not likely to be same between products, so I did not change it.
+In cart table, we use productname + email to track cart. This is not the best option, because we should use id + email. Product name is not likely to be same between products, so I did not change it.
 
 Orders table ‘s primary key is orderid, this oderid is used to track orders in orderdetails table.
 
 Orderdetails has 3 foreign keys, email, productid, orderid. We combine 3 foreign key together as primary key to track each records in orderdetails table.
 
-for implement the forgot password reset function I did added resetpasswordtoken and resetpasswordexpair those two colums to user, for store token and expair time.
+For implementing the forgot password reset function we added two columns (resetpasswordtoken and resetpasswordexpire) to user, to store the token and expire time.
 
 				
 CREATE TABLE users (
