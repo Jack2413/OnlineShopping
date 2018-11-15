@@ -388,7 +388,7 @@ app.get("/forgot/:email", async (req, res) => {
 });
 
 app.get('/ForgotReset/:token', function(req, res) {
-  res.sendFile('ForgotReset.html', {root: __dirname });
+  res.sendFile('ForgotReset.html');
 });
 
 app.put("/ForgotReset", async (req, res) => {
@@ -419,7 +419,7 @@ function sendAnResetEmail(email,token){
 	  subject: 'Sending Email using Node.js',
 	  text: 'click the link below to reset the password'+ 
     '\n\n' +
-	  'https://nwen304onlineshoping.herokuapp.com/ForgotReset'+
+	  'https://nwen304onlineshoping.herokuapp.com/ForgotReset/'+
     token
 	};
 
