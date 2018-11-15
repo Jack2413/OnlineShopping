@@ -54,16 +54,16 @@ app.use(function(req, res, next) {
 });
 
 //cache control headers
-app.use(
-  cacheControl({
-    noCache: false
-  })
-);
-app.use(
-  cacheControl({
-    maxAge: 5
-  })
-);
+// app.use(
+//   cacheControl({
+//     noCache: false
+//   })
+// );
+// app.use(
+//   cacheControl({
+//     maxAge: 5
+//   })
+// );
 
 //Get function
 //to get all the tasks from Heroku database, and return the result to front-end
