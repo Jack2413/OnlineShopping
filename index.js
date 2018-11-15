@@ -420,7 +420,7 @@ app.put("/ForgotReset/:token", async (req, res) => {
 
     var newpassword = req.body.newpassword;
     var token = req.params.token;
-    var result = await client.query("select resetPasswordExpires from users where token = $1",[token]); 
+    var result = await client.query("select resetPasswordExpires from users where resetpasswordtoken = $1",[token]); 
     var currentTime = new Date();
 
     if(result.rows[0]===undefined){
@@ -450,12 +450,12 @@ app.put("/ForgotReset/:token", async (req, res) => {
     console.log("salt: " + salt + "encrypt_password: " + encrypt_password);
 
     var result = await client.query(
-      "UPDATE USERS SET ENCRYPTED_PASSWORD = $1, SALT = $2 WHERE TOKEN = $3",
+      "UPDATE USERS SET ENCRYPTED_PASSWORD = $1, SALT = $2 WHERE resetpasswordtoken = $3",
       [encrypt_password, salt, token]
     );
 
     await client.query(
-      "UPDATE USERS SET TOKEN = '' WHERE TOKEN = $3",
+      "UPDATE USERS SET resetpasswordtoken = '' WHERE resetpasswordtoken = $3",
       [token]
     );
 
@@ -482,7 +482,7 @@ function sendAnResetEmail(email, token) {
   var mailOptions = {
     from: "nwen304onlingshoping@gmail.com",
     to: "888jack219@gmail.com",
-    subject: "Sending Email using Node.js",
+    subject: "Reset Your Password",
     text:
       "click the link below to reset the password" +
       "\n\n" +
