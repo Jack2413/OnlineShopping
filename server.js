@@ -1,5 +1,4 @@
 var express = require("express");
-var {google} = require("googleapis");
 var app = express();
 var port = process.env.PORT || 8080;
 var bodyParser = require("body-parser");
@@ -14,6 +13,12 @@ const pool = new Pool({
   connectionString: connectionURL,
   ssl: true
 });
+// Passport/Google OAuth
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20');
+const cookieSession = require('cookie-session');
+const fs = require('fs');
+require('./passport.js')(passport, GoogleStrategy, app, fs, cookieSession);
 
 var confige = {
   // size of the generated hash
@@ -28,46 +33,6 @@ var confige = {
   iterations: 872791,
   encryptBytes: 128
 };
-
-//==============
-// Google OAuth
-//==============
-
-// Create an oAuth2 client to authorize the API call
-const client = new google.auth.OAuth2(
-  '14808020967-md5hcmqvm7agttppg31gslldf4uhjcig.apps.googleusercontent.com', 
-  'ZNaha4XvCAhtxAhRtPT8wM7y', 
-  'http://localhost:8080/oauthCallback/'
-);
-
-// Generate url that will be used for authorization
-const scopes = ['https://www.googleapis.com/auth/plus.me'];
-this.authorizeUrl = client.generateAuthUrl({
-  access_type: 'offline',
-  scope: scopes,
-});
-
-app.use("/oauthCallback", (req, res) => {
-  const code = req.query.code;
-  client.getToken(code, (err, tokens) => {
-    if (err) {
-      console.error('Error getting oAuth tokens:');
-      throw err;
-    }
-    client.credentials = tokens;
-    const home = 'http://localhost:8080'
-    res.send('<h3>Authentication successful!</h3><a href=' + home + '>Home</a>');
-  });
-}); 
-
-function signOut() {
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    console.log('User signed out.');
-  });
-}
-
-// Google OAuth end.
 
 app
   .use(express.static(path.join(__dirname + "/front-end")))
@@ -106,6 +71,24 @@ app.get("/db", async (req, res) => {
       // result.rows.forEach(row => {
       //   console.log(row);
       // });
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.get("/recommandation", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "select imagecode, count(name)  from products, orderdetails where id = productid group by imagecode order by count(name) desc limit 3"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
     }
     res.send(result.rows);
     client.release();
@@ -163,13 +146,15 @@ app.post("/addtoproduct", urlencodedParser, async (req, res) => {
   try {
     const client = await pool.connect();
     var result = await client.query(
-      "INSERT INTO products (name, price, description) VALUES ('" +
+      "INSERT INTO products (name, price, description, imagecode) VALUES ('" +
         req.body.name +
         "'," +
         req.body.price +
         ",'" +
         req.body.description +
-        "')"
+        "'," +
+        req.body.imagecode +
+        ")"
     );
     if (!result) {
       return res.send("No data found");
@@ -349,6 +334,25 @@ app.put("/cartdelete", urlencodedParser, async (req, res) => {
       return res.send("No data found");
     } else {
       console.log("post/db succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
+app.put("/emptycart", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "DELETE FROM cart WHERE email = '" + req.body.email + "';"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("PUT/emptycart succesful");
     }
     res.send(result.rows);
     client.release();

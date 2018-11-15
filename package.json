@@ -19,6 +19,7 @@
   "dependencies": {
     "async": "^2.6.1",
     "body-parser": "^1.18.3",
+    "cookie-session": "^2.0.0-beta.3",
     "csprng": "^0.1.2",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
@@ -27,6 +28,8 @@
     "jquery.cookie": "^1.4.1",
     "nodemailer": "^4.6.8",
     "nodemon": "^1.18.4",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
     "pbkdf2": "^3.0.17",
     "pbkdf2-password": "^1.2.1",
     "pg": "^7.5.0"
