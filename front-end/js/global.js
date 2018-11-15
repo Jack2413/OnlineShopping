@@ -95,7 +95,8 @@ $(document).ready(function(e) {
 
   	var isChecked = $('#agree').prop('checked');
   	if(!isChecked){
-  		alert("You have to agree the Terms and Conditions and Privacy Policy before you submit.")
+  		alert("You have to agree the Terms and Conditions and Privacy Policy before you submit.");
+  		return;
   	}
 
     var $username = $("#InputUsername").val();
