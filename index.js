@@ -389,9 +389,11 @@ app.get("/forgot/:email", async (req, res) => {
 
 app.get('/ForgotReset/:token', function(req, res) {
   res.sendFile(__dirname + '/front-end/ForgotReset.html');
+  res.sendFile(__dirname + '/js/global.js');
+  res.sendFile(__dirname + '/css/global.css');
 });
 
-app.put("/ForgotReset", async (req, res) => {
+app.put("/ForgotReset/:token", async (req, res) => {
   console.log("get in forgot function");
   const client = await pool.connect();
   console.log(req.body);
