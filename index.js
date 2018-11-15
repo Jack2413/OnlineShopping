@@ -439,8 +439,8 @@ app.put("/ForgotReset/:token", async (req, res) => {
         });
     }
 
-    salt = crypto.randomBytes(confige.saltBytes).toString("hex");
-    encrypt_password = crypto.pbkdf2Sync(
+    var salt = crypto.randomBytes(confige.saltBytes).toString("hex");
+    var encrypt_password = crypto.pbkdf2Sync(
       newpassword,
       salt,
       confige.iterations,
