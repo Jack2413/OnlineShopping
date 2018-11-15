@@ -287,7 +287,7 @@ $(document).on("mousemove keypress scroll", function() {
     timeout = setTimeout(function() {
       alert("You are stop using the application, automaticly logout");
       logout();
-    }, 30000);
+    }, 300000);
   }
 });
 
