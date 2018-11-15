@@ -375,7 +375,7 @@ app.get("/forgot/:email", async (req, res) => {
       await client.query("UPDATE users SET resetPasswordToken = $1,resetPasswordExpires = $2 where email = $3",[resetPasswordToken,resetPasswordExpires,email]);
 
       sendAnResetEmail(email,resetPasswordToken);
-      return res.json({feedback: "An email has been send to " + email + " for further informations",status: 200});
+      return res.json({feedback: "An email has been send to " + email + " for further informations",status: 200,token: resetPasswordToken});
     }
     client.release();
 
@@ -385,6 +385,23 @@ app.get("/forgot/:email", async (req, res) => {
     console.error(err);
     res.send("Error " + err);
   }
+});
+
+app.get('/ForgotReset/:token', function(req, res) {
+  res.sendFile('ForgotReset.html', {root: __dirname });
+}
+
+app.put("/ForgotReset", async (req, res) => {
+  console.log("get in forgot function");
+  const client = await pool.connect();
+  console.log(req.body);
+
+  var token = req.body.token;
+  var newpassword = req.body.newpassword;
+
+  //var result = await (select )
+
+
 });
 
 function sendAnResetEmail(email,token){
@@ -402,7 +419,7 @@ function sendAnResetEmail(email,token){
 	  subject: 'Sending Email using Node.js',
 	  text: 'click the link below to reset the password'+ 
     '\n\n' +
-	  'https://nwen304onlineshoping.herokuapp.com/ForgotReset.html/'+
+	  'https://nwen304onlineshoping.herokuapp.com/ForgotReset'+
     token
 	};
 

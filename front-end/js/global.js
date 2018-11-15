@@ -222,16 +222,13 @@ $(document).ready(function(e) {
     }).then(function(result){
     	alert(result.feedback);
     	if(result.status == 200){
-    		alert("Ok");
-    	} else if(result.status == 400){
-    		alert("Not ok");
+    		window.localStorage.setItem("token",result.token);
     	}
-
     },ERROR_LOG);
   });
 
   $('#ForgotSummitButton').click(function() {
-  	var $email = $("#InputEmail").val();
+
     var $newpassword = $("#InputPassword").val();
     var $confirmPassword = $("#ConfirmPassword").val();
 
@@ -247,7 +244,7 @@ $(document).ready(function(e) {
       method: "PUT",
       url: url + "/forgotReset",
       data: JSON.stringify({
-        email: $email,
+        token: window.localStorage.getItem("token"),
         newpassword: $newpassword
       }),
       contentType: "application/json",
