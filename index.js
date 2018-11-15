@@ -389,8 +389,8 @@ app.get("/forgot/:email", async (req, res) => {
 
 app.get('/ForgotReset/:token', function(req, res) {
   res.sendFile(__dirname + '/front-end/ForgotReset.html');
-  res.sendFile(__dirname + '/js/global.js');
-  res.sendFile(__dirname + '/css/global.css');
+  res.sendFile(__dirname + '/front-end/js/global.js');
+  res.sendFile(__dirname + '/front-end/css/global.css');
 });
 
 app.put("/ForgotReset/:token", async (req, res) => {
