@@ -388,7 +388,7 @@ app.get("/forgot/:email", async (req, res) => {
 });
 
 app.get('/ForgotReset/:token', function(req, res) {
-  res.redirect(__dirname + '/front-end/ForgotReset.html');
+  res.redirect('ForgotReset.html');
 });
 
 app.put("/ForgotReset/:token", async (req, res) => {
