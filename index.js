@@ -5,7 +5,7 @@ var bodyParser = require("body-parser");
 var crypto = require("crypto");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 crypto.DEFAULT_ENCODING = "hex";
-var nodemailer = require('nodemailer');
+var nodemailer = require("nodemailer");
 const path = require("path");
 const { Pool } = require("pg");
 
@@ -27,7 +27,6 @@ var confige = {
   iterations: 872791,
   encryptBytes: 128
 };
-
 
 app
   .use(express.static(path.join(__dirname + "/front-end")))
@@ -70,12 +69,12 @@ app.post("/login", async (req, res) => {
     ]);
     console.log("result " + result.rows);
 
-    if(result.rows[0]===undefined){
-    	console.log("invalid username or password");
-      	return res.json({
-	        feedback: "Invalid Username or Password",
-	        status: 400
-    	});
+    if (result.rows[0] === undefined) {
+      console.log("invalid username or password");
+      return res.json({
+        feedback: "Invalid Username or Password",
+        status: 400
+      });
     }
 
     var db_username = result.rows[0].username;
@@ -360,58 +359,65 @@ app.get("/forgot/:email", async (req, res) => {
   try {
     console.log("get in forgot function");
     const client = await pool.connect();
-    
+
     var email = req.params.email;
     var result = await client.query(
       "select email from users where email = $1",
       [email]
     );
     console.log("result " + result.rows[0]);
-    if (result.rows[0]===undefined) {
+    if (result.rows[0] === undefined) {
       return res.json({ feedback: "The account is not exist", status: 400 });
     } else {
-      var resetPasswordToken = crypto.randomBytes(confige.saltBytes).toString("hex");
-      var resetPasswordExpires = Date.now() + 300000 //5min
-      await client.query("UPDATE users SET resetPasswordToken = $1 WHERE resetPasswordExpires = $2",[resetPasswordToken,resetPasswordExpires]);
+      var resetPasswordToken = crypto
+        .randomBytes(confige.saltBytes)
+        .toString("hex");
+      var resetPasswordExpires = Date.now() + 300000; //5min
+      await client.query(
+        "UPDATE users SET resetPasswordToken = $1 WHERE resetPasswordExpires = $2",
+        [resetPasswordToken, resetPasswordExpires]
+      );
 
       sendAnResetEmail(email);
-      return res.json({feedback: "An email has been send to " + email + " for further informations",status: 200});
+      return res.json({
+        feedback:
+          "An email has been send to " + email + " for further informations",
+        status: 200
+      });
     }
     client.release();
-
-    
-
   } catch (err) {
     console.error(err);
     res.send("Error " + err);
   }
 });
 
-function sendAnResetEmail(email){
-	var transporter = nodemailer.createTransport({
-	  service: 'gmail',
-	  auth: {
-	    user: 'nwen304onlingshoping@gmail.com',
-	    pass: 'OnlingShoping'
-	  }
-	});
-	
-	var mailOptions = {
-	  from: 'nwen304onlingshoping@gmail.com',
-	  to: '888jack219@gmail.com',
-	  subject: 'Sending Email using Node.js',
-	  text: 'click the link below to reset the password\n'+
-	  +'https://nwen304onlineshoping.herokuapp.com/ForgotReset.html/'+token
-	};
+function sendAnResetEmail(email) {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "nwen304onlingshoping@gmail.com",
+      pass: "OnlingShoping"
+    }
+  });
 
-	transporter.sendMail(mailOptions, function(error, info){
-	  if (error) {
-	    console.log(error);
-	  } else {
-	    console.log('Email sent: ' + info.response);
-	  }
-	});
+  var mailOptions = {
+    from: "nwen304onlingshoping@gmail.com",
+    to: "888jack219@gmail.com",
+    subject: "Sending Email using Node.js",
+    text:
+      "click the link below to reset the password\n" +
+      +"https://nwen304onlineshoping.herokuapp.com/ForgotReset.html/" +
+      token
+  };
 
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
 }
 
 app.get("/db", async (req, res) => {
@@ -688,6 +694,24 @@ app.put("/cartdelete", urlencodedParser, async (req, res) => {
       return res.send("No data found");
     } else {
       console.log("post/db succesful");
+    }
+    res.send(result.rows);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+app.put("/emptycart", urlencodedParser, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    var result = await client.query(
+      "DELETE FROM cart WHERE email = '" + req.body.email + "';"
+    );
+    if (!result) {
+      return res.send("No data found");
+    } else {
+      console.log("PUT/emptycart succesful");
     }
     res.send(result.rows);
     client.release();
