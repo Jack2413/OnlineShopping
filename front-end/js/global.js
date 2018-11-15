@@ -130,7 +130,7 @@ $(document).ready(function(e) {
         }
       },
       function(error) {
-        alert(error);
+        alert(error.feedback);
       }
     );
     //alert($username+' '+$email+' '+$password);
@@ -223,9 +223,6 @@ $(document).ready(function(e) {
 
     }).then(function(result){
     	alert(result.feedback);
-    	if(result.status == 200){
-    		window.localStorage.setItem("token",result.token);
-    	}
     },ERROR_LOG);
   });
 

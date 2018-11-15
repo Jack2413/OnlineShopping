@@ -28,7 +28,6 @@ Nodemon server.js
 
 Forgot password: reset password.
 
-
 Homepage Functionalities:
 Recommendation system: 
 We choose top 3 popular(best seller) product to recommend for our customers. So if nothing in order details, this website will 
@@ -48,7 +47,22 @@ Administrator can see all orders owned by different customers, customer can see 
 View button: click view button to see details of certain order.
 
 Orderdetails functionalities: 
-Administrator can amend products amount, customers can only browse it.
+Administrator can amend products amount and delete the products , customers can only browse it.
+
+register functionlities:
+
+the user have to insert username, email, password and agreed the privacy provisions to summit the reset from. There are several rules for fill in the application. 1. the user name can not be empty 2. the password must be at less 6 decit 3. the if the email have been use for registered, you can not use the same email to register again. If meet the above request, it should be Registered successfully.   
+
+login functionlities:
+
+the user have to insert the Registered emaill and correct password
+
+Password reset functionalities:
+there are two keen of reset functions, frist one is design for who knows his old password and the second one is design for who forgot his old password. In the frist function the user have to insert his email, old password and the new password to complete the reset function. if the old password do not match the password in database, will reject reset the from, otherwise will be reset successfully.
+
+In the second function, the user have to provide his registered email account, if the account is exist the server will automaticly send an email to the users email address. That is, contains a reset from link with token(to identify the user), it allows user click on the link to reset his password. the token have a expair time (5 min). if the user do not reset the password in 5 min or the user try to hack the tokens. the server will respond "use Invaild token or over expair time" and reject the reset from. If the user done every thing currently, reset password should be successful.
+
+Once the password reseted, it will jump back to login page you have to login again.
 
 
 b. What the REST interface is
@@ -160,6 +174,7 @@ Orders table ‘s primary key is orderid, this oderid is used to track orders in
 
 Orderdetails has 3 foreign keys, email, productid, orderid. We combine 3 foreign key together as primary key to track each records in orderdetails table.
 
+for implement the forgot password reset function I did added resetpasswordtoken and resetpasswordexpair those two colums to user, for store token and expair time.
 
 				
 CREATE TABLE users (
@@ -168,6 +183,8 @@ CREATE TABLE users (
   encrypted_password varchar(256) NOT NULL,
   salt varchar(128) NOT NULL,
   permission INTEGER NOT NULL DEFAULT 1,
+  resetpasswordtoken varchar(128)
+  resetpasswordexpair timestemp,
   PRIMARY KEY (email)
 )；
 
