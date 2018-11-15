@@ -233,7 +233,6 @@ $(document).ready(function(e) {
     var $confirmPassword = $("#ConfirmPassword").val();
 
     if (
-      !isEmail($email) ||
       $newpassword.length < 6 ||
       $newpassword != $confirmPassword
     ) {
