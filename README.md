@@ -79,6 +79,12 @@ API TYPE
 API URL
 EXPLANATION
 
+
+LOGIN, RESET, SIGN UP, FORGOT PASSWORD=====>
+Get 
+/forgot/:email
+Reset detail
+
 post
 /login
 login
@@ -91,6 +97,12 @@ put
 /reset
 Password reset
 
+
+ORDERS=====>
+Get 
+/currentorderid
+Get current order id in order to insert cart information into orderdetails
+
 get
 /getOrder/:email
 Get customer’s orders in order page
@@ -99,6 +111,17 @@ get
 /getOrderDetails/:orderID
 To show the details of certain order
 
+post
+/addtoorders
+Add customer email to orders then get a order id.
+
+post
+/addtoorderdetails
+insert cart information into orderdetails
+
+
+
+ADMINISTRATOR=====>
 put
 /modifyOrder
 Administrator can modify order infomation
@@ -107,10 +130,12 @@ delete
 /deleteOrderDetails
 Adiministrator can delete records in orderdetails
 
-Get 
-/forgot/:email
-Reset detail
+post
+/addtoproduct
+Administrator add product to homepage
 
+
+HOMEPAGE=====>
 get
 /db
 Products for homepage 
@@ -120,28 +145,14 @@ Get
 Recommand 3 top sellers
 
 Get 
-/cartdb/:email
-Get customer’s cart infomation
-
-Get 
 /search/:name
 Find the product accoring to name
 
-post
-/addtoproduct
-Administrator add product to homepage
 
+CART PAGE=====>
 Get 
-/currentorderid
-Get current order id in order to insert cart information into orderdetails
-
-post
-/addtoorders
-Add customer email to orders then get a order id.
-
-post
-/addtoorderdetails
-insert cart information into orderdetails
+/cartdb/:email
+Get customer’s cart infomation
 
 post
 /addtocart 
