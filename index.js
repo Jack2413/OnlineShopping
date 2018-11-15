@@ -447,20 +447,22 @@ app.put("/ForgotReset/:token", async (req, res) => {
       confige.encryptBytes,
       "sha512"
     );
-    
+
     console.log("salt: " + salt + "encrypt_password: " + encrypt_password);
 
     var result = await client.query(
       "UPDATE USERS SET ENCRYPTED_PASSWORD = $1, SALT = $2 WHERE resetpasswordtoken = $3",
       [encrypt_password, salt, token]
     );
+    console.log("reset success");
 
     await client.query(
-      "UPDATE USERS SET resetpasswordtoken = '' WHERE resetpasswordtoken = $3",
+      "UPDATE USERS SET resetpasswordtoken = '' WHERE resetpasswordtoken = $1",
       [token]
     );
+    console.log("delete token");
 
-    console.log("reset success");
+    
     return res.json({ feedback: "reset success", status: 200 });
 
     client.release();
