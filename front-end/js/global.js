@@ -231,7 +231,6 @@ $(document).ready(function(e) {
 
     var $newpassword = $("#InputPassword").val();
     var $confirmPassword = $("#ConfirmPassword").val();
-    alert(window.location.search);
 
     if (
       !isEmail($email) ||
@@ -243,7 +242,7 @@ $(document).ready(function(e) {
 
     $.ajax({
       method: "PUT",
-      url: url + "/ForgotReset",
+      url: window.location.href,
       data: JSON.stringify({
         newpassword: $newpassword
       }),
