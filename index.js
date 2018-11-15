@@ -406,18 +406,67 @@ app.get("/forgot/:email", async (req, res) => {
 });
 
 app.get('/ForgotReset/:token', function(req, res) {
+
+
   res.sendfile(__dirname + '/front-end/ForgotReset.html');
   //res.render('pages/ForgotReset');
 });
 
 app.put("/ForgotReset/:token", async (req, res) => {
-  console.log("get in forgot function");
-  const client = await pool.connect();
-  console.log(req.body);
+  try{
+    console.log("get in ForgotReset function");
+    const client = await pool.connect();
+    console.log(req.body);
 
-  var token = req.body.token;
-  var newpassword = req.body.newpassword;
+    var newpassword = req.body.newpassword;
+    var token = req.params.token;
+    var result = await client.query("select resetPasswordExpires from users where token = $1",[token]); 
+    var currentTime = new Date();
 
+    if(result.rows[0]===undefined){
+      return res.json({
+          feedback: "Invalid token or over expires time",
+          status: 400
+        });
+    }
+    var ExpiresTime = result.rows[0].resetpasswordexpires;
+    console("timebetween: "+(currentTime-ExpiresTime));
+
+    if (currentTime-ExpiresTime>300000) {
+      return res.json({
+          feedback: "Invalid token or over expires time",
+          status: 400
+        });
+    }
+
+    salt = crypto.randomBytes(confige.saltBytes).toString("hex");
+    encrypt_password = crypto.pbkdf2Sync(
+      newpassword,
+      salt,
+      confige.iterations,
+      confige.encryptBytes,
+      "sha512"
+    );
+    console.log("salt: " + salt + "encrypt_password: " + encrypt_password);
+
+    var result = await client.query(
+      "UPDATE USERS SET ENCRYPTED_PASSWORD = $1, SALT = $2 WHERE TOKEN = $3",
+      [encrypt_password, salt, token]
+    );
+
+    await client.query(
+      "UPDATE USERS SET TOKEN = "" WHERE TOKEN = $3",
+      [encrypt_password, salt, token]
+    );
+
+    console.log("reset success");
+    return res.json({ feedback: "reset success", status: 200 });
+
+    client.release();
+  }catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
   //var result = await (select )
 });
 
