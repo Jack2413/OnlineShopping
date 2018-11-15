@@ -369,30 +369,14 @@ app.get("/forgot/:email", async (req, res) => {
     if (result.rows[0] === undefined) {
       return res.json({ feedback: "The account is not exist", status: 400 });
     } else {
-<<<<<<< HEAD
+
       var resetPasswordToken = crypto.randomBytes(confige.saltBytes).toString("hex");
       var resetPasswordExpires = new Date(); // 5min 
       await client.query("UPDATE users SET resetPasswordToken = $1,resetPasswordExpires = $2 where email = $3",[resetPasswordToken,resetPasswordExpires,email]);
 
       sendAnResetEmail(email,resetPasswordToken);
       return res.json({feedback: "An email has been send to " + email + " for further informations",status: 200,token: resetPasswordToken});
-=======
-      var resetPasswordToken = crypto
-        .randomBytes(confige.saltBytes)
-        .toString("hex");
-      var resetPasswordExpires = Date.now() + 300000; //5min
-      await client.query(
-        "UPDATE users SET resetPasswordToken = $1 WHERE resetPasswordExpires = $2",
-        [resetPasswordToken, resetPasswordExpires]
-      );
 
-      sendAnResetEmail(email);
-      return res.json({
-        feedback:
-          "An email has been send to " + email + " for further informations",
-        status: 200
-      });
->>>>>>> b2ec3db345473cc8af2bbaa674ee153cc9392690
     }
     client.release();
   } catch (err) {
@@ -401,7 +385,7 @@ app.get("/forgot/:email", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
+
 app.get('/ForgotReset/:token', function(req, res) {
   //res.sendfile(__dirname + '/front-end/ForgotReset.html');
   res.render('pages/ForgotReset');
@@ -446,35 +430,6 @@ function sendAnResetEmail(email,token){
 	    console.log('Email sent: ' + info.response);
 	  }
 	});
-
-=======
-function sendAnResetEmail(email) {
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "nwen304onlingshoping@gmail.com",
-      pass: "OnlingShoping"
-    }
-  });
-
-  var mailOptions = {
-    from: "nwen304onlingshoping@gmail.com",
-    to: "888jack219@gmail.com",
-    subject: "Sending Email using Node.js",
-    text:
-      "click the link below to reset the password\n" +
-      +"https://nwen304onlineshoping.herokuapp.com/ForgotReset.html/" +
-      token
-  };
-
-  transporter.sendMail(mailOptions, function(error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Email sent: " + info.response);
-    }
-  });
->>>>>>> b2ec3db345473cc8af2bbaa674ee153cc9392690
 }
 
 app.get("/db", async (req, res) => {
