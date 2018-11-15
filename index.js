@@ -53,6 +53,18 @@ app.use(function(req, res, next) {
   next();
 });
 
+//cache control headers
+app.use(
+  cacheControl({
+    noCache: false
+  })
+);
+app.use(
+  cacheControl({
+    maxAge: 5
+  })
+);
+
 //Get function
 //to get all the tasks from Heroku database, and return the result to front-end
 app.post("/login", async (req, res) => {
@@ -369,14 +381,22 @@ app.get("/forgot/:email", async (req, res) => {
     if (result.rows[0] === undefined) {
       return res.json({ feedback: "The account is not exist", status: 400 });
     } else {
+      var resetPasswordToken = crypto
+        .randomBytes(confige.saltBytes)
+        .toString("hex");
+      var resetPasswordExpires = new Date(); // 5min
+      await client.query(
+        "UPDATE users SET resetPasswordToken = $1,resetPasswordExpires = $2 where email = $3",
+        [resetPasswordToken, resetPasswordExpires, email]
+      );
 
-      var resetPasswordToken = crypto.randomBytes(confige.saltBytes).toString("hex");
-      var resetPasswordExpires = new Date(); // 5min 
-      await client.query("UPDATE users SET resetPasswordToken = $1,resetPasswordExpires = $2 where email = $3",[resetPasswordToken,resetPasswordExpires,email]);
-
-      sendAnResetEmail(email,resetPasswordToken);
-      return res.json({feedback: "An email has been send to " + email + " for further informations",status: 200,token: resetPasswordToken});
-
+      sendAnResetEmail(email, resetPasswordToken);
+      return res.json({
+        feedback:
+          "An email has been send to " + email + " for further informations",
+        status: 200,
+        token: resetPasswordToken
+      });
     }
     client.release();
   } catch (err) {
@@ -384,7 +404,6 @@ app.get("/forgot/:email", async (req, res) => {
     res.send("Error " + err);
   }
 });
-
 
 app.get('/ForgotReset/:token', function(req, res) {
   res.sendfile(__dirname + '/front-end/ForgotReset.html');
@@ -400,36 +419,35 @@ app.put("/ForgotReset/:token", async (req, res) => {
   var newpassword = req.body.newpassword;
 
   //var result = await (select )
-
-
 });
 
-function sendAnResetEmail(email,token){
-	var transporter = nodemailer.createTransport({
-	  service: 'gmail',
-	  auth: {
-	    user: 'nwen304onlingshoping@gmail.com',
-	    pass: 'OnlingShoping'
-	  }
-	});
-	
-	var mailOptions = {
-	  from: 'nwen304onlingshoping@gmail.com',
-	  to: '888jack219@gmail.com',
-	  subject: 'Sending Email using Node.js',
-	  text: 'click the link below to reset the password'+ 
-    '\n\n' +
-	  'https://nwen304onlineshoping.herokuapp.com/ForgotReset/'+
-    token
-	};
+function sendAnResetEmail(email, token) {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "nwen304onlingshoping@gmail.com",
+      pass: "OnlingShoping"
+    }
+  });
 
-	transporter.sendMail(mailOptions, function(error, info){
-	  if (error) {
-	    console.log(error);
-	  } else {
-	    console.log('Email sent: ' + info.response);
-	  }
-	});
+  var mailOptions = {
+    from: "nwen304onlingshoping@gmail.com",
+    to: "888jack219@gmail.com",
+    subject: "Sending Email using Node.js",
+    text:
+      "click the link below to reset the password" +
+      "\n\n" +
+      "https://nwen304onlineshoping.herokuapp.com/ForgotReset/" +
+      token
+  };
+
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
 }
 
 app.get("/db", async (req, res) => {

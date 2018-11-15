@@ -29,18 +29,54 @@ echo 'Test Delete orderDetails'
 curl -H "Content-Type: application/json" -X DELETE -d '{"orderID":"5","productID":"40"}' https://nwen304onlineshoping.herokuapp.com/deleteOrderDetails
 echo
 
-echo 'Test add product'
-curl -H "Content-Type: application/json" -X POST -d '{"name":"MINION FAMILY", "price":"15", "descroption":"123"}' https://nwen304onlineshoping.herokuapp.com/cartadd1
-echo
-
-echo 'Test cartminus1'
+echo 'Test Delete orderDetails'
 curl -H "Content-Type: application/json" -X DELETE -d '{"orderID":"5","productID":"40"}' https://nwen304onlineshoping.herokuapp.com/deleteOrderDetails
 echo
 
-echo 'Test cartadd1'
-curl -H "Content-Type: application/json" -X POST -d '{"name":"MINION FAMILY", "price":"15", "descroption":"123"}' https://nwen304onlineshoping.herokuapp.com/addtoproduct
+echo 'Test /addtoorders'
+curl -H "Content-Type: application/json" -X POST -d '{"email":"test@gmail.com"}' https://nwen304onlineshoping.herokuapp.com/addtoorders
 echo
 
-echo 'Test add product'
-curl -H "Content-Type: application/json" -X POST -d '{"name":"MINION FAMILY", "price":"15", "descroption":"123"}' https://nwen304onlineshoping.herokuapp.com/addtoproduct
+echo 'Test /addtoorderdetails'
+curl -H "Content-Type: application/json" -X POST -d '{"orderid":"1","email":"test@gmail.com","productid":"38","amount":"2","totalprice":"50"}' https://nwen304onlineshoping.herokuapp.com/addtoorderdetails
+echo
+
+echo 'Test /cartadd1'
+curl -H "Content-Type: application/json" -X PUT -d '{"name":"FAMILY MINION","email":"test@gmail.com"}' https://nwen304onlineshoping.herokuapp.com/cartadd1
+echo
+
+echo 'Test /cartminus1'
+curl -H "Content-Type: application/json" -X PUT -d '{"name":"FAMILY MINION","email":"test@gmail.com"}' https://nwen304onlineshoping.herokuapp.com/cartminus1
+echo
+
+echo 'Test /emptycart'
+curl -H "Content-Type: application/json" -X PUT -d '{"email":"test@gmail.com"}' https://nwen304onlineshoping.herokuapp.com/emptycart
+echo
+
+echo 'Test /currentorderid'
+curl -H "Content-Type: application/json" -X GET -d '{"80"}' https://nwen304onlineshoping.herokuapp.com/currentorderid
+echo
+
+echo 'Test /cartdelete'
+curl -H "Content-Type: application/json" -X PUT -d '{"name":"FAMILY MINION","email":"test@gmail.com"}' https://nwen304onlineshoping.herokuapp.com/cartdelete
+echo
+
+echo 'Test /db'
+curl -H "Content-Type: application/json" -X GET -d '{}' https://nwen304onlineshoping.herokuapp.com/db
+echo
+
+echo 'Test /search/DAVE THE MINION'
+curl -H "Content-Type: application/json" -X GET -d '{}' https://nwen304onlineshoping.herokuapp.com/search/DAVE THE MINION
+echo
+
+echo 'Test /addtoproduct'
+curl -H "Content-Type: application/json" -X POST -d '{"name":"DAVE THE MINION","price":"15","imagecode":"1","description":"this is a minion toy"}' https://nwen304onlineshoping.herokuapp.com/addtoproduct
+echo
+
+echo 'Test /addtocart'
+curl -H "Content-Type: application/json" -X POST -d '{"name":"DAVE THE MINION","price":"15","email":"test@gmail.com", "productid":"38"}' https://nwen304onlineshoping.herokuapp.com/addtocart
+echo
+
+echo 'Test /recommandation'
+curl -H "Content-Type: application/json" -X POST -d '{}' https://nwen304onlineshoping.herokuapp.com/recommandation
 echo
