@@ -430,7 +430,7 @@ app.put("/ForgotReset/:token", async (req, res) => {
         });
     }
     var ExpiresTime = result.rows[0].resetpasswordexpires;
-    console("timebetween: "+(currentTime-ExpiresTime));
+    console.log("timebetween: "+(currentTime-ExpiresTime));
 
     if (currentTime-ExpiresTime>300000) {
       return res.json({
