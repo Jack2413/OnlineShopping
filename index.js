@@ -389,7 +389,7 @@ app.get("/forgot/:email", async (req, res) => {
 
 app.get('/ForgotReset/:token', function(req, res) {
   res.sendFile('ForgotReset.html', {root: __dirname });
-}
+});
 
 app.put("/ForgotReset", async (req, res) => {
   console.log("get in forgot function");
