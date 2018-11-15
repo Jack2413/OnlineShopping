@@ -56,7 +56,7 @@ app.use(function(req, res, next) {
 //cache control headers
 app.use(
   cacheControl({
-    noCache: true
+    noCache: false
   })
 );
 app.use(
