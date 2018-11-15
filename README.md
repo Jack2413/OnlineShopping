@@ -81,6 +81,7 @@ EXPLANATION
 
 
 LOGIN, RESET, SIGN UP, FORGOT PASSWORD=====>
+
 Get 
 /forgot/:email
 Reset detail
@@ -99,6 +100,7 @@ Password reset
 
 
 ORDERS=====>
+
 Get 
 /currentorderid
 Get current order id in order to insert cart information into orderdetails
@@ -122,6 +124,7 @@ insert cart information into orderdetails
 
 
 ADMINISTRATOR=====>
+
 put
 /modifyOrder
 Administrator can modify order infomation
@@ -136,6 +139,7 @@ Administrator add product to homepage
 
 
 HOMEPAGE=====>
+
 get
 /db
 Products for homepage 
@@ -150,6 +154,7 @@ Find the product accoring to name
 
 
 CART PAGE=====>
+
 Get 
 /cartdb/:email
 Get customer’s cart infomation
