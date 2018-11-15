@@ -455,8 +455,8 @@ app.put("/ForgotReset/:token", async (req, res) => {
     );
 
     await client.query(
-      "UPDATE USERS SET TOKEN = "" WHERE TOKEN = $3",
-      [encrypt_password, salt, token]
+      "UPDATE USERS SET TOKEN = '' WHERE TOKEN = $3",
+      [token]
     );
 
     console.log("reset success");
